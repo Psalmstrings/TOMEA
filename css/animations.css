@@ -1,0 +1,100 @@
+/* ==========================================================================
+   TOMÉA PERFUMES - Elegant Animations & Micro-interactions
+   Subtle, expensive, restrained motion.
+   ========================================================================== */
+
+/* Scroll Reveal Base */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Delay Utilities */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+
+/* Subtle Image Scale on Hover */
+.scale-on-hover {
+  overflow: hidden;
+}
+
+.scale-on-hover img {
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scale-on-hover:hover img {
+  transform: scale(1.05);
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Skeleton Loading State */
+.skeleton {
+  background: linear-gradient(90deg, #FAF4F4 25%, #F4E7E8 50%, #FAF4F4 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite;
+  border-radius: 2px;
+}
+
+/* Micro-interaction: Button pulse on hover */
+.btn-primary:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+/* ==========================================================================
+   Reduced Motion Accessibility
+   Respects user system preferences
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-bg-media {
+    transform: none !important;
+  }
+
+  .tomea-preloader {
+    display: none !important;
+  }
+}

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Collection | TOMÉA PERFUMES</title>
+  <meta name="description" content="Explore the TOMÉA Extrait de Parfum collection. Discover L'Origine, Charme, and Désir — premium luxury fragrances crafted for timeless distinction.">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    /* ── Collection Page Overrides ────────────────────────────────── */
+
+    /* Hero */
+    .col-hero {
+      background: linear-gradient(160deg, var(--color-burgundy-deep) 0%, var(--color-burgundy) 60%, #7D3440 100%);
+      padding: calc(var(--header-height) + 5rem) 0 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .col-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/hero-banner.jpg') center/cover no-repeat;
+      opacity: 0.08;
+    }
+    .col-hero .inner {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .col-hero .eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      display: block;
+      margin-bottom: 1.25rem;
+    }
+    .col-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    .col-hero p {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.80);
+      line-height: 1.8;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── Toolbar ─────────────────────────────────────────────────── */
+    .col-body {
+      background-color: var(--color-cream);
+      padding: 4rem 0 6rem;
+    }
+    .col-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(107,46,53,0.12);
+    }
+    .col-filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .col-filter-btn {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.775rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.35rem;
+      border-radius: 50px;
+      border: 1.5px solid rgba(107,46,53,0.18);
+      background: #FFFFFF;
+      color: var(--color-charcoal);
+      cursor: pointer;
+      transition: all 0.22s ease;
+    }
+    .col-filter-btn.is-active,
+    .col-filter-btn:hover {
+      background-color: var(--color-burgundy);
+      color: #FFFFFF;
+      border-color: var(--color-burgundy);
+    }
+    .col-right {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .col-search-wrap {
+      position: relative;
+    }
+    .col-search-wrap svg {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-grey);
+      pointer-events: none;
+    }
+    .col-search-wrap input {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.825rem;
+      padding: 0.6rem 1rem 0.6rem 2.4rem;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(107,46,53,0.14);
+      border-radius: 50px;
+      color: var(--color-black);
+      width: 220px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .col-search-wrap input:focus {
+      border-color: var(--color-burgundy);
+      box-shadow: 0 0 0 3px rgba(107,46,53,0.08);
+      outline: none;
+    }
+    .col-sort-select {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.825rem;
+      padding: 0.6rem 1.1rem;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(107,46,53,0.14);
+      border-radius: 50px;
+      color: var(--color-black);
+      cursor: pointer;
+      appearance: none;
+      padding-right: 2rem;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B2E35' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+    }
+    .col-count {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.775rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-grey);
+      white-space: nowrap;
+    }
+
+    /* ── Product Grid Skeletons ───────────────────────────────────── */
+    .col-skeleton {
+      background: linear-gradient(90deg, #ede8e4 25%, #e4ddd8 50%, #ede8e4 75%);
+      background-size: 400% 100%;
+      animation: skeletonPulse 1.6s ease-in-out infinite;
+      border-radius: 4px;
+    }
+    @keyframes skeletonPulse {
+      0% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ── Maison CTA Strip ─────────────────────────────────────────── */
+    .col-cta-strip {
+      background: linear-gradient(135deg, var(--color-burgundy-deep) 0%, var(--color-burgundy) 100%);
+      padding: 5.5rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .col-cta-strip::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: rgba(197,160,89,0.05);
+      pointer-events: none;
+    }
+    .col-cta-strip .inner {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .col-cta-strip .eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .col-cta-strip h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .col-cta-strip p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+    .col-cta-strip .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      background: #FFFFFF;
+      color: var(--color-burgundy);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .col-cta-strip .btn-wa:hover {
+      background: var(--color-gold);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+    }
+
+    /* ── Empty State ──────────────────────────────────────────────── */
+    .col-empty {
+      text-align: center;
+      padding: 5rem 1rem;
+      grid-column: 1 / -1;
+    }
+    .col-empty-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--color-blush-soft);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .col-empty h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-charcoal);
+      margin-bottom: 0.5rem;
+    }
+    .col-empty p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.925rem;
+      color: var(--color-grey-dark);
+    }
+
+    /* ── Responsive ───────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .col-hero { padding: calc(var(--header-height) + 3rem) 0 3.5rem; }
+      .col-toolbar { flex-direction: column; align-items: flex-start; }
+      .col-right { width: 100%; flex-wrap: wrap; }
+      .col-search-wrap, .col-search-wrap input { width: 100%; }
+      .col-sort-select { width: 100%; }
+      .col-cta-strip { padding: 4rem 0; }
+    }
+    @media (max-width: 480px) {
+      .col-hero h1 { font-size: 2.4rem; }
+      .col-filters { gap: 0.4rem; }
+      .col-filter-btn { font-size: 0.7rem; padding: 0.45rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Site Header ─────────────────────────────────────────────── -->
+  <header class="site-header header-solid" role="banner">
+    <div class="header-container">
+      <a href="index.html" class="header-brand" aria-label="TOMÉA PERFUMES Homepage">
+        <img src="assets/images/logo-burgundy.png" alt="TOMÉA Logo" class="header-logo-img logo-dark" style="display:block;">
+        <img src="assets/images/logo-white.png" alt="TOMÉA Logo" class="header-logo-img logo-light" style="display:none;">
+      </a>
+      <nav class="desktop-nav" role="navigation" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="collection.html" class="nav-link is-active">The Collection</a>
+        <a href="about.html" class="nav-link">About TOMÉA</a>
+        <a href="contact.html" class="nav-link">Concierge</a>
+      </nav>
+      <div class="header-actions">
+        <button class="header-wa-btn" data-action="whatsapp-concierge" aria-label="Order via WhatsApp">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.042-.047-.282-.07-1.144-.383-2.18-1.309-1.312-1.173-1.846-2.348-1.925-2.522-.079-.174-.537-.714-.537-1.362 0-.649.34-.968.461-1.099.121-.131.265-.164.354-.164.088 0 .177.001.254.005.081.004.19-.031.297.226.11.265.376.917.409.985.033.069.055.15.011.238-.044.088-.066.143-.132.22-.066.077-.139.172-.199.232-.066.066-.135.138-.058.271.077.133.344.568.739.919.508.453.937.593 1.07.659.133.066.21.055.288-.033.077-.089.332-.387.42-.519.088-.133.177-.11.299-.066.121.044.774.365.907.432.133.066.221.099.254.154.033.056.033.322-.111.727z"/>
+          </svg>
+          <span>Order Now</span>
+        </button>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav-overlay" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <img src="assets/images/logo-white.png" alt="TOMÉA" class="mobile-logo">
+      <button class="mobile-nav-close" aria-label="Close menu">&times;</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="collection.html" class="mobile-nav-link is-active">The Collection</a>
+      <a href="about.html" class="mobile-nav-link">About TOMÉA</a>
+      <a href="contact.html" class="mobile-nav-link">Concierge</a>
+    </nav>
+    <div class="mobile-nav-footer">
+      <button class="btn btn-primary btn-block" data-action="whatsapp-concierge">Order Now</button>
+    </div>
+  </aside>
+
+  <main id="main-content">
+
+    <!-- ── Hero ───────────────────────────────────────────────────── -->
+    <section class="col-hero" aria-labelledby="col-heading">
+      <div class="inner">
+        <span class="eyebrow">Signature Creations</span>
+        <h1 id="col-heading">The Collection</h1>
+        <p>Three distinctive olfactory narratives — meticulously crafted at Extrait de Parfum strength for the discerning connoisseur who demands presence.</p>
+      </div>
+    </section>
+
+    <!-- ── Products Body ──────────────────────────────────────────── -->
+    <section class="col-body">
+      <div class="container">
+
+        <!-- Toolbar -->
+        <div class="col-toolbar" role="toolbar" aria-label="Collection filters and sort">
+          <div class="col-filters" role="group" aria-label="Filter by fragrance family">
+            <button class="col-filter-btn collection-filter-btn is-active" data-category="all">All Fragrances</button>
+            <button class="col-filter-btn collection-filter-btn" data-category="Woody">Woody</button>
+            <button class="col-filter-btn collection-filter-btn" data-category="Floral">Floral Amber</button>
+            <button class="col-filter-btn collection-filter-btn" data-category="Fresh">Fresh Amber</button>
+          </div>
+
+          <div class="col-right">
+            <div class="col-search-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input
+                type="search"
+                id="collection-search"
+                placeholder="Search fragrances…"
+                aria-label="Search fragrances"
+                autocomplete="off"
+              />
+            </div>
+            <select class="col-sort-select" id="collection-sort" aria-label="Sort collection">
+              <option value="default">Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+            <span class="col-count" id="collection-count" aria-live="polite">Loading…</span>
+          </div>
+        </div>
+
+        <!-- Products Grid — populated by products.js -->
+        <div class="products-grid" id="collection-grid" role="list" aria-label="Fragrance collection">
+          <!-- Loading skeletons -->
+          <div class="col-skeleton" style="height:520px;border-radius:6px;" aria-hidden="true"></div>
+          <div class="col-skeleton" style="height:520px;border-radius:6px;" aria-hidden="true"></div>
+          <div class="col-skeleton" style="height:520px;border-radius:6px;" aria-hidden="true"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Maison CTA Strip ───────────────────────────────────────── -->
+    <section class="col-cta-strip" aria-labelledby="cta-heading">
+      <div class="inner">
+        <span class="eyebrow">Direct from the Maison</span>
+        <h2 id="cta-heading">Every Order is Personal</h2>
+        <p>
+          Each TOMÉA fragrance is dispatched directly from our Maison with full white-glove
+          concierge assistance. Nationwide delivery available across Nigeria.
+        </p>
+        <button class="btn-wa" data-action="whatsapp-concierge" aria-label="Contact TOMÉA Concierge on WhatsApp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.042-.047-.282-.07-1.144-.383-2.18-1.309-1.312-1.173-1.846-2.348-1.925-2.522-.079-.174-.537-.714-.537-1.362 0-.649.34-.968.461-1.099.121-.131.265-.164.354-.164.088 0 .177.001.254.005.081.004.19-.031.297.226.11.265.376.917.409.985.033.069.055.15.011.238-.044.088-.066.143-.132.22-.066.077-.139.172-.199.232-.066.066-.135.138-.058.271.077.133.344.568.739.919.508.453.937.593 1.07.659.133.066.21.055.288-.033.077-.089.332-.387.42-.519.088-.133.177-.11.299-.066.121.044.774.365.907.432.133.066.221.099.254.154.033.056.033.322-.111.727z"/>
+          </svg>
+          Contact Concierge
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Site Footer ─────────────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <img src="assets/images/logo-white.png" alt="TOMÉA PERFUMES" class="footer-logo-img">
+          <p class="footer-brand-desc">Confidence, Bottled. Premium fragrance for the discerning few.</p>
+          <div class="footer-social-row">
+            <a href="https://instagram.com/tomeaperfumes" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TOMÉA on Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://facebook.com/tomeaperfumes" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TOMÉA on Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+            <a href="https://tiktok.com/@tomeaperfumes" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TOMÉA on TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-1.01-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">NAVIGATION</h4>
+          <ul class="footer-links-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collection.html">The Collection</a></li>
+            <li><a href="about.html">About TOMÉA</a></li>
+            <li><a href="contact.html">Concierge</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">CREATIONS</h4>
+          <ul class="footer-links-list">
+            <li><a href="product.html?id=lorigine">TOMÉA L'Origine</a></li>
+            <li><a href="product.html?id=charme">TOMÉA Charme</a></li>
+            <li><a href="product.html?id=desir">TOMÉA Désir</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">ORDER NOW</h4>
+          <div class="footer-contact-info">
+            <p>Place your order directly via WhatsApp concierge for personalised service.</p>
+            <div style="margin-top:1rem;">
+              <button class="btn btn-sm btn-white-outline" data-action="whatsapp-concierge">Chat with Concierge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 TOMÉA PERFUMES. All rights reserved.</p>
+        <p><a href="privacy.html">Privacy Policy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/firestore.js"></script>
+  <script src="js/cloudinary.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/products.js"></script>
+
+</body>
+</html>

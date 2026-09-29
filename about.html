@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About The Maison | TOMÉA PERFUMES</title>
+  <meta name="description" content="Discover the story, heritage, and uncompromising craftsmanship behind TOMÉA PERFUMES. Modern luxury, confidence bottled, and haute parfumerie.">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    /* ── About Page Styles ────────────────────────────────────────── */
+
+    /* Cinematic Hero */
+    .about-hero {
+      background: linear-gradient(150deg, var(--color-burgundy-darkest) 0%, var(--color-burgundy-deep) 40%, var(--color-burgundy) 100%);
+      position: relative;
+      overflow: hidden;
+      padding: calc(var(--header-height) + 6rem) 0 6rem;
+      text-align: center;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/campaign-lorigine.jpg') center/cover no-repeat;
+      opacity: 0.07;
+    }
+    .about-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--color-cream));
+    }
+    .about-hero .inner {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .about-hero .eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .about-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .about-hero h1 em {
+      display: block;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.75em;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.06em;
+    }
+    .about-hero p {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1rem, 1.6vw, 1.18rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.85;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ── Genesis Narrative ────────────────────────────────────────── */
+    .about-genesis {
+      background: var(--color-cream);
+      padding: 7rem 0 5rem;
+    }
+    .about-genesis .narrow {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .about-genesis .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-burgundy);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .about-genesis h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 700;
+      color: var(--color-charcoal);
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+    .about-genesis .prose {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.06rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--color-grey-dark);
+    }
+    .about-genesis .prose p + p {
+      margin-top: 1.5rem;
+    }
+
+    /* Pull Quote */
+    .about-pull-quote {
+      margin: 4rem 0;
+      border-left: 4px solid var(--color-burgundy);
+      padding: 2.5rem 2.5rem 2.5rem 2.75rem;
+      background: linear-gradient(135deg, var(--color-blush-soft) 0%, #FFFFFF 100%);
+      border-radius: 0 8px 8px 0;
+      position: relative;
+    }
+    .about-pull-quote::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif;
+      font-size: 7rem;
+      color: var(--color-burgundy);
+      opacity: 0.12;
+      position: absolute;
+      top: -1.5rem;
+      left: 1rem;
+      line-height: 1;
+    }
+    .about-pull-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.15rem, 2vw, 1.5rem);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-charcoal);
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+    .about-pull-quote cite {
+      display: block;
+      margin-top: 1.25rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-burgundy);
+      font-style: normal;
+    }
+
+    /* ── Vision & Mission ─────────────────────────────────────────── */
+    .about-ethos {
+      background: #FFFFFF;
+      padding: 7rem 0;
+    }
+    .about-ethos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-ethos-media img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: var(--shadow-luxury);
+    }
+    .about-ethos-content .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-burgundy);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .about-ethos-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.9rem);
+      font-weight: 700;
+      color: var(--color-charcoal);
+      line-height: 1.1;
+      margin-bottom: 2.5rem;
+    }
+    .ethos-block {
+      padding: 1.75rem;
+      background: var(--color-cream);
+      border-radius: 6px;
+      border-left: 3px solid var(--color-burgundy);
+      margin-bottom: 1.25rem;
+      transition: box-shadow 0.25s ease;
+    }
+    .ethos-block:last-child { margin-bottom: 0; }
+    .ethos-block:hover { box-shadow: var(--shadow-medium); }
+    .ethos-block h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.825rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-burgundy);
+      margin-bottom: 0.65rem;
+    }
+    .ethos-block p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.975rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--color-grey-dark);
+      margin: 0;
+    }
+
+    /* ── Pillars ──────────────────────────────────────────────────── */
+    .about-pillars {
+      background: var(--color-cream);
+      padding: 7rem 0;
+    }
+    .about-pillars-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .about-pillars-header .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-burgundy);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .about-pillars-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 700;
+      color: var(--color-charcoal);
+      line-height: 1.1;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .pillar-card {
+      background: #FFFFFF;
+      border-radius: 6px;
+      padding: 2.75rem 2.25rem;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+      position: relative;
+      box-shadow: var(--shadow-subtle);
+    }
+    .pillar-card:hover {
+      border-bottom-color: var(--color-burgundy);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-luxury);
+    }
+    .pillar-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--color-blush);
+      line-height: 1;
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+    .pillar-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-charcoal);
+      margin-bottom: 1rem;
+      line-height: 1.35;
+    }
+    .pillar-card p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--color-grey-dark);
+      margin: 0;
+    }
+
+    /* ── Packaging Showcase ───────────────────────────────────────── */
+    .about-packaging {
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--color-blush-soft) 100%);
+      padding: 7rem 0;
+    }
+    .about-packaging-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .about-packaging-header .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-burgundy);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .about-packaging-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--color-charcoal);
+      line-height: 1.1;
+    }
+    .packaging-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .pack-card {
+      overflow: hidden;
+      border-radius: 6px;
+      background: #FFFFFF;
+      box-shadow: var(--shadow-medium);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .pack-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-luxury);
+    }
+    .pack-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+    .pack-card-body {
+      padding: 1.75rem 2rem;
+    }
+    .pack-card-body h4 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-charcoal);
+      margin-bottom: 0.5rem;
+    }
+    .pack-card-body p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--color-grey-dark);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .pack-card-tag {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-burgundy);
+      border: 1px solid rgba(107,46,53,0.25);
+      padding: 0.25rem 0.75rem;
+      border-radius: 30px;
+    }
+
+    /* ── Invitation CTA ───────────────────────────────────────────── */
+    .about-cta {
+      background: linear-gradient(135deg, var(--color-burgundy-deep) 0%, var(--color-burgundy) 60%, #7D3440 100%);
+      padding: 7rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/campaign-charme.jpg') center/cover no-repeat;
+      opacity: 0.06;
+    }
+    .about-cta .inner {
+      position: relative;
+      z-index: 1;
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .about-cta .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      display: block;
+      margin-bottom: 1.25rem;
+    }
+    .about-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.75rem);
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+    }
+    .about-cta p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.85;
+      margin-bottom: 3rem;
+    }
+    .about-cta-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .about-cta-btns .btn-explore {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1rem 2.25rem;
+      background: rgba(255,255,255,0.12);
+      color: #FFFFFF;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.25s ease;
+    }
+    .about-cta-btns .btn-explore:hover {
+      background: rgba(255,255,255,0.22);
+      border-color: rgba(255,255,255,0.7);
+    }
+    .about-cta-btns .btn-concierge {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1rem 2.25rem;
+      background: #FFFFFF;
+      color: var(--color-burgundy);
+      border: 1.5px solid #FFFFFF;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .about-cta-btns .btn-concierge:hover {
+      background: var(--color-gold);
+      color: #FFFFFF;
+      border-color: var(--color-gold);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+    }
+
+    /* ── Responsive ───────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .about-ethos-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-ethos-media { order: -1; }
+      .about-ethos-media img { aspect-ratio: 16/7; }
+      .pillars-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .packaging-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .about-hero { padding: calc(var(--header-height) + 3.5rem) 0 4rem; }
+      .about-genesis,
+      .about-ethos,
+      .about-pillars,
+      .about-packaging,
+      .about-cta { padding: 5rem 0; }
+      .about-pull-quote { padding: 2rem 1.5rem 2rem 2rem; }
+      .about-cta-btns { flex-direction: column; align-items: center; }
+      .about-cta-btns a, .about-cta-btns button { width: 100%; max-width: 320px; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .about-hero h1 { font-size: 2.6rem; }
+      .pillar-num { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Site Header ─────────────────────────────────────────────── -->
+  <header class="site-header header-solid" role="banner">
+    <div class="header-container">
+      <a href="index.html" class="header-brand" aria-label="TOMÉA PERFUMES Homepage">
+        <img src="assets/images/logo-burgundy.png" alt="TOMÉA Logo" class="header-logo-img logo-dark" style="display:block;">
+        <img src="assets/images/logo-white.png" alt="TOMÉA Logo" class="header-logo-img logo-light" style="display:none;">
+      </a>
+      <nav class="desktop-nav" role="navigation" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="collection.html" class="nav-link">The Collection</a>
+        <a href="about.html" class="nav-link is-active">About TOMÉA</a>
+        <a href="contact.html" class="nav-link">Concierge</a>
+      </nav>
+      <div class="header-actions">
+        <button class="header-wa-btn" data-action="whatsapp-concierge" aria-label="Order via WhatsApp">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.042-.047-.282-.07-1.144-.383-2.18-1.309-1.312-1.173-1.846-2.348-1.925-2.522-.079-.174-.537-.714-.537-1.362 0-.649.34-.968.461-1.099.121-.131.265-.164.354-.164.088 0 .177.001.254.005.081.004.19-.031.297.226.11.265.376.917.409.985.033.069.055.15.011.238-.044.088-.066.143-.132.22-.066.077-.139.172-.199.232-.066.066-.135.138-.058.271.077.133.344.568.739.919.508.453.937.593 1.07.659.133.066.21.055.288-.033.077-.089.332-.387.42-.519.088-.133.177-.11.299-.066.121.044.774.365.907.432.133.066.221.099.254.154.033.056.033.322-.111.727z"/>
+          </svg>
+          <span>Order Now</span>
+        </button>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav-overlay" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <img src="assets/images/logo-white.png" alt="TOMÉA" class="mobile-logo">
+      <button class="mobile-nav-close" aria-label="Close menu">&times;</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="collection.html" class="mobile-nav-link">The Collection</a>
+      <a href="about.html" class="mobile-nav-link is-active">About TOMÉA</a>
+      <a href="contact.html" class="mobile-nav-link">Concierge</a>
+    </nav>
+    <div class="mobile-nav-footer">
+      <button class="btn btn-primary btn-block" data-action="whatsapp-concierge">Order via WhatsApp</button>
+    </div>
+  </aside>
+
+  <main id="main-content">
+
+    <!-- ── Cinematic Hero ─────────────────────────────────────────── -->
+    <section class="about-hero" aria-labelledby="about-heading">
+      <div class="inner">
+        <span class="eyebrow">The Maison</span>
+        <h1 id="about-heading">
+          Confidence,
+          <em>Bottled</em>
+        </h1>
+        <p>
+          The story of an African luxury fragrance house dedicated to timeless elegance,
+          magnetic presence, and unyielding sophistication.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── The Genesis ────────────────────────────────────────────── -->
+    <section class="about-genesis" aria-labelledby="genesis-heading">
+      <div class="narrow">
+        <span class="section-label">The Genesis</span>
+        <h2 id="genesis-heading">Born from an Uncompromising Standard</h2>
+        <div class="prose">
+          <p>
+            TOMÉA PERFUMES was born from an uncompromising desire to celebrate true luxury:
+            the quiet assurance that occurs when supreme craftsmanship meets raw individuality.
+            In an era saturated with transient aromas, TOMÉA crafts deliberate, high-potency
+            Extrait de Parfum creations engineered to leave an indelible impression.
+          </p>
+          <p>
+            Every fragrance in the TOMÉA collection is an intimate conversation between rare
+            global raw materials and the unapologetic confidence of modern African luxury
+            lifestyle. From radiant Italian citrus to sacred ambers, noble oudhs, and velvet
+            musks — our formulations achieve an artful balance between immediate magnetic charm
+            and deep, lingering sillage.
+          </p>
+        </div>
+
+        <div class="about-pull-quote reveal-on-scroll" role="figure" aria-label="Founder's quote">
+          <blockquote>
+            "True luxury does not clamor for attention. It enters with grace, lingers with
+            poise, and is remembered long after you have departed."
+          </blockquote>
+          <cite>— The Founder's Note</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Vision & Mission ───────────────────────────────────────── -->
+    <section class="about-ethos" aria-labelledby="ethos-heading">
+      <div class="container">
+        <div class="about-ethos-grid">
+          <div class="about-ethos-media reveal-on-scroll">
+            <img
+              src="assets/images/brand-vision-mission.jpg"
+              alt="TOMÉA Brand Vision — editorial campaign image"
+              loading="lazy"
+            >
+          </div>
+          <div class="about-ethos-content reveal-on-scroll">
+            <span class="section-label">Our Ethos</span>
+            <h2 id="ethos-heading">Vision &amp; Mission</h2>
+            <div class="ethos-block">
+              <h3>Our Vision</h3>
+              <p>
+                To establish TOMÉA as Africa's most prestigious luxury fragrance maison,
+                redefining high-fashion olfactory art on the global stage with uncompromising
+                elegance and sensory mastery.
+              </p>
+            </div>
+            <div class="ethos-block">
+              <h3>Our Mission</h3>
+              <p>
+                To empower discerning men and women with commanding Extrait de Parfum
+                creations that embody sovereignty, sensual distinction, and the effortless
+                magnetism of true sophistication.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Three Pillars ──────────────────────────────────────────── -->
+    <section class="about-pillars" aria-labelledby="pillars-heading">
+      <div class="container">
+        <div class="about-pillars-header">
+          <span class="section-label">Haute Parfumerie</span>
+          <h2 id="pillars-heading">The Three Pillars of TOMÉA</h2>
+        </div>
+        <div class="pillars-grid">
+          <article class="pillar-card reveal-on-scroll">
+            <span class="pillar-num">01</span>
+            <h3>Extrait de Parfum Concentration</h3>
+            <p>
+              Our fragrances feature between 25%–35% pure perfume oils — the highest
+              concentration recognized in classical perfumery. This ensures phenomenal
+              longevity of 12+ hours with rich, dimensional evolution on the skin.
+            </p>
+          </article>
+          <article class="pillar-card reveal-on-scroll">
+            <span class="pillar-num">02</span>
+            <h3>The Olfactory Architecture</h3>
+            <p>
+              Each blend follows a meticulously tuned pyramid: bright, effervescent top
+              notes that capture the senses, a luxurious multi-faceted heart, and a dense,
+              warm drydown that bonds intimately with your skin chemistry.
+            </p>
+          </article>
+          <article class="pillar-card reveal-on-scroll">
+            <span class="pillar-num">03</span>
+            <h3>The Unboxing Ritual</h3>
+            <p>
+              Every bottle is ensconced in a rigid burgundy presentation casket, stamped
+              with warm gold foil and accompanied by the signature TOMÉA luxury ribbon
+              and bespoke carrier bag.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Packaging Showcase ─────────────────────────────────────── -->
+    <section class="about-packaging" aria-labelledby="packaging-heading">
+      <div class="container">
+        <div class="about-packaging-header">
+          <span class="section-label">The Unboxing Experience</span>
+          <h2 id="packaging-heading">A Gift Before the Fragrance</h2>
+        </div>
+        <div class="packaging-grid">
+          <article class="pack-card reveal-on-scroll">
+            <img
+              class="pack-card-img"
+              src="assets/images/packaging-unboxing.jpg"
+              alt="TOMÉA presentation coffret — rigid burgundy box with gold foil"
+              loading="lazy"
+            >
+            <div class="pack-card-body">
+              <h4>The Presentation Coffret</h4>
+              <p>Tailored velvet lining with a rigid protective structural casing — a keepsake as enduring as the fragrance within.</p>
+              <span class="pack-card-tag">Rigid Casket</span>
+            </div>
+          </article>
+          <article class="pack-card reveal-on-scroll">
+            <img
+              class="pack-card-img"
+              src="assets/images/brand-bag-luxury.jpg"
+              alt="TOMÉA luxury carrier bag — deep burgundy with gold insignia"
+              loading="lazy"
+            >
+            <div class="pack-card-body">
+              <h4>The Signature Carrier</h4>
+              <p>Deep burgundy embossed with gold hot-stamped insignia and satin ribbon handles. Unmistakable in any room.</p>
+              <span class="pack-card-tag">Gold Insignia</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Invitation CTA ─────────────────────────────────────────── -->
+    <section class="about-cta" aria-labelledby="cta-heading">
+      <div class="inner">
+        <span class="section-label">Discover Your Signature</span>
+        <h2 id="cta-heading">Experience the Collection</h2>
+        <p>
+          Explore our premier trio: L'Origine, Charme, and Désir. Or consult with our
+          private fragrance concierge for a personalized olfactory recommendation.
+        </p>
+        <div class="about-cta-btns">
+          <a href="collection.html" class="btn-explore" aria-label="Explore all TOMÉA fragrances">Explore All Fragrances</a>
+          <button class="btn-concierge" data-action="whatsapp-concierge" aria-label="Speak to TOMÉA fragrance concierge">Speak to Concierge</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Site Footer ─────────────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <img src="assets/images/logo-white.png" alt="TOMÉA Logo" class="footer-logo">
+          <p class="footer-tagline">Confidence, Bottled.</p>
+          <p class="footer-desc">A premium luxury perfume brand celebrating refinement, magnetic allure, and African opulence.</p>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">NAVIGATION</h4>
+          <ul class="footer-nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collection.html">The Collection</a></li>
+            <li><a href="about.html">About TOMÉA</a></li>
+            <li><a href="contact.html">Concierge &amp; Inquiries</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">THE FRAGRANCES</h4>
+          <ul class="footer-nav-list">
+            <li><a href="product.html?id=lorigine">TOMÉA L'Origine</a></li>
+            <li><a href="product.html?id=charme">TOMÉA Charme</a></li>
+            <li><a href="product.html?id=desir">TOMÉA Désir</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">ORDER DIRECT</h4>
+          <div class="footer-contact-info">
+            <p>Every bottle is personally prepared and dispatched with luxury packaging.</p>
+            <div style="margin-top:1rem;">
+              <button class="btn btn-sm btn-white-outline" data-action="whatsapp-concierge">Chat with Concierge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 TOMÉA PERFUMES. All rights reserved.</p>
+        <p><a href="privacy.html">Client Care &amp; Privacy Policy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/firestore.js"></script>
+  <script src="js/cloudinary.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+
+</body>
+</html>

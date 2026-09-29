@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | TOMÉA PERFUMES</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <style>
+    body.login-page {
+      background: radial-gradient(ellipse at 60% 40%, #3A060F 0%, #1A0206 50%, #0D0104 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      margin: 0;
+      font-family: 'Poppins', -apple-system, sans-serif;
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .login-brand-top {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .login-brand-top img {
+      max-height: 36px;
+      filter: brightness(0) invert(1);
+      margin-bottom: 1rem;
+    }
+
+    .login-card {
+      background: #FFFFFF;
+      width: 100%;
+      padding: 2.75rem 2.5rem 2.25rem;
+      border-radius: 6px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+      border-top: 4px solid #6B2E35;
+    }
+
+    .login-heading {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #0D0708;
+      margin: 0 0 0.35rem 0;
+      letter-spacing: -0.025em;
+    }
+
+    .login-subheading {
+      font-size: 0.875rem;
+      color: #5E5052;
+      margin: 0 0 2rem 0;
+      font-weight: 400;
+    }
+
+    .login-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6B2E35;
+      background: rgba(107, 46, 53, 0.08);
+      padding: 3px 10px;
+      font-weight: 700;
+      border-radius: 3px;
+      margin-bottom: 1.5rem;
+    }
+
+    .login-error-alert {
+      display: none;
+      background-color: #FFF5F5;
+      border-left: 3px solid #E53E3E;
+      color: #C53030;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 3px;
+    }
+
+    .btn-login-submit {
+      width: 100%;
+      padding: 0.95rem;
+      background-color: #6B2E35;
+      color: #FFFFFF;
+      border: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-login-submit:hover {
+      background-color: #541E25;
+      box-shadow: 0 6px 20px rgba(107, 46, 53, 0.35);
+    }
+
+    .btn-login-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .login-footer-link {
+      text-align: center;
+      margin-top: 1.75rem;
+      font-size: 0.8125rem;
+    }
+
+    .login-footer-link a {
+      color: #5E5052;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .login-footer-link a:hover { color: #6B2E35; }
+
+    .tomea-label {
+      display: block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #0D0708;
+      margin-bottom: 0.45rem;
+    }
+
+    .tomea-input {
+      width: 100%;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.975rem;
+      color: #0D0708;
+      background-color: #FFFFFF;
+      border: 1.5px solid #DDD7D3;
+      border-radius: 4px;
+      padding: 0.8rem 1rem;
+      min-height: 48px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      box-sizing: border-box;
+    }
+
+    .tomea-input:focus {
+      outline: none;
+      border-color: #6B2E35;
+      box-shadow: 0 0 0 3.5px rgba(107, 46, 53, 0.12);
+    }
+
+    .tomea-form-group {
+      margin-bottom: 1.35rem;
+    }
+  </style>
+</head>
+<body class="login-page">
+
+  <div class="login-wrapper">
+    <div class="login-brand-top">
+      <img src="../assets/images/logo-white.png" alt="TOMÉA PERFUMES" onerror="this.style.display='none'" />
+    </div>
+
+    <div class="login-card">
+      <div style="margin-bottom: 1.5rem;">
+        <span class="login-badge">Maison Advisory Portal</span>
+        <h1 class="login-heading">Administrator Sign In</h1>
+        <p class="login-subheading">Enter your credentials to access the TOMÉA CMS dashboard.</p>
+      </div>
+
+      <div id="login-error-msg" class="login-error-alert" role="alert"></div>
+
+      <form id="admin-login-form">
+        <div class="tomea-form-group">
+          <label for="admin-email-input" class="tomea-label">Email Address</label>
+          <input 
+            type="email" 
+            id="admin-email-input" 
+            class="tomea-input" 
+            placeholder="admin@tomeaperfumes.com" 
+            required 
+            autocomplete="username" 
+          />
+        </div>
+
+        <div class="tomea-form-group">
+          <label for="admin-password-input" class="tomea-label">Password</label>
+          <input 
+            type="password" 
+            id="admin-password-input" 
+            class="tomea-input" 
+            placeholder="••••••••••••" 
+            required 
+            autocomplete="current-password" 
+          />
+        </div>
+
+        <button type="submit" id="btn-admin-login" class="btn-login-submit">
+          Sign In to Dashboard
+        </button>
+      </form>
+
+      <div class="login-footer-link">
+        <a href="../index.html">&larr; Return to Public Boutique</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase & Core Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/firestore.js"></script>
+  <script src="../js/firebase-auth.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // If already logged in, redirect straight to dashboard
+      if (window.Auth && window.Auth.isAuthenticated()) {
+        window.location.href = 'dashboard.html';
+        return;
+      }
+
+      const form = document.getElementById('admin-login-form');
+      const errBox = document.getElementById('login-error-msg');
+      const submitBtn = document.getElementById('btn-admin-login');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errBox.style.display = 'none';
+        errBox.textContent = '';
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Signing in...';
+
+        const email = document.getElementById('admin-email-input').value.trim();
+        const password = document.getElementById('admin-password-input').value.trim();
+
+        try {
+          if (!window.Auth) throw new Error('Authentication service unavailable.');
+          await window.Auth.login(email, password);
+          if (window.Utils) window.Utils.showToast('Welcome to TOMÉA Maison Portal.', 'success');
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 400);
+        } catch (err) {
+          console.error('[TOMÉA Login] Failed:', err);
+          errBox.textContent = err.message || 'Authentication failed. Please verify credentials.';
+          errBox.style.display = 'block';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Sign In to Dashboard';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

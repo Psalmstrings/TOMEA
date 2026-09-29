@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage Editorial CMS | TOMÉA Admin</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar" role="navigation" aria-label="Administrator Navigation">
+    <div class="admin-sidebar-brand">
+      <img src="../assets/images/logo-white.png" alt="TOMÉA" class="admin-sidebar-logo" />
+      <span class="admin-badge-label">CMS</span>
+    </div>
+
+    <nav class="admin-sidebar-nav">
+      <a href="dashboard.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="products.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span>Fragrances</span>
+      </a>
+
+      <a href="homepage.html" class="admin-nav-item is-active">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span>Homepage CMS</span>
+      </a>
+
+      <a href="settings.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span>Brand Settings</span>
+      </a>
+
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+        <a href="../index.html" target="_blank" class="admin-nav-item">
+          <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          <span>View Public Store</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <div class="admin-user-info">
+        <span class="admin-user-label">Active Session</span>
+        <span class="admin-user-email js-admin-email">Administrator</span>
+      </div>
+      <button class="btn btn-sm btn-logout js-admin-logout" title="Log Out">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Layout -->
+  <div class="admin-main-wrapper">
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="admin-sidebar-toggle" aria-label="Toggle Sidebar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <h1 class="topbar-title">Homepage Editorial CMS</h1>
+      </div>
+      <div class="topbar-right">
+        <a href="../index.html" target="_blank" class="btn btn-sm btn-outline">Preview Changes &rarr;</a>
+        <span class="topbar-admin-badge js-admin-email">admin@tomeaperfumes.com</span>
+      </div>
+    </header>
+
+    <main class="admin-content-container">
+      <form id="admin-homepage-form">
+        <!-- Section 1: Hero Banner -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-header">
+            <h3 class="card-heading">1. Cinematic Hero Section</h3>
+            <p class="card-subtext">The primary visual and verbal statement greeting visitors on the homepage.</p>
+          </div>
+          <div class="admin-card-body">
+            <div class="tomea-form-group">
+              <label for="cms-hero-tagline" class="tomea-label">Hero Pre-title / Tagline</label>
+              <input type="text" id="cms-hero-tagline" class="tomea-input" placeholder="e.g. HAUTE PARFUMERIE • EXTRAIT DE PARFUM" />
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="cms-hero-heading" class="tomea-label">Main Hero Headline</label>
+              <input type="text" id="cms-hero-heading" class="tomea-input" placeholder="e.g. CONFIDENCE, BOTTLED." />
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="cms-hero-subtitle" class="tomea-label">Hero Editorial Subtitle</label>
+              <textarea id="cms-hero-subtitle" rows="2" class="tomea-textarea" placeholder="e.g. An opulent collection of high-concentration Extrait de Parfum crafted for timeless distinction and magnetic presence."></textarea>
+            </div>
+
+            <div class="form-grid-two">
+              <div class="tomea-form-group">
+                <label for="cms-hero-primary-cta" class="tomea-label">Primary Button Label</label>
+                <input type="text" id="cms-hero-primary-cta" class="tomea-input" placeholder="e.g. Explore The Collection" />
+              </div>
+
+              <div class="tomea-form-group">
+                <label for="cms-hero-secondary-cta" class="tomea-label">Secondary Button Label</label>
+                <input type="text" id="cms-hero-secondary-cta" class="tomea-input" placeholder="e.g. The Maison Story" />
+              </div>
+            </div>
+
+            <!-- Hero Image Selector / Cloudinary Uploader -->
+            <div class="tomea-form-group">
+              <label for="cms-hero-image" class="tomea-label">Hero Background Photography (Path or Cloudinary URL)</label>
+              <div class="input-with-button">
+                <input type="text" id="cms-hero-image" class="tomea-input" placeholder="assets/images/hero-banner.jpg" />
+                <input type="file" id="hero-file-input" style="display:none;" accept="image/*" />
+                <button type="button" id="btn-upload-hero-image" class="btn btn-sm btn-secondary">Upload to Cloudinary</button>
+              </div>
+            </div>
+
+            <div class="hero-image-preview-box mt-3">
+              <span class="text-xs text-muted d-block mb-1">Current Hero Image Preview:</span>
+              <img id="cms-hero-image-preview" src="../assets/images/hero-banner.jpg" alt="Hero Preview" style="max-height: 180px; width: 100%; object-fit: cover; border: 1px solid var(--admin-border);" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Editorial Intro & Philosophy -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-header">
+            <h3 class="card-heading">2. Editorial Brand Statement</h3>
+            <p class="card-subtext">The literary introduction to the TOMÉA world and craft.</p>
+          </div>
+          <div class="admin-card-body">
+            <div class="tomea-form-group">
+              <label for="cms-intro-pretitle" class="tomea-label">Intro Pre-title</label>
+              <input type="text" id="cms-intro-pretitle" class="tomea-input" placeholder="e.g. THE MAISON PHILOSOPHY" />
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="cms-intro-title" class="tomea-label">Intro Heading</label>
+              <input type="text" id="cms-intro-title" class="tomea-input" placeholder="e.g. WHERE MODERN AFRICAN LUXURY MEETS HAUTE PARFUMERIE" />
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="cms-intro-p1" class="tomea-label">Opening Paragraph</label>
+              <textarea id="cms-intro-p1" rows="3" class="tomea-textarea" placeholder="Crafted for those who command the room without saying a word..."></textarea>
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="cms-intro-p2" class="tomea-label">Secondary Paragraph</label>
+              <textarea id="cms-intro-p2" rows="3" class="tomea-textarea" placeholder="Every formulation features 25% to 35% pure perfume oils..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Vision & Mission (Brand Guideline Aligned) -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-header">
+            <h3 class="card-heading">3. Vision & Mission Pillars</h3>
+            <p class="card-subtext">Directly from the official TOMÉA Brand Guideline document.</p>
+          </div>
+          <div class="admin-card-body">
+            <div class="form-grid-two">
+              <div>
+                <div class="tomea-form-group">
+                  <label for="cms-vision-title" class="tomea-label">Vision Heading</label>
+                  <input type="text" id="cms-vision-title" class="tomea-input" placeholder="Our Vision" />
+                </div>
+                <div class="tomea-form-group">
+                  <label for="cms-vision-text" class="tomea-label">Vision Description</label>
+                  <textarea id="cms-vision-text" rows="4" class="tomea-textarea" placeholder="To establish TOMÉA as Africa's most prestigious luxury fragrance maison..."></textarea>
+                </div>
+              </div>
+
+              <div>
+                <div class="tomea-form-group">
+                  <label for="cms-mission-title" class="tomea-label">Mission Heading</label>
+                  <input type="text" id="cms-mission-title" class="tomea-input" placeholder="Our Mission" />
+                </div>
+                <div class="tomea-form-group">
+                  <label for="cms-mission-text" class="tomea-label">Mission Description</label>
+                  <textarea id="cms-mission-text" rows="4" class="tomea-textarea" placeholder="To empower discerning men and women with commanding Extrait de Parfum creations..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Final Call to Action -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-header">
+            <h3 class="card-heading">4. Boutique Final Invitation</h3>
+            <p class="card-subtext">Closing CTA strip leading clients directly to collection or WhatsApp concierge.</p>
+          </div>
+          <div class="admin-card-body">
+            <div class="tomea-form-group">
+              <label for="cms-final-cta-heading" class="tomea-label">Invitation Heading</label>
+              <input type="text" id="cms-final-cta-heading" class="tomea-input" placeholder="e.g. FIND YOUR SIGNATURE AROMA" />
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="cms-final-cta-subtitle" class="tomea-label">Invitation Subtext</label>
+              <input type="text" id="cms-final-cta-subtitle" class="tomea-input" placeholder="e.g. Experience the magnetic trio or speak with our private fragrance advisor." />
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="cms-final-cta-btn" class="tomea-label">Button Text</label>
+              <input type="text" id="cms-final-cta-btn" class="tomea-input" placeholder="e.g. Order via WhatsApp Concierge" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Bar -->
+        <div class="admin-submit-bar">
+          <button type="submit" id="btn-save-homepage" class="btn btn-primary btn-lg">
+            Save & Publish Changes
+          </button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <!-- Firebase & Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/firestore.js"></script>
+  <script src="../js/firebase-auth.js"></script>
+  <script src="../js/cloudinary.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="../js/admin-homepage.js"></script>
+</body>
+</html>

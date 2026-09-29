@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fragrance Catalogue | TOMÉA Admin</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar" role="navigation" aria-label="Administrator Navigation">
+    <div class="admin-sidebar-brand">
+      <img src="../assets/images/logo-white.png" alt="TOMÉA" class="admin-sidebar-logo" />
+      <span class="admin-badge-label">CMS</span>
+    </div>
+
+    <nav class="admin-sidebar-nav">
+      <a href="dashboard.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="products.html" class="admin-nav-item is-active">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span>Fragrances</span>
+      </a>
+
+      <a href="homepage.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span>Homepage CMS</span>
+      </a>
+
+      <a href="settings.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span>Brand Settings</span>
+      </a>
+
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+        <a href="../collection.html" target="_blank" class="admin-nav-item">
+          <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          <span>View Boutique</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <div class="admin-user-info">
+        <span class="admin-user-label">Active Session</span>
+        <span class="admin-user-email js-admin-email">Administrator</span>
+      </div>
+      <button class="btn btn-sm btn-logout js-admin-logout" title="Log Out">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Admin Main Layout -->
+  <div class="admin-main-wrapper">
+    <!-- Admin Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="admin-sidebar-toggle" aria-label="Toggle Sidebar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <h1 class="topbar-title">Fragrance Collection Management</h1>
+      </div>
+
+      <div class="topbar-right">
+        <button id="btn-open-add-product" class="btn btn-sm btn-primary">
+          + Add New Fragrance
+        </button>
+        <span class="topbar-admin-badge js-admin-email">admin@tomeaperfumes.com</span>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <main class="admin-content-container">
+      <!-- Search & Filters Toolbar -->
+      <div class="admin-card mb-4">
+        <div class="admin-toolbar-row">
+          <div class="toolbar-search">
+            <input 
+              type="text" 
+              id="admin-product-search" 
+              class="tomea-input" 
+              placeholder="Search by fragrance name, notes, or olfactory family..." 
+            />
+          </div>
+          <div class="toolbar-filter">
+            <select id="admin-product-filter" class="tomea-select">
+              <option value="all">All Fragrances</option>
+              <option value="active">Active in Boutique</option>
+              <option value="draft">Drafts / Hidden</option>
+              <option value="featured">Featured on Homepage</option>
+              <option value="outofstock">Waitlist Only</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fragrances Table -->
+      <div class="admin-card">
+        <div class="admin-card-header d-flex justify-between align-center">
+          <div>
+            <h3 class="card-heading">Catalogue Products</h3>
+            <p class="card-subtext">Manage pricing, Extrait concentrations, olfactory notes, and Cloudinary media.</p>
+          </div>
+        </div>
+        <div class="admin-card-body p-0">
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Family / Size</th>
+                  <th>Price</th>
+                  <th>Display Order</th>
+                  <th>Status</th>
+                  <th>Featured</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-table-body">
+                <tr><td colspan="7" class="text-center py-4">Loading fragrance products...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Fullscreen / Drawer Modal for Adding/Editing Fragrance -->
+  <div id="admin-product-modal" class="admin-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+    <div class="admin-modal-container modal-lg">
+      <div class="admin-modal-header">
+        <h2 id="product-modal-title" class="modal-title">Add New Fragrance</h2>
+        <button type="button" class="modal-close-btn js-close-product-modal" aria-label="Close">&times;</button>
+      </div>
+
+      <form id="admin-product-form" class="admin-modal-form">
+        <div class="admin-modal-body">
+          <input type="hidden" id="prod-id" />
+
+          <!-- Row 1: Basic Identifiers -->
+          <div class="form-grid-two">
+            <div class="tomea-form-group">
+              <label for="prod-name" class="tomea-label">Fragrance Title *</label>
+              <input type="text" id="prod-name" class="tomea-input" placeholder="e.g. TOMÉA L'Origine" required />
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="prod-slug" class="tomea-label">URL Slug</label>
+              <input type="text" id="prod-slug" class="tomea-input" placeholder="e.g. tomea-lorigine (auto-generated if empty)" />
+            </div>
+          </div>
+
+          <!-- Row 2: Subtitle & Concentration -->
+          <div class="form-grid-two">
+            <div class="tomea-form-group">
+              <label for="prod-subtitle" class="tomea-label">Editorial Subtitle / Character</label>
+              <input type="text" id="prod-subtitle" class="tomea-input" placeholder="e.g. Power, Depth, Quiet Confidence" />
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="prod-concentration" class="tomea-label">Concentration</label>
+              <select id="prod-concentration" class="tomea-select">
+                <option value="Extrait de Parfum">Extrait de Parfum (Highest Luxury Concentration)</option>
+                <option value="Eau de Parfum">Eau de Parfum</option>
+                <option value="Parfum">Parfum</option>
+                <option value="Limited Reserve Extrait">Limited Reserve Extrait</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 3: Pricing & Volume -->
+          <div class="form-grid-three">
+            <div class="tomea-form-group">
+              <label for="prod-price" class="tomea-label">Price (₦ NGN) *</label>
+              <input type="number" id="prod-price" class="tomea-input" placeholder="45000" min="0" step="100" required />
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="prod-compare-price" class="tomea-label">Compare-at / Retail Price (₦)</label>
+              <input type="number" id="prod-compare-price" class="tomea-input" placeholder="50000" min="0" step="100" />
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="prod-size" class="tomea-label">Bottle Volume</label>
+              <input type="text" id="prod-size" class="tomea-input" value="50ml / 1.7 FL. OZ." />
+            </div>
+          </div>
+
+          <!-- Row 4: Olfactory Family & Order -->
+          <div class="form-grid-two">
+            <div class="tomea-form-group">
+              <label for="prod-family" class="tomea-label">Fragrance Family</label>
+              <select id="prod-family" class="tomea-select">
+                <option value="Woody Aromatic">Woody Aromatic</option>
+                <option value="Floral Ambery">Floral Ambery</option>
+                <option value="Sensual Oriental Amber">Sensual Oriental Amber</option>
+                <option value="Gourmand Woody">Gourmand Woody</option>
+                <option value="Fresh Citrus Aquatic">Fresh Citrus Aquatic</option>
+              </select>
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="prod-display-order" class="tomea-label">Display Priority Order</label>
+              <input type="number" id="prod-display-order" class="tomea-input" value="1" min="1" max="100" />
+            </div>
+          </div>
+
+          <!-- Descriptions -->
+          <div class="tomea-form-group">
+            <label for="prod-short-desc" class="tomea-label">Short Boutique Summary</label>
+            <input type="text" id="prod-short-desc" class="tomea-input" placeholder="A concise 1-sentence synopsis for collection cards..." />
+          </div>
+
+          <div class="tomea-form-group">
+            <label for="prod-full-desc" class="tomea-label">Detailed Olfactory Narrative</label>
+            <textarea id="prod-full-desc" rows="3" class="tomea-textarea" placeholder="Comprehensive product description highlighting craftsmanship and notes evolution..."></textarea>
+          </div>
+
+          <div class="tomea-form-group">
+            <label for="prod-story" class="tomea-label">The Story / Creative Inspiration</label>
+            <textarea id="prod-story" rows="2" class="tomea-textarea" placeholder="The creative ethos and emotional statement of this fragrance..."></textarea>
+          </div>
+
+          <!-- Olfactory Pyramid Builder -->
+          <div class="admin-section-divider">
+            <h4 class="divider-title">OLFACTORY ARCHITECTURE (NOTES BUILDER)</h4>
+          </div>
+
+          <div class="notes-builder-grid">
+            <!-- Top Notes -->
+            <div class="note-builder-col">
+              <label class="tomea-label">Top Notes</label>
+              <div class="input-with-button">
+                <input type="text" id="prod-add-top-input" class="tomea-input" placeholder="e.g. Italian Bergamot" />
+                <button type="button" id="btn-add-top-note" class="btn btn-sm btn-secondary">+ Add</button>
+              </div>
+              <div id="top-notes-tags" class="notes-tag-container"></div>
+            </div>
+
+            <!-- Heart Notes -->
+            <div class="note-builder-col">
+              <label class="tomea-label">Heart Notes</label>
+              <div class="input-with-button">
+                <input type="text" id="prod-add-heart-input" class="tomea-input" placeholder="e.g. Damascus Rose" />
+                <button type="button" id="btn-add-heart-note" class="btn btn-sm btn-secondary">+ Add</button>
+              </div>
+              <div id="heart-notes-tags" class="notes-tag-container"></div>
+            </div>
+
+            <!-- Base Notes -->
+            <div class="note-builder-col">
+              <label class="tomea-label">Base Notes</label>
+              <div class="input-with-button">
+                <input type="text" id="prod-add-base-input" class="tomea-input" placeholder="e.g. Warm Amber, Oud" />
+                <button type="button" id="btn-add-base-note" class="btn btn-sm btn-secondary">+ Add</button>
+              </div>
+              <div id="base-notes-tags" class="notes-tag-container"></div>
+            </div>
+          </div>
+
+          <!-- Media & Cloudinary Integration -->
+          <div class="admin-section-divider">
+            <h4 class="divider-title">FLACON IMAGERY & MEDIA (CLOUDINARY READY)</h4>
+          </div>
+
+          <div class="images-manager-wrapper">
+            <div class="d-flex justify-between align-center mb-2">
+              <span class="text-sm font-semibold">Attached Images (First image is Primary flacon)</span>
+              <button type="button" id="btn-open-brand-library" class="btn btn-sm btn-outline">
+                Choose from TOMÉA Asset Library
+              </button>
+            </div>
+
+            <!-- Cloudinary Dropzone -->
+            <div id="cloudinary-dropzone" class="cloudinary-dropzone">
+              <input type="file" id="cloudinary-file-input" class="dropzone-file-input" accept="image/*" />
+              <div class="dropzone-content">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <p>Click or drag new flacon photography to upload via Cloudinary</p>
+                <span class="text-xs text-muted">Supports JPG, PNG, WEBP</span>
+              </div>
+            </div>
+
+            <!-- Upload Progress -->
+            <div id="cloudinary-upload-progress" class="upload-progress-wrapper" style="display:none;">
+              <div class="progress-bar-track">
+                <div id="cloudinary-progress-bar" class="progress-bar-fill" style="width: 0%;"></div>
+              </div>
+              <span id="cloudinary-status-text" class="text-xs text-muted">Uploading to Cloudinary CDN...</span>
+            </div>
+
+            <!-- Gallery Previews -->
+            <div id="product-images-preview-grid" class="image-previews-grid"></div>
+          </div>
+
+          <!-- Toggles & Status -->
+          <div class="admin-section-divider">
+            <h4 class="divider-title">AVAILABILITY & STATUS</h4>
+          </div>
+
+          <div class="form-checkboxes-row">
+            <label class="custom-checkbox">
+              <input type="checkbox" id="prod-active" checked />
+              <span class="checkbox-box"></span>
+              <span class="checkbox-label"><strong>Active</strong> (Visible in public boutique & collection)</span>
+            </label>
+
+            <label class="custom-checkbox">
+              <input type="checkbox" id="prod-featured" />
+              <span class="checkbox-box"></span>
+              <span class="checkbox-label"><strong>Featured</strong> (Highlighted on Homepage curated selection)</span>
+            </label>
+
+            <label class="custom-checkbox">
+              <input type="checkbox" id="prod-outofstock" />
+              <span class="checkbox-box"></span>
+              <span class="checkbox-label"><strong>Waitlist Only</strong> (Temporarily out of stock)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="admin-modal-footer">
+          <button type="button" class="btn btn-secondary js-close-product-modal">Cancel</button>
+          <button type="submit" id="btn-save-product" class="btn btn-primary">Save Fragrance</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Brand Asset Library Modal -->
+  <div id="brand-library-modal" class="admin-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="library-modal-title">
+    <div class="admin-modal-container modal-md">
+      <div class="admin-modal-header">
+        <h2 id="library-modal-title" class="modal-title">Select from TOMÉA Brand Asset Vault</h2>
+        <button type="button" class="modal-close-btn js-close-library-modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <p class="text-sm text-muted mb-3">Click on any official brand photography asset below to attach it to this fragrance flacon.</p>
+        <div id="brand-library-grid" class="brand-library-grid"></div>
+      </div>
+      <div class="admin-modal-footer">
+        <button type="button" class="btn btn-secondary js-close-library-modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase & Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/firestore.js"></script>
+  <script src="../js/firebase-auth.js"></script>
+  <script src="../js/cloudinary.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="../js/admin-products.js"></script>
+</body>
+</html>

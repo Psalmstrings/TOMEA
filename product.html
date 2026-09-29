@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fragrance Details | TOMÉA PERFUMES</title>
+  <meta name="description" content="Experience the exquisite craftsmanship of TOMÉA Extrait de Parfum. Handcrafted luxury fragrances with exceptional longevity, opulent notes, and African elegance.">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header header-solid" role="banner">
+    <div class="header-container">
+      <a href="index.html" class="header-brand" aria-label="TOMÉA PERFUMES Homepage">
+        <img src="assets/images/logo-burgundy.png" alt="TOMÉA Logo" class="header-logo-img logo-dark" style="display:block;">
+        <img src="assets/images/logo-white.png" alt="TOMÉA Logo" class="header-logo-img logo-light" style="display:none;">
+      </a>
+      <nav class="desktop-nav" role="navigation" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="collection.html" class="nav-link is-active">The Collection</a>
+        <a href="about.html" class="nav-link">About TOMÉA</a>
+        <a href="contact.html" class="nav-link">Concierge</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn btn-sm btn-primary-outline" data-action="whatsapp-concierge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px;">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.042-.047-.282-.07-1.144-.383-2.18-1.309-1.312-1.173-1.846-2.348-1.925-2.522-.079-.174-.537-.714-.537-1.362 0-.649.34-0.968.461-1.099.121-.131.265-.164.354-.164.088 0 .177.001.254.005.081.004.19-.031.297.226.11.265.376.917.409.985.033.069.055.15.011.238-.044.088-.066.143-.132.22-.066.077-.139.172-.199.232-.066.066-.135.138-.058.271.077.133.344.568.739.919.508.453.937.593 1.07.659.133.066.21.055.288-.033.077-.089.332-.387.42-.519.088-.133.177-.11.299-.066.121.044.774.365.907.432.133.066.221.099.254.154.033.056.033.322-.111.727z"/>
+          </svg>
+          Order on WhatsApp
+        </button>
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-overlay"></div>
+  <aside class="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <img src="assets/images/logo-burgundy.png" alt="TOMÉA" class="mobile-logo">
+      <button class="mobile-nav-close" aria-label="Close menu">&times;</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="collection.html" class="mobile-nav-link is-active">The Collection</a>
+      <a href="about.html" class="mobile-nav-link">About TOMÉA</a>
+      <a href="contact.html" class="mobile-nav-link">Concierge</a>
+      <a href="admin/login.html" class="mobile-nav-link">Maison Portal</a>
+    </nav>
+    <div class="mobile-nav-footer">
+      <button class="btn btn-primary btn-block" data-action="whatsapp-concierge">
+        Direct WhatsApp Order
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content Container -->
+  <main id="main-content" class="product-page-main">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-bar">
+      <div class="container">
+        <nav aria-label="Breadcrumb" class="breadcrumbs">
+          <a href="index.html">Home</a>
+          <span class="sep">/</span>
+          <a href="collection.html">The Collection</a>
+          <span class="sep">/</span>
+          <span class="current-crumb" id="breadcrumb-product-name">Fragrance</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Product Details Injected by JS -->
+    <section class="product-details-section">
+      <div class="container">
+        <div id="product-details-container" class="product-details-container-state">
+          <div class="state-loading-spinner" style="text-align: center; padding: 6rem 0;">
+            <div class="spinner"></div>
+            <p class="loading-text" style="margin-top: 1rem; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem; color: var(--color-grey-dark);">Summoning Fragrance Architecture...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience / Brand Pillar Banner -->
+    <section class="product-pillars-strip">
+      <div class="container">
+        <div class="pillars-grid">
+          <div class="pillar-item">
+            <div class="pillar-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <h4>12+ Hours Extrait Longevity</h4>
+            <p>Concentrated oils crafted for exceptional sillage and endurance from day to night.</p>
+          </div>
+          <div class="pillar-item">
+            <div class="pillar-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h4>Pure European & African Resins</h4>
+            <p>Masterfully blended rare florals, noble woods, and precious amber accords.</p>
+          </div>
+          <div class="pillar-item">
+            <div class="pillar-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="1" y="3" width="15" height="13"/>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/>
+                <circle cx="18.5" cy="18.5" r="2.5"/>
+              </svg>
+            </div>
+            <h4>Complimentary White-Glove Courier</h4>
+            <p>Secure, tracked dispatch across Lagos and nationwide courier partners.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section class="product-recommendations-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-pretitle">THE MAISON COLLECTION</span>
+          <h2 class="section-title">COMPLEMENTARY CREATIONS</h2>
+        </div>
+        <div id="recommendations-grid" class="products-grid">
+          <!-- Dynamic cards injected via JS -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <img src="assets/images/logo-white.png" alt="TOMÉA Logo" class="footer-logo">
+          <p class="footer-tagline">Confidence, Bottled.</p>
+          <p class="footer-desc">A premium luxury perfume brand celebrating refinement, magnetic allure, and African opulence.</p>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">NAVIGATION</h4>
+          <ul class="footer-nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collection.html">The Collection</a></li>
+            <li><a href="about.html">About TOMÉA</a></li>
+            <li><a href="contact.html">Concierge & Inquiries</a></li>
+            <li><a href="admin/login.html">Admin Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">THE FRAGRANCES</h4>
+          <ul class="footer-nav-list">
+            <li><a href="product.html?id=lorigine">TOMÉA L'Origine</a></li>
+            <li><a href="product.html?id=charme">TOMÉA Charme</a></li>
+            <li><a href="product.html?id=desir">TOMÉA Désir</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">ORDER DIRECT</h4>
+          <div class="footer-contact-info">
+            <p>Every bottle is personally prepared and dispatched with luxury packaging.</p>
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-sm btn-white-outline" data-action="whatsapp-concierge">Chat with Concierge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 TOMÉA PERFUMES. All rights reserved.</p>
+        <p><a href="privacy.html">Client Care & Privacy Policy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Application Modules -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/firestore.js"></script>
+  <script src="js/cloudinary.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/product-details.js"></script>
+</body>
+</html>

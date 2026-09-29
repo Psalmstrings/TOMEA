@@ -1,0 +1,240 @@
+/* ==========================================================================
+   TOMÉA PERFUMES - Responsive Design System
+   Breakpoints: 1280px, 1024px, 768px, 480px, 375px, 320px
+   ========================================================================== */
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+  :root {
+    --container-max: 1400px;
+  }
+}
+
+/* Standard Desktop to Small Desktop (1024px - 1280px) */
+@media (max-width: 1280px) {
+  :root {
+    --space-3xl: 4.5rem;
+    --space-4xl: 6rem;
+  }
+
+  .products-grid {
+    gap: var(--space-xl);
+  }
+}
+
+/* Tablet Landscape & Small Laptops (900px - 1024px) */
+@media (max-width: 1024px) {
+  .desktop-nav {
+    gap: var(--space-lg);
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-details-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .product-gallery-section {
+    position: static;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .footer-brand-col {
+    grid-column: span 2;
+  }
+
+  .vision-mission-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .experience-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .intro-media-badge {
+    bottom: -10px;
+    left: 10px;
+  }
+}
+
+/* Tablets (768px - 899px) */
+@media (max-width: 899px) {
+  :root {
+    --header-height: 72px;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .header-actions .header-wa-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-layout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collection-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .collection-filters {
+    overflow-x: auto;
+    padding-bottom: var(--space-xs);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .collection-controls-right {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .collection-search-wrap {
+    width: 100%;
+  }
+
+  .collection-sort-select {
+    width: 100%;
+  }
+}
+
+/* Mobile Devices (Under 768px) */
+@media (max-width: 767px) {
+  :root {
+    --space-xl: 1.5rem;
+    --space-2xl: 2.5rem;
+    --space-3xl: 3.5rem;
+    --space-4xl: 4.5rem;
+  }
+
+  .container {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  .header-container {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .hero-section {
+    padding-top: calc(var(--header-height) + var(--space-xl));
+    padding-bottom: var(--space-2xl);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .product-card-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-pillars {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .product-gallery-thumbs {
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .gallery-thumb-btn {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+  }
+
+  .product-price-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+
+  .product-spec-pills {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .qty-selector-row {
+    justify-content: space-between;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footer-brand-col {
+    grid-column: span 1;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  .tomea-toast-container {
+    left: var(--space-md);
+    right: var(--space-md);
+    bottom: var(--space-md);
+    max-width: 100%;
+  }
+}
+
+/* Small Mobile Screens (Under 390px) */
+@media (max-width: 390px) {
+  .hero-title {
+    font-size: 2.25rem;
+  }
+
+  .btn {
+    padding: 0.85rem 1.25rem;
+    font-size: 0.75rem;
+  }
+
+  .product-card-body {
+    padding: var(--space-md);
+  }
+
+  .header-logo-img {
+    height: 28px;
+  }
+}

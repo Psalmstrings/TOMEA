@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concierge &amp; Client Care | TOMÉA PERFUMES</title>
+  <meta name="description" content="Connect with the TOMÉA private fragrance concierge. Inquire about bespoke fragrance consultations, private orders, and white-glove nationwide delivery.">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    /* ── Concierge Page Styles ────────────────────────────────────── */
+
+    /* Hero */
+    .concierge-hero {
+      background: linear-gradient(150deg, var(--color-burgundy-darkest) 0%, var(--color-burgundy-deep) 45%, var(--color-burgundy) 100%);
+      position: relative;
+      overflow: hidden;
+      padding: calc(var(--header-height) + 5.5rem) 0 5.5rem;
+      text-align: center;
+    }
+    .concierge-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/campaign-desir.jpg') center/cover no-repeat;
+      opacity: 0.07;
+    }
+    .concierge-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--color-cream));
+    }
+    .concierge-hero .inner {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .concierge-hero .eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .concierge-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .concierge-hero p {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.85;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ── Contact Body ─────────────────────────────────────────────── */
+    .concierge-body {
+      background: var(--color-cream);
+      padding: 6rem 0;
+    }
+    .concierge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* ── Touchpoints Column ───────────────────────────────────────── */
+    .touchpoints-col {
+      position: sticky;
+      top: calc(var(--header-height) + 2rem);
+    }
+    .touchpoints-header {
+      margin-bottom: 2rem;
+    }
+    .touchpoints-header .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-burgundy);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .touchpoints-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-charcoal);
+      line-height: 1.15;
+    }
+    .touchpoints-header p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--color-grey-dark);
+      line-height: 1.8;
+      margin-top: 0.75rem;
+    }
+
+    /* WhatsApp priority card */
+    .wa-priority-card {
+      background: linear-gradient(135deg, var(--color-burgundy-deep) 0%, var(--color-burgundy) 100%);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .wa-priority-card::before {
+      content: '';
+      position: absolute;
+      top: -20px; right: -20px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .wa-priority-card .wa-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .wa-priority-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.4rem;
+    }
+    .wa-priority-card p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+    .wa-launch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.825rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.75rem;
+      background: #FFFFFF;
+      color: var(--color-burgundy);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .wa-launch-btn:hover {
+      background: var(--color-gold);
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    /* Contact item rows */
+    .contact-item-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: #FFFFFF;
+      border-radius: 6px;
+      margin-bottom: 0.85rem;
+      border: 1px solid rgba(107,46,53,0.08);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .contact-item-row:last-child { margin-bottom: 0; }
+    .contact-item-row:hover {
+      box-shadow: var(--shadow-medium);
+      border-color: rgba(107,46,53,0.18);
+    }
+    .contact-item-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--color-blush-soft);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--color-burgundy);
+    }
+    .contact-item-body h4 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--color-charcoal);
+      margin-bottom: 0.2rem;
+    }
+    .contact-item-body p,
+    .contact-item-body a {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--color-grey-dark);
+      line-height: 1.6;
+      margin: 0;
+      text-decoration: none;
+    }
+    .contact-item-body a {
+      color: var(--color-burgundy);
+      font-weight: 500;
+    }
+    .contact-item-body a:hover { text-decoration: underline; }
+    .contact-item-body .small-note {
+      font-size: 0.78rem;
+      color: var(--color-grey);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Social links in contact */
+    .contact-social-links {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-social-link {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--color-burgundy);
+      text-decoration: none;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid rgba(107,46,53,0.25);
+      border-radius: 30px;
+      transition: all 0.2s ease;
+    }
+    .contact-social-link:hover {
+      background: var(--color-burgundy);
+      color: #FFFFFF;
+      border-color: var(--color-burgundy);
+    }
+
+    /* ── Inquiry Form Column ──────────────────────────────────────── */
+    .form-col {
+      background: #FFFFFF;
+      border-radius: 8px;
+      padding: 2.75rem;
+      box-shadow: var(--shadow-medium);
+      border: 1px solid rgba(107,46,53,0.06);
+    }
+    .form-col-header {
+      margin-bottom: 2rem;
+    }
+    .form-col-header .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-burgundy);
+      display: block;
+      margin-bottom: 0.65rem;
+    }
+    .form-col-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--color-charcoal);
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    .form-col-header p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--color-grey-dark);
+      line-height: 1.75;
+    }
+
+    /* Form elements */
+    .inquiry-form .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-label {
+      display: block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--color-charcoal);
+      margin-bottom: 0.45rem;
+      letter-spacing: 0.02em;
+    }
+    .form-label .req {
+      color: var(--color-burgundy);
+      margin-left: 2px;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--color-charcoal);
+      padding: 0.85rem 1.1rem;
+      background: var(--color-cream);
+      border: 1.5px solid rgba(107,46,53,0.14);
+      border-radius: 6px;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease;
+      appearance: none;
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-burgundy);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(107,46,53,0.08);
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--color-grey);
+      font-weight: 300;
+    }
+    .form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B2E35' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 130px;
+      line-height: 1.7;
+    }
+    .form-submit-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.925rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1.1rem 2rem;
+      background: var(--color-burgundy);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: all 0.25s ease;
+    }
+    .form-submit-btn:hover {
+      background: var(--color-burgundy-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(74,7,20,0.25);
+    }
+    .form-submit-btn:active { transform: translateY(0); }
+    .form-note {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      color: var(--color-grey);
+      text-align: center;
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+
+    /* ── FAQ Section ──────────────────────────────────────────────── */
+    .faq-section {
+      background: #FFFFFF;
+      padding: 7rem 0;
+    }
+    .faq-section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .faq-section-header .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-burgundy);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .faq-section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--color-charcoal);
+      line-height: 1.1;
+    }
+    .faq-list {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid rgba(107,46,53,0.1);
+    }
+    .faq-item:first-child { border-top: 1px solid rgba(107,46,53,0.1); }
+    .faq-question-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      width: 100%;
+      text-align: left;
+      padding: 1.5rem 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .faq-question-btn:hover .faq-q-text { color: var(--color-burgundy); }
+    .faq-question-btn:hover .faq-icon { background: var(--color-burgundy); color: #FFFFFF; }
+    .faq-q-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--color-charcoal);
+      line-height: 1.4;
+      transition: color 0.2s ease;
+    }
+    .faq-icon {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--color-cream);
+      border: 1.5px solid rgba(107,46,53,0.15);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--color-burgundy);
+      transition: all 0.25s ease;
+    }
+    .faq-icon svg {
+      transition: transform 0.3s ease;
+    }
+    .faq-item.is-open .faq-icon { background: var(--color-burgundy); color: #FFFFFF; }
+    .faq-item.is-open .faq-icon svg { transform: rotate(45deg); }
+    .faq-item.is-open .faq-q-text { color: var(--color-burgundy); }
+    .faq-answer {
+      display: none;
+      padding-bottom: 1.5rem;
+    }
+    .faq-item.is-open .faq-answer { display: block; }
+    .faq-answer p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.975rem;
+      font-weight: 300;
+      color: var(--color-grey-dark);
+      line-height: 1.9;
+      margin: 0;
+    }
+
+    /* ── Responsive ───────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .concierge-grid { grid-template-columns: 1fr; }
+      .touchpoints-col { position: static; }
+    }
+    @media (max-width: 768px) {
+      .concierge-hero { padding: calc(var(--header-height) + 3rem) 0 4rem; }
+      .concierge-body { padding: 4.5rem 0; }
+      .faq-section { padding: 5rem 0; }
+      .form-col { padding: 2rem 1.5rem; }
+      .inquiry-form .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .concierge-hero h1 { font-size: 2.4rem; }
+      .form-col { padding: 1.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Site Header ─────────────────────────────────────────────── -->
+  <header class="site-header header-solid" role="banner">
+    <div class="header-container">
+      <a href="index.html" class="header-brand" aria-label="TOMÉA PERFUMES Homepage">
+        <img src="assets/images/logo-burgundy.png" alt="TOMÉA Logo" class="header-logo-img logo-dark" style="display:block;">
+        <img src="assets/images/logo-white.png" alt="TOMÉA Logo" class="header-logo-img logo-light" style="display:none;">
+      </a>
+      <nav class="desktop-nav" role="navigation" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="collection.html" class="nav-link">The Collection</a>
+        <a href="about.html" class="nav-link">About TOMÉA</a>
+        <a href="contact.html" class="nav-link is-active">Concierge</a>
+      </nav>
+      <div class="header-actions">
+        <button class="header-wa-btn" data-action="whatsapp-concierge" aria-label="Order via WhatsApp">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.042-.047-.282-.07-1.144-.383-2.18-1.309-1.312-1.173-1.846-2.348-1.925-2.522-.079-.174-.537-.714-.537-1.362 0-.649.34-.968.461-1.099.121-.131.265-.164.354-.164.088 0 .177.001.254.005.081.004.19-.031.297.226.11.265.376.917.409.985.033.069.055.15.011.238-.044.088-.066.143-.132.22-.066.077-.139.172-.199.232-.066.066-.135.138-.058.271.077.133.344.568.739.919.508.453.937.593 1.07.659.133.066.21.055.288-.033.077-.089.332-.387.42-.519.088-.133.177-.11.299-.066.121.044.774.365.907.432.133.066.221.099.254.154.033.056.033.322-.111.727z"/>
+          </svg>
+          <span>Order via WhatsApp</span>
+        </button>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav-overlay" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <img src="assets/images/logo-white.png" alt="TOMÉA" class="mobile-logo">
+      <button class="mobile-nav-close" aria-label="Close menu">&times;</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="collection.html" class="mobile-nav-link">The Collection</a>
+      <a href="about.html" class="mobile-nav-link">About TOMÉA</a>
+      <a href="contact.html" class="mobile-nav-link is-active">Concierge</a>
+    </nav>
+    <div class="mobile-nav-footer">
+      <button class="btn btn-primary btn-block" data-action="whatsapp-concierge">Order Now</button>
+    </div>
+  </aside>
+
+  <main id="main-content">
+
+    <!-- ── Cinematic Hero ─────────────────────────────────────────── -->
+    <section class="concierge-hero" aria-labelledby="concierge-heading">
+      <div class="inner">
+        <span class="eyebrow">Private Client Services</span>
+        <h1 id="concierge-heading">Concierge &amp; Inquiries</h1>
+        <p>
+          Our dedicated client advisors are on hand to provide personalized olfactory advice,
+          coordinate nationwide delivery, and handle every bespoke order with precision.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Touchpoints + Form ─────────────────────────────────────── -->
+    <section class="concierge-body">
+      <div class="container">
+        <div class="concierge-grid">
+
+          <!-- Left: Direct Touchpoints -->
+          <div class="touchpoints-col reveal-on-scroll">
+            <div class="touchpoints-header">
+              <span class="section-label">Reach Us Directly</span>
+              <h2>Direct Touchpoints</h2>
+              <p>We respond to all WhatsApp inquiries within minutes during business hours.</p>
+            </div>
+
+            <!-- WhatsApp Priority Card -->
+            <div class="wa-priority-card">
+              <span class="wa-label">Recommended</span>
+              <h3>WhatsApp Concierge</h3>
+              <p>Instant consultation, real-time order confirmation, and dispatch booking. No wait times.</p>
+              <button class="wa-launch-btn" data-action="whatsapp-concierge" aria-label="Open WhatsApp chat with TOMÉA concierge">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.042-.047-.282-.07-1.144-.383-2.18-1.309-1.312-1.173-1.846-2.348-1.925-2.522-.079-.174-.537-.714-.537-1.362 0-.649.34-.968.461-1.099.121-.131.265-.164.354-.164.088 0 .177.001.254.005.081.004.19-.031.297.226.11.265.376.917.409.985.033.069.055.15.011.238-.044.088-.066.143-.132.22-.066.077-.139.172-.199.232-.066.066-.135.138-.058.271.077.133.344.568.739.919.508.453.937.593 1.07.659.133.066.21.055.288-.033.077-.089.332-.387.42-.519.088-.133.177-.11.299-.066.121.044.774.365.907.432.133.066.221.099.254.154.033.056.033.322-.111.727z"/>
+                </svg>
+                Launch WhatsApp Now
+              </button>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-item-row">
+              <div class="contact-item-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="contact-item-body">
+                <h4>Client Care Email</h4>
+                <a href="mailto:concierge@tomeaperfumes.com">concierge@tomeaperfumes.com</a>
+                <span class="small-note">Guaranteed response within 2 hours (business hours)</span>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div class="contact-item-row">
+              <div class="contact-item-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="contact-item-body">
+                <h4>Maison Headquarters</h4>
+                <p>Victoria Island / Lekki Phase 1, Lagos, Nigeria</p>
+                <span class="small-note">Mon – Sat: 9:00 AM – 7:00 PM (WAT)</span>
+              </div>
+            </div>
+
+            <!-- Social -->
+            <div class="contact-item-row">
+              <div class="contact-item-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </div>
+              <div class="contact-item-body">
+                <h4>Editorial Channels</h4>
+                <div class="contact-social-links">
+                  <a href="https://instagram.com/tomeaperfumes" target="_blank" rel="noopener" class="contact-social-link">@tomeaperfumes</a>
+                  <a href="https://tiktok.com/@tomeaperfumes" target="_blank" rel="noopener" class="contact-social-link">TikTok</a>
+                  <a href="https://facebook.com/tomeaperfumes" target="_blank" rel="noopener" class="contact-social-link">Facebook</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Inquiry Form -->
+          <div class="form-col reveal-on-scroll">
+            <div class="form-col-header">
+              <span class="section-label">Send an Inquiry</span>
+              <h2>Get in Touch</h2>
+              <p>Fill in your details and our concierge team will reach out via WhatsApp or email within hours.</p>
+            </div>
+
+            <form id="concierge-inquiry-form" class="inquiry-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="inquiry-name" class="form-label">
+                    Full Name <span class="req" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="inquiry-name"
+                    class="form-input"
+                    placeholder="e.g. Lady Vivienne Adeleke"
+                    required
+                    autocomplete="name"
+                    aria-required="true"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="inquiry-phone" class="form-label">
+                    WhatsApp / Phone <span class="req" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="inquiry-phone"
+                    class="form-input"
+                    placeholder="+234 800 000 0000"
+                    required
+                    autocomplete="tel"
+                    aria-required="true"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inquiry-email" class="form-label">Email Address</label>
+                <input
+                  type="email"
+                  id="inquiry-email"
+                  class="form-input"
+                  placeholder="vivienne@example.com"
+                  autocomplete="email"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="inquiry-subject" class="form-label">Fragrance or Topic of Interest</label>
+                <select id="inquiry-subject" class="form-select">
+                  <option value="General Concierge">General Concierge Inquiry</option>
+                  <option value="TOMÉA L'Origine">Order: TOMÉA L'Origine (Extrait de Parfum)</option>
+                  <option value="TOMÉA Charme">Order: TOMÉA Charme (Extrait de Parfum)</option>
+                  <option value="TOMÉA Désir">Order: TOMÉA Désir (Extrait de Parfum)</option>
+                  <option value="Complete Trio Discovery">The Complete Extrait Trio</option>
+                  <option value="Bespoke Gifting &amp; Corporate">Bespoke Gifting &amp; Corporate</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="inquiry-message" class="form-label">Message / Delivery Details</label>
+                <textarea
+                  id="inquiry-message"
+                  class="form-textarea"
+                  rows="5"
+                  placeholder="Share your preferences, delivery address, or any special requests…"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="form-submit-btn" aria-label="Submit inquiry to TOMÉA concierge via WhatsApp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.042-.047-.282-.07-1.144-.383-2.18-1.309-1.312-1.173-1.846-2.348-1.925-2.522-.079-.174-.537-.714-.537-1.362 0-.649.34-.968.461-1.099.121-.131.265-.164.354-.164.088 0 .177.001.254.005.081.004.19-.031.297.226.11.265.376.917.409.985.033.069.055.15.011.238-.044.088-.066.143-.132.22-.066.077-.139.172-.199.232-.066.066-.135.138-.058.271.077.133.344.568.739.919.508.453.937.593 1.07.659.133.066.21.055.288-.033.077-.089.332-.387.42-.519.088-.133.177-.11.299-.066.121.044.774.365.907.432.133.066.221.099.254.154.033.056.033.322-.111.727z"/>
+                </svg>
+                Send via WhatsApp Concierge
+              </button>
+              <p class="form-note">Your inquiry is sent securely via WhatsApp. No spam. Guaranteed response.</p>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ Section ────────────────────────────────────────────── -->
+    <section class="faq-section" aria-labelledby="faq-heading">
+      <div class="container">
+        <div class="faq-section-header">
+          <span class="section-label">Client Assistance</span>
+          <h2 id="faq-heading">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-list" role="list">
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question-btn" aria-expanded="false" aria-controls="faq-answer-1">
+              <span class="faq-q-text">Why does TOMÉA take orders via WhatsApp concierge?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer" id="faq-answer-1" role="region">
+              <p>We believe luxury is inherently personal. By liaising directly via WhatsApp, our advisors ensure your bottle is perfectly matched to your scent profile, coordinate instant white-glove dispatch, and provide real-time tracking from our Lagos atelier to your doorstep.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question-btn" aria-expanded="false" aria-controls="faq-answer-2">
+              <span class="faq-q-text">What is the difference between Extrait de Parfum and standard perfumes?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer" id="faq-answer-2" role="region">
+              <p>Standard Eau de Parfum typically contains 15%–20% fragrance oils. All TOMÉA fragrances are formulated at Extrait de Parfum strength (25%–35% oil concentration). This guarantees an opulent sillage, rich skin evolution, and over 12 hours of longevity on the skin.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question-btn" aria-expanded="false" aria-controls="faq-answer-3">
+              <span class="faq-q-text">How does nationwide delivery work across Nigeria?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer" id="faq-answer-3" role="region">
+              <p>Orders within Lagos are fulfilled via express private dispatch within 24 hours. Nationwide orders to Abuja, Port Harcourt, Ibadan, and other states are dispatched via premium tracked courier partners, typically arriving within 2–3 business days in cushioned protective presentation boxes.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question-btn" aria-expanded="false" aria-controls="faq-answer-4">
+              <span class="faq-q-text">Can I include a personalized gift note with my order?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer" id="faq-answer-4" role="region">
+              <p>Yes. Simply inform our WhatsApp concierge when confirming your order. We will hand-inscribe your recipient's name and bespoke message onto gold-foil embossed stationery placed within the presentation box at no extra charge.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question-btn" aria-expanded="false" aria-controls="faq-answer-5">
+              <span class="faq-q-text">Do you offer corporate and bulk gifting options?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer" id="faq-answer-5" role="region">
+              <p>Absolutely. TOMÉA offers bespoke corporate gifting packages tailored to your brand or occasion — including custom ribbon colours, branded gift notes, and curated fragrance sets. Contact our concierge team to discuss volume pricing and lead times for your requirements.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Site Footer ─────────────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <img src="assets/images/logo-white.png" alt="TOMÉA Logo" class="footer-logo">
+          <p class="footer-tagline">Confidence, Bottled.</p>
+          <p class="footer-desc">A premium luxury perfume brand celebrating refinement, magnetic allure, and African opulence.</p>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">NAVIGATION</h4>
+          <ul class="footer-nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collection.html">The Collection</a></li>
+            <li><a href="about.html">About TOMÉA</a></li>
+            <li><a href="contact.html">Concierge &amp; Inquiries</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">THE FRAGRANCES</h4>
+          <ul class="footer-nav-list">
+            <li><a href="product.html?id=lorigine">TOMÉA L'Origine</a></li>
+            <li><a href="product.html?id=charme">TOMÉA Charme</a></li>
+            <li><a href="product.html?id=desir">TOMÉA Désir</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">ORDER DIRECT</h4>
+          <div class="footer-contact-info">
+            <p>Every bottle is personally prepared and dispatched with luxury packaging.</p>
+            <div style="margin-top:1rem;">
+              <button class="btn btn-sm btn-white-outline" data-action="whatsapp-concierge">Chat with Concierge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 TOMÉA PERFUMES. All rights reserved.</p>
+        <p><a href="privacy.html">Client Care &amp; Privacy Policy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/firestore.js"></script>
+  <script src="js/cloudinary.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // ── FAQ Accordion ──────────────────────────────────────────────
+      document.querySelectorAll('.faq-question-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const isOpen = item.classList.contains('is-open');
+          // Close all others
+          document.querySelectorAll('.faq-item.is-open').forEach(el => {
+            el.classList.remove('is-open');
+            el.querySelector('.faq-question-btn').setAttribute('aria-expanded', 'false');
+          });
+          // Toggle clicked
+          if (!isOpen) {
+            item.classList.add('is-open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      // ── Concierge Form Submission ──────────────────────────────────
+      const form = document.getElementById('concierge-inquiry-form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const name    = document.getElementById('inquiry-name').value.trim();
+          const phone   = document.getElementById('inquiry-phone').value.trim();
+          const email   = document.getElementById('inquiry-email').value.trim();
+          const subject = document.getElementById('inquiry-subject').value;
+          const msg     = document.getElementById('inquiry-message').value.trim();
+
+          if (!name || !phone) {
+            if (window.Utils) {
+              window.Utils.showToast('Please fill in your name and phone number.', 'error');
+            }
+            return;
+          }
+
+          const lines = [
+            'Hello TOMÉA Concierge,',
+            '',
+            'I am reaching out regarding: ' + subject,
+            '',
+            '*Client Name:* ' + name,
+            '*Phone / WhatsApp:* ' + phone,
+            email ? '*Email:* ' + email : '',
+            '',
+            '*Message / Order Details:*',
+            msg || 'I would like to order or learn more about TOMÉA fragrances.',
+            '',
+            'Please advise on availability and dispatch. Thank you.'
+          ].filter(l => l !== undefined);
+
+          const inquiryText = lines.join('\n');
+
+          if (window.WhatsAppService) {
+            window.WhatsAppService.openCustomMessage(inquiryText);
+          } else {
+            const encoded = encodeURIComponent(inquiryText);
+            window.open('https://wa.me/2348000000000?text=' + encoded, '_blank');
+          }
+
+          if (window.Utils) {
+            window.Utils.showToast('Connecting you with the TOMÉA concierge on WhatsApp…', 'success');
+          }
+
+          form.reset();
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

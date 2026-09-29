@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | TOMÉA PERFUMES Admin</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar" role="navigation" aria-label="Administrator Navigation">
+    <div class="admin-sidebar-brand">
+      <img src="../assets/images/logo-white.png" alt="TOMÉA" class="admin-sidebar-logo" />
+      <span class="admin-badge-label">CMS</span>
+    </div>
+
+    <nav class="admin-sidebar-nav">
+      <a href="dashboard.html" class="admin-nav-item is-active">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="products.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span>Fragrances</span>
+      </a>
+
+      <a href="homepage.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span>Homepage CMS</span>
+      </a>
+
+      <a href="settings.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span>Brand Settings</span>
+      </a>
+
+      <div class="sidebar-nav-divider">
+        <a href="../index.html" target="_blank" class="admin-nav-item">
+          <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          <span>View Public Store</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <div class="admin-user-info">
+        <span class="admin-user-label">Active Session</span>
+        <span class="admin-user-email js-admin-email">Administrator</span>
+      </div>
+      <button class="btn btn-sm btn-logout js-admin-logout" title="Log Out">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Admin Main Layout -->
+  <div class="admin-main-wrapper">
+    <!-- Admin Top Header -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="admin-sidebar-toggle" aria-label="Toggle Navigation Sidebar">
+          <span></span><span></span><span></span>
+        </button>
+        <div>
+          <h1 class="topbar-title">Dashboard</h1>
+          <p class="topbar-subtitle" id="dash-date">—</p>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="admin-pill-status">
+          <span class="status-indicator-dot"></span>
+          <span>Live &amp; Ready</span>
+        </div>
+        <span class="topbar-admin-badge js-admin-email">admin@tomeaperfumes.com</span>
+        <button class="btn btn-sm btn-outline js-admin-logout">Sign Out</button>
+      </div>
+    </header>
+
+    <!-- Admin Content Area -->
+    <main class="admin-content-container">
+
+      <!-- Welcome Banner -->
+      <div class="admin-banner-card">
+        <div class="banner-text">
+          <div class="banner-pretitle">TOMÉA MAISON PORTAL</div>
+          <h2>Welcome back, Administrator</h2>
+          <p>Manage fragrances, homepage content, WhatsApp concierge routing, and brand settings — all in one place.</p>
+        </div>
+        <div class="banner-actions">
+          <a href="products.html" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            New Fragrance
+          </a>
+          <a href="settings.html" class="btn btn-banner-secondary">WhatsApp Config</a>
+        </div>
+      </div>
+
+      <!-- Key Metrics Row -->
+      <div class="admin-metrics-grid">
+        <div class="metric-card metric-card--total">
+          <div class="metric-header">
+            <span class="metric-title">Total Creations</span>
+            <div class="metric-icon-box metric-icon-box--dark">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value" id="metric-total-products">—</div>
+          <div class="metric-subtext">Fragrances catalogued</div>
+          <div class="metric-trend">
+            <a href="products.html" class="metric-link">Manage all →</a>
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--active">
+          <div class="metric-header">
+            <span class="metric-title">Active in Boutique</span>
+            <div class="metric-icon-box metric-icon-box--green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value text-success" id="metric-active-products">—</div>
+          <div class="metric-subtext">Visible to public clients</div>
+          <div class="metric-trend">
+            <span class="metric-badge metric-badge--green">Live</span>
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--featured">
+          <div class="metric-header">
+            <span class="metric-title">Featured Heroes</span>
+            <div class="metric-icon-box metric-icon-box--gold">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value text-gold" id="metric-featured-products">—</div>
+          <div class="metric-subtext">Highlighted on homepage</div>
+          <div class="metric-trend">
+            <a href="homepage.html" class="metric-link">Edit homepage →</a>
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--waitlist">
+          <div class="metric-header">
+            <span class="metric-title">Waitlist / OOS</span>
+            <div class="metric-icon-box metric-icon-box--amber">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value text-amber" id="metric-out-of-stock">—</div>
+          <div class="metric-subtext">Awaiting flacon bottling</div>
+          <div class="metric-trend">
+            <a href="products.html" class="metric-link">Review stock →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-column: WhatsApp status + Quick Actions -->
+      <div class="dash-two-col">
+
+        <!-- WhatsApp Routing Status -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3 class="card-heading">WhatsApp Concierge</h3>
+            <p class="card-subtext">All boutique order buttons route to this number.</p>
+          </div>
+          <div class="admin-card-body">
+            <div class="wa-status-box">
+              <div class="wa-icon-circle">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.042-.047-.282-.07-1.144-.383-2.18-1.309-1.312-1.173-1.846-2.348-1.925-2.522-.079-.174-.537-.714-.537-1.362 0-.649.34-.968.461-1.099.121-.131.265-.164.354-.164.088 0 .177.001.254.005.081.004.19-.031.297.226.11.265.376.917.409.985.033.069.055.15.011.238-.044.088-.066.143-.132.22-.066.077-.139.172-.199.232-.066.066-.135.138-.058.271.077.133.344.568.739.919.508.453.937.593 1.07.659.133.066.21.055.288-.033.077-.089.332-.387.42-.519.088-.133.177-.11.299-.066.121.044.774.365.907.432.133.066.221.099.254.154.033.056.033.322-.111.727z"/>
+                </svg>
+              </div>
+              <div class="wa-info">
+                <span class="wa-label">Routing Number</span>
+                <strong class="wa-number" id="dash-wa-number">Loading...</strong>
+              </div>
+              <a href="settings.html" class="btn btn-sm btn-secondary">Update</a>
+            </div>
+
+            <!-- Firebase Connection Status -->
+            <div class="connection-status-row">
+              <div class="connection-item" id="firebase-status-card">
+                <div class="connection-dot connection-dot--checking"></div>
+                <div>
+                  <span class="connection-label">Firebase</span>
+                  <span class="connection-state" id="firebase-status-text">Checking...</span>
+                </div>
+              </div>
+              <div class="connection-item" id="cloudinary-status-card">
+                <div class="connection-dot connection-dot--checking"></div>
+                <div>
+                  <span class="connection-label">Cloudinary CDN</span>
+                  <span class="connection-state" id="cloudinary-status-text">Checking...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions Panel -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3 class="card-heading">Quick Actions</h3>
+            <p class="card-subtext">Commonly used admin shortcuts.</p>
+          </div>
+          <div class="admin-card-body">
+            <div class="quick-actions-grid">
+              <a href="products.html" class="quick-action-item">
+                <div class="qa-icon qa-icon--burgundy">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                </div>
+                <span class="qa-label">Add Fragrance</span>
+              </a>
+              <a href="products.html" class="quick-action-item">
+                <div class="qa-icon qa-icon--dark">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                  </svg>
+                </div>
+                <span class="qa-label">Edit Products</span>
+              </a>
+              <a href="homepage.html" class="quick-action-item">
+                <div class="qa-icon qa-icon--blue">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                  </svg>
+                </div>
+                <span class="qa-label">Edit Homepage</span>
+              </a>
+              <a href="settings.html" class="quick-action-item">
+                <div class="qa-icon qa-icon--green">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                </div>
+                <span class="qa-label">WhatsApp Setup</span>
+              </a>
+              <a href="../index.html" target="_blank" class="quick-action-item">
+                <div class="qa-icon qa-icon--purple">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                </div>
+                <span class="qa-label">Preview Store</span>
+              </a>
+              <a href="../collection.html" target="_blank" class="quick-action-item">
+                <div class="qa-icon qa-icon--amber">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                    <line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                  </svg>
+                </div>
+                <span class="qa-label">Live Collection</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Fragrances Section -->
+      <div class="admin-card">
+        <div class="admin-card-header d-flex justify-between align-center">
+          <div>
+            <h3 class="card-heading">Recent Fragrances</h3>
+            <p class="card-subtext">Latest Extrait de Parfum products and stock readiness.</p>
+          </div>
+          <a href="products.html" class="btn btn-sm btn-primary">Manage All &rarr;</a>
+        </div>
+        <div class="admin-card-body p-0">
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Fragrance Family</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Featured</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-recent-products">
+                <tr><td colspan="6" class="text-center py-4 text-muted">Loading fragrance catalogue...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Firebase & Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/firestore.js"></script>
+  <script src="../js/firebase-auth.js"></script>
+  <script src="../js/admin.js"></script>
+
+  <script>
+    // Dashboard date
+    const dateEl = document.getElementById('dash-date');
+    if (dateEl) {
+      dateEl.textContent = new Date().toLocaleDateString('en-GB', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      });
+    }
+
+    // Connection status check
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const firebaseOk = window.DB && window.DB.isFirebaseReady;
+        const fbDot = document.querySelector('#firebase-status-card .connection-dot');
+        const fbText = document.getElementById('firebase-status-text');
+        if (fbDot && fbText) {
+          if (firebaseOk) {
+            fbDot.className = 'connection-dot connection-dot--ok';
+            fbText.textContent = 'Connected';
+          } else {
+            fbDot.className = 'connection-dot connection-dot--warn';
+            fbText.textContent = 'Local mode';
+          }
+        }
+
+        const cloudOk = window.Cloudinary && window.Cloudinary.isConfigured();
+        const cdnDot = document.querySelector('#cloudinary-status-card .connection-dot');
+        const cdnText = document.getElementById('cloudinary-status-text');
+        if (cdnDot && cdnText) {
+          if (cloudOk) {
+            cdnDot.className = 'connection-dot connection-dot--ok';
+            cdnText.textContent = 'dd5p5t2rs';
+          } else {
+            cdnDot.className = 'connection-dot connection-dot--warn';
+            cdnText.textContent = 'Preset needed';
+          }
+        }
+      }, 1200);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maison Brand & WhatsApp Settings | TOMÉA Admin</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar" role="navigation" aria-label="Administrator Navigation">
+    <div class="admin-sidebar-brand">
+      <img src="../assets/images/logo-white.png" alt="TOMÉA" class="admin-sidebar-logo" />
+      <span class="admin-badge-label">CMS</span>
+    </div>
+
+    <nav class="admin-sidebar-nav">
+      <a href="dashboard.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="products.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span>Fragrances</span>
+      </a>
+
+      <a href="homepage.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span>Homepage CMS</span>
+      </a>
+
+      <a href="settings.html" class="admin-nav-item is-active">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span>Brand Settings</span>
+      </a>
+
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+        <a href="../index.html" target="_blank" class="admin-nav-item">
+          <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          <span>View Public Store</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <div class="admin-user-info">
+        <span class="admin-user-label">Active Session</span>
+        <span class="admin-user-email js-admin-email">Administrator</span>
+      </div>
+      <button class="btn btn-sm btn-logout js-admin-logout" title="Log Out">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Admin Main Layout -->
+  <div class="admin-main-wrapper">
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="admin-sidebar-toggle" aria-label="Toggle Sidebar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <h1 class="topbar-title">Maison Configuration & WhatsApp Settings</h1>
+      </div>
+      <div class="topbar-right">
+        <button type="button" id="btn-reset-defaults" class="btn btn-sm btn-outline text-danger">
+          Restore Brand Guideline Seed
+        </button>
+        <span class="topbar-admin-badge js-admin-email">admin@tomeaperfumes.com</span>
+      </div>
+    </header>
+
+    <main class="admin-content-container">
+      <form id="admin-settings-form">
+        <!-- Section 1: WhatsApp Concierge Setup (High Priority) -->
+        <div class="admin-card mb-4" style="border-left: 4px solid #25D366;">
+          <div class="admin-card-header">
+            <div class="d-flex align-center gap-2">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#25D366">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.042-.047-.282-.07-1.144-.383-2.18-1.309-1.312-1.173-1.846-2.348-1.925-2.522-.079-.174-.537-.714-.537-1.362 0-.649.34-0.968.461-1.099.121-.131.265-.164.354-.164.088 0 .177.001.254.005.081.004.19-.031.297.226.11.265.376.917.409.985.033.069.055.15.011.238-.044.088-.066.143-.132.22-.066.077-.139.172-.199.232-.066.066-.135.138-.058.271.077.133.344.568.739.919.508.453.937.593 1.07.659.133.066.21.055.288-.033.077-.089.332-.387.42-.519.088-.133.177-.11.299-.066.121.044.774.365.907.432.133.066.221.099.254.154.033.056.033.322-.111.727z"/>
+              </svg>
+              <div>
+                <h3 class="card-heading">WhatsApp Concierge Ordering Number</h3>
+                <p class="card-subtext">Every "Order via WhatsApp" and "Chat with Concierge" button across the entire website sends orders to this number.</p>
+              </div>
+            </div>
+          </div>
+          <div class="admin-card-body">
+            <div class="tomea-form-group">
+              <label for="setting-wa-number" class="tomea-label">WhatsApp Number (International format without '+') *</label>
+              <input 
+                type="text" 
+                id="setting-wa-number" 
+                class="tomea-input font-mono" 
+                placeholder="2348000000000" 
+                required 
+              />
+              <span class="text-xs text-muted mt-1 d-block">
+                Example: For Nigerian number <code>08123456789</code>, enter <code>2348123456789</code>. Do not include spaces, hyphens, or '+' signs.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Brand Identity & Currency -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-header">
+            <h3 class="card-heading">Brand Identity & Pricing Defaults</h3>
+            <p class="card-subtext">Official Maison metadata displayed in headers, footers, and price tags.</p>
+          </div>
+          <div class="admin-card-body">
+            <div class="form-grid-two">
+              <div class="tomea-form-group">
+                <label for="setting-brand-name" class="tomea-label">Official Brand Name</label>
+                <input type="text" id="setting-brand-name" class="tomea-input" value="TOMÉA PERFUMES" />
+              </div>
+
+              <div class="tomea-form-group">
+                <label for="setting-tagline" class="tomea-label">Official Tagline</label>
+                <input type="text" id="setting-tagline" class="tomea-input" value="Confidence, Bottled." />
+              </div>
+            </div>
+
+            <div class="form-grid-two">
+              <div class="tomea-form-group">
+                <label for="setting-currency" class="tomea-label">Currency Symbol</label>
+                <input type="text" id="setting-currency" class="tomea-input" value="₦" />
+              </div>
+
+              <div class="tomea-form-group">
+                <label for="setting-currency-code" class="tomea-label">Currency ISO Code</label>
+                <input type="text" id="setting-currency-code" class="tomea-input" value="NGN" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Concierge Contact Details -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-header">
+            <h3 class="card-heading">Atelier Contacts & Social Links</h3>
+            <p class="card-subtext">Details featured on the public Concierge page and footer.</p>
+          </div>
+          <div class="admin-card-body">
+            <div class="form-grid-two">
+              <div class="tomea-form-group">
+                <label for="setting-email" class="tomea-label">Client Concierge Email</label>
+                <input type="email" id="setting-email" class="tomea-input" placeholder="concierge@tomeaperfumes.com" />
+              </div>
+
+              <div class="tomea-form-group">
+                <label for="setting-phone" class="tomea-label">Direct Atelier Phone Hotline</label>
+                <input type="text" id="setting-phone" class="tomea-input" placeholder="+234 800 000 0000" />
+              </div>
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="setting-address" class="tomea-label">Atelier / Boutique Location</label>
+              <input type="text" id="setting-address" class="tomea-input" placeholder="Victoria Island / Lekki Phase 1, Lagos, Nigeria" />
+            </div>
+
+            <div class="form-grid-three">
+              <div class="tomea-form-group">
+                <label for="setting-instagram" class="tomea-label">Instagram URL</label>
+                <input type="url" id="setting-instagram" class="tomea-input" placeholder="https://instagram.com/tomeaperfumes" />
+              </div>
+
+              <div class="tomea-form-group">
+                <label for="setting-facebook" class="tomea-label">Facebook URL</label>
+                <input type="url" id="setting-facebook" class="tomea-input" placeholder="https://facebook.com/tomeaperfumes" />
+              </div>
+
+              <div class="tomea-form-group">
+                <label for="setting-tiktok" class="tomea-label">TikTok URL</label>
+                <input type="url" id="setting-tiktok" class="tomea-input" placeholder="https://tiktok.com/@tomeaperfumes" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Cloudinary Storage Configuration -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-header">
+            <h3 class="card-heading">Cloudinary CDN Credentials</h3>
+            <p class="card-subtext">Your Cloudinary account is pre-configured for product and hero image uploads via CDN.</p>
+          </div>
+          <div class="admin-card-body">
+            <div class="form-grid-two">
+              <div class="tomea-form-group">
+                <label for="setting-cloud-name" class="tomea-label">Cloudinary Cloud Name</label>
+                <input type="text" id="setting-cloud-name" class="tomea-input" placeholder="dd5p5t2rs" />
+              </div>
+
+              <div class="tomea-form-group">
+                <label for="setting-upload-preset" class="tomea-label">Unsigned Upload Preset</label>
+                <input type="text" id="setting-upload-preset" class="tomea-input" placeholder="tomea_unsigned" />
+              </div>
+            </div>
+            <div style="background: #EBF8F2; border: 1.5px solid #B7E4CA; border-radius: 6px; padding: 0.85rem 1rem; font-size: 0.875rem; color: #065F46;">
+              <strong>&#9432; Setup Required:</strong> In your <a href="https://cloudinary.com/console/settings/upload" target="_blank" style="color:#065F46;font-weight:700;">Cloudinary Console → Settings → Upload Presets</a>, create an unsigned preset named <code style="background:rgba(0,0,0,0.08);padding:1px 5px;border-radius:3px;">tomea_unsigned</code> with Signing Mode: <strong>Unsigned</strong>. Your Cloud Name <strong>dd5p5t2rs</strong> is already connected.
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Bar -->
+        <div class="admin-submit-bar">
+          <button type="submit" id="btn-save-settings" class="btn btn-primary btn-lg">
+            Save Settings
+          </button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <!-- Firebase & Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/firestore.js"></script>
+  <script src="../js/firebase-auth.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="../js/admin-settings.js"></script>
+</body>
+</html>

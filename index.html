@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOMÉA PERFUMES | Scent Your Presence | Extrait de Parfum</title>
+  <meta name="description" content="Discover TOMÉA Perfumes. Handcrafted luxury Extrait de Parfum creations offering timeless elegance, quiet confidence, and enduring distinction.">
+  <meta property="og:title" content="TOMÉA PERFUMES | Scent Your Presence">
+  <meta property="og:description" content="Luxury Extrait de Parfum fragrances that represent confidence, elegance, and timeless allure.">
+  <meta property="og:image" content="assets/images/hero-banner.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Minimal Luxury Preloader -->
+  <div class="tomea-preloader" id="tomea-preloader" aria-hidden="true">
+    <div class="preloader-brand">
+      <img src="assets/images/logo-white.png" alt="TOMÉA" class="preloader-logo-img">
+      <p class="preloader-tagline">PERFUMES</p>
+    </div>
+    <div class="preloader-progress-track">
+      <div class="preloader-progress-bar"></div>
+    </div>
+  </div>
+
+  <!-- Site Header & Sticky Navigation -->
+  <header class="site-header" role="banner">
+    <div class="header-container">
+      <a href="index.html" class="header-brand" aria-label="TOMÉA PERFUMES Homepage">
+        <img src="assets/images/logo-white.png" alt="TOMÉA Logo" class="header-logo-img logo-light">
+        <img src="assets/images/logo-burgundy.png" alt="TOMÉA Logo" class="header-logo-img logo-dark">
+      </a>
+
+      <nav class="desktop-nav" role="navigation" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link is-active">Home</a>
+        <a href="collection.html" class="nav-link">The Collection</a>
+        <a href="about.html" class="nav-link">About TOMÉA</a>
+        <a href="contact.html" class="nav-link">Concierge</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="header-wa-btn" data-action="whatsapp-concierge" aria-label="Order via WhatsApp">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.042-.047-.282-.07-1.144-.383-2.18-1.309-1.312-1.173-1.846-2.348-1.925-2.522-.079-.174-.537-.714-.537-1.362 0-.649.34-0.968.461-1.099.121-.131.265-.164.354-.164.088 0 .177.001.254.005.081.004.19-.031.297.226.11.265.376.917.409.985.033.069.055.15.011.238-.044.088-.066.143-.132.22-.066.077-.139.172-.199.232-.066.066-.135.138-.058.271.077.133.344.568.739.919.508.453.937.593 1.07.659.133.066.21.055.288-.033.077-.089.332-.387.42-.519.088-.133.177-.11.299-.066.121.044.774.365.907.432.133.066.221.099.254.154.033.056.033.322-.111.727z"/>
+          </svg>
+          <span>Order Now</span>
+        </button>
+
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav-overlay" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation">
+    <button class="mobile-nav-close" aria-label="Close navigation">&times;</button>
+    
+    <div>
+      <img src="assets/images/logo-white.png" alt="TOMÉA" style="height: 32px; width: auto; margin-bottom: 2rem;">
+      <nav class="mobile-nav-links">
+        <a href="index.html" class="mobile-nav-link is-active">Home</a>
+        <a href="collection.html" class="mobile-nav-link">The Collection</a>
+        <a href="about.html" class="mobile-nav-link">About TOMÉA</a>
+        <a href="contact.html" class="mobile-nav-link">Concierge</a>
+      </nav>
+    </div>
+
+    <div class="mobile-nav-footer">
+      <button class="btn btn-primary" data-action="whatsapp-concierge">
+        Order
+      </button>
+    </div>
+  </aside>
+
+  <main id="main-content">
+    <!-- Cinematic Editorial Hero -->
+    <section class="hero-section" aria-label="Hero Showcase">
+      <div class="hero-bg-wrapper">
+        <img 
+          src="assets/images/hero-banner.jpg" 
+          alt="TOMÉA Perfumes Luxury Silk Fragrance Atmosphere" 
+          class="hero-bg-media"
+          id="hero-bg-image"
+        >
+        <div class="hero-overlay-scrim"></div>
+      </div>
+
+      <div class="hero-content">
+        <span class="hero-eyebrow" id="hero-tagline">EXTRAIT DE PARFUM</span>
+        <h1 class="hero-title" id="hero-heading">SCENT YOUR PRESENCE.</h1>
+        <p class="hero-subtitle" id="hero-subtitle">
+          Handcrafted high-concentration fragrances curated for timeless elegance, quiet confidence, and enduring distinction.
+        </p>
+
+        <div class="hero-actions">
+          <a href="collection.html" class="btn btn-white" id="hero-primary-cta">EXPLORE THE COLLECTION</a>
+          <button class="btn btn-white-outline" data-action="whatsapp-concierge" id="hero-secondary-cta">ORDER NOW</button>
+        </div>
+      </div>
+
+      <div class="hero-scroll-indicator" aria-hidden="true">
+        <span>SCROLL</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- Maison Brand Introduction -->
+    <section class="maison-intro-section section-spacing" aria-label="About the Maison">
+      <div class="container">
+        <div class="intro-grid">
+          <div class="intro-content-col reveal-on-scroll">
+            <span class="brand-eyebrow" id="intro-pretitle">THE MAISON</span>
+            <h2 class="editorial-heading" id="intro-title">A NEW DEFINITION OF TIMELESS LUXURY</h2>
+            
+            <div class="intro-paragraphs">
+              <p id="intro-p1">
+                TOMÉA was founded on an unapologetic belief: that high-concentration luxury fragrance should be an experience of personal empowerment, sophistication, and lasting allure.
+              </p>
+              <p id="intro-p2">
+                Every Extrait de Parfum in our collection is formulated with the highest grade essence concentrations, delivering exceptional sillage and an intimate scent journey from the initial spray to its skin-close dry down.
+              </p>
+            </div>
+
+            <div class="intro-pillars">
+              <div class="pillar-item">
+                <span class="pillar-number">01</span>
+                <h3 class="pillar-title">Extrait Concentration</h3>
+                <p class="pillar-desc">Formulated with supreme oil richness for enduring longevity.</p>
+              </div>
+              <div class="pillar-item">
+                <span class="pillar-number">02</span>
+                <h3 class="pillar-title">Quiet Confidence</h3>
+                <p class="pillar-desc">Distinctive signatures designed to announce your presence elegantly.</p>
+              </div>
+              <div class="pillar-item">
+                <span class="pillar-number">03</span>
+                <h3 class="pillar-title">Accessible Luxury</h3>
+                <p class="pillar-desc">Couture perfumery without the traditional luxury price tag.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="intro-media-col reveal-on-scroll delay-1">
+            <div class="intro-media-frame">
+              <img src="assets/images/brand-vision-mission.jpg" alt="TOMÉA Fragrance Bottles - Charme and L'Origine" loading="lazy">
+              <div class="intro-media-badge">
+                <p>&ldquo;Confidence, Bottled.&rdquo;</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Collection (Dynamic from Firestore) -->
+    <section class="featured-collection-section section-spacing" aria-label="Featured Perfumes">
+      <div class="container">
+        <div class="section-header-centered reveal-on-scroll">
+          <span class="brand-eyebrow">SIGNATURE CREATIONS</span>
+          <h2 class="editorial-heading">THE EXTRAIT COLLECTION</h2>
+          <p class="editorial-subtext">
+            Three distinctive olfactory narratives, thoughtfully crafted with master precision to elevate your daily ritual.
+          </p>
+        </div>
+
+        <!-- Dynamic Grid populated by homepage.js -->
+        <div class="products-grid" id="featured-products-grid">
+          <div class="skeleton" style="height: 480px;"></div>
+          <div class="skeleton" style="height: 480px;"></div>
+          <div class="skeleton" style="height: 480px;"></div>
+        </div>
+
+        <div class="text-center" style="margin-top: 3.5rem;">
+          <a href="collection.html" class="btn btn-secondary">VIEW COMPLETE COLLECTION</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fragrance Experience & Olfactory Architecture -->
+    <section class="experience-section section-spacing" aria-label="Fragrance Experience">
+      <div class="container">
+        <div class="section-header-centered reveal-on-scroll">
+          <span class="brand-eyebrow">OLFACTORY ARCHITECTURE</span>
+          <h2 class="editorial-heading">THE FRAGRANCE EXPERIENCE</h2>
+          <p class="editorial-subtext">
+            Understand the harmonious evolution of each scent layer as it interacts with your skin's warmth over hours of wear.
+          </p>
+        </div>
+
+        <!-- Fragrance Tabs Switcher -->
+        <div class="fragrance-tabs-nav reveal-on-scroll" role="tablist">
+          <button class="fragrance-tab-btn is-active" data-target="panel-lorigine" role="tab" aria-selected="true">
+            TOMÉA L'Origine
+          </button>
+          <button class="fragrance-tab-btn" data-target="panel-charme" role="tab" aria-selected="false">
+            TOMÉA Charme
+          </button>
+          <button class="fragrance-tab-btn" data-target="panel-desir" role="tab" aria-selected="false">
+            TOMÉA Désir
+          </button>
+        </div>
+
+        <!-- L'Origine Notes Panel -->
+        <div class="fragrance-notes-panel is-active" id="panel-lorigine" role="tabpanel">
+          <div class="experience-grid">
+            <div class="experience-bottle-col reveal-on-scroll">
+              <img src="assets/images/bottle-lorigine.jpg" alt="TOMÉA L'Origine Bottle" class="experience-bottle-img" loading="lazy">
+            </div>
+
+            <div class="olfactory-pyramid reveal-on-scroll delay-1">
+              <div class="pyramid-level">
+                <span class="level-badge">TOP NOTES</span>
+                <p style="font-size: 0.85rem; color: var(--color-grey-dark); margin-bottom: 0.5rem;">The immediate luminous impression upon contact.</p>
+                <div class="notes-content">
+                  <span class="note-tag">Italian bergamot</span>
+                  <span class="note-tag">Bright citrus peel</span>
+                </div>
+              </div>
+
+              <div class="pyramid-level">
+                <span class="level-badge">HEART NOTES</span>
+                <p style="font-size: 0.85rem; color: var(--color-grey-dark); margin-bottom: 0.5rem;">The deep signature character unfolding after 15 minutes.</p>
+                <div class="notes-content">
+                  <span class="note-tag">Aromatic herbs</span>
+                  <span class="note-tag">Soft spicy accords</span>
+                  <span class="note-tag">Creamed gourmand nuance</span>
+                </div>
+              </div>
+
+              <div class="pyramid-level">
+                <span class="level-badge">BASE NOTES</span>
+                <p style="font-size: 0.85rem; color: var(--color-grey-dark); margin-bottom: 0.5rem;">The magnetic foundation lingering intimately for 12+ hours.</p>
+                <div class="notes-content">
+                  <span class="note-tag">Ambered woods</span>
+                  <span class="note-tag">Clean musks</span>
+                  <span class="note-tag">Subtle sweetness</span>
+                </div>
+              </div>
+
+              <div style="margin-top: 1.5rem;">
+                <button class="btn btn-primary" data-action="order-whatsapp" data-product-id="lorigine">
+                  Order L'Origine Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charme Notes Panel -->
+        <div class="fragrance-notes-panel" id="panel-charme" role="tabpanel">
+          <div class="experience-grid">
+            <div class="experience-bottle-col">
+              <img src="assets/images/bottle-charme.jpg" alt="TOMÉA Charme Bottle" class="experience-bottle-img" loading="lazy">
+            </div>
+
+            <div class="olfactory-pyramid">
+              <div class="pyramid-level">
+                <span class="level-badge">TOP NOTES</span>
+                <p style="font-size: 0.85rem; color: var(--color-grey-dark); margin-bottom: 0.5rem;">Sparkling effervescence and radiant morning light.</p>
+                <div class="notes-content">
+                  <span class="note-tag">Sparkling bergamot</span>
+                  <span class="note-tag">Soft citrus brightness</span>
+                </div>
+              </div>
+
+              <div class="pyramid-level">
+                <span class="level-badge">HEART NOTES</span>
+                <p style="font-size: 0.85rem; color: var(--color-grey-dark); margin-bottom: 0.5rem;">Sensual floral sweetness and whipped vanilla warmth.</p>
+                <div class="notes-content">
+                  <span class="note-tag">Aromatic accords</span>
+                  <span class="note-tag">Creamy vanilla infusion</span>
+                  <span class="note-tag">Delicate floral warmth</span>
+                </div>
+              </div>
+
+              <div class="pyramid-level">
+                <span class="level-badge">BASE NOTES</span>
+                <p style="font-size: 0.85rem; color: var(--color-grey-dark); margin-bottom: 0.5rem;">Golden amber and warm skin embrace.</p>
+                <div class="notes-content">
+                  <span class="note-tag">Golden amber</span>
+                  <span class="note-tag">Smooth woods</span>
+                  <span class="note-tag">Skin-close musk</span>
+                </div>
+              </div>
+
+              <div style="margin-top: 1.5rem;">
+                <button class="btn btn-primary" data-action="order-whatsapp" data-product-id="charme">
+                  Order Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Désir Notes Panel -->
+        <div class="fragrance-notes-panel" id="panel-desir" role="tabpanel">
+          <div class="experience-grid">
+            <div class="experience-bottle-col">
+              <img src="assets/images/bottle-desir.jpg" alt="TOMÉA Désir Bottle" class="experience-bottle-img" loading="lazy">
+            </div>
+
+            <div class="olfactory-pyramid">
+              <div class="pyramid-level">
+                <span class="level-badge">TOP NOTES</span>
+                <p style="font-size: 0.85rem; color: var(--color-grey-dark); margin-bottom: 0.5rem;">Cool freshness and dew-kissed botanical clarity.</p>
+                <div class="notes-content">
+                  <span class="note-tag">Fresh citrus</span>
+                  <span class="note-tag">Green notes</span>
+                </div>
+              </div>
+
+              <div class="pyramid-level">
+                <span class="level-badge">HEART NOTES</span>
+                <p style="font-size: 0.85rem; color: var(--color-grey-dark); margin-bottom: 0.5rem;">Enigmatic vanilla and soft aromatic florals.</p>
+                <div class="notes-content">
+                  <span class="note-tag">Creamy vanilla</span>
+                  <span class="note-tag">Soft aromatic florals</span>
+                </div>
+              </div>
+
+              <div class="pyramid-level">
+                <span class="level-badge">BASE NOTES</span>
+                <p style="font-size: 0.85rem; color: var(--color-grey-dark); margin-bottom: 0.5rem;">Velvety woods and clean magnetic sillage.</p>
+                <div class="notes-content">
+                  <span class="note-tag">Musky woods</span>
+                  <span class="note-tag">Warm amber</span>
+                  <span class="note-tag">Lingering softness</span>
+                </div>
+              </div>
+
+              <div style="margin-top: 1.5rem;">
+                <button class="btn btn-primary" data-action="order-whatsapp" data-product-id="desir">
+                  Order Désir via WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Vision & Mission Section -->
+    <section class="vision-mission-section section-spacing" aria-label="Brand Vision and Mission">
+      <div class="container">
+        <div class="vision-mission-grid">
+          <div class="vision-mission-text-col reveal-on-scroll">
+            <span class="brand-eyebrow" style="color: var(--color-gold);">THE PHILOSOPHY</span>
+            <h2 class="editorial-heading" style="color: var(--color-white); margin-bottom: 2rem;">CRAFTED FOR DISTINCTION</h2>
+
+            <div class="statement-box">
+              <h3 class="statement-title" id="vision-title">OUR VISION</h3>
+              <p class="statement-body" id="vision-text">
+                To build a fragrance brand that represents confidence, elegance, and timeless luxury while making premium scents accessible.
+              </p>
+            </div>
+
+            <div class="statement-box">
+              <h3 class="statement-title" id="mission-title">OUR MISSION</h3>
+              <p class="statement-body" id="mission-text">
+                To provide luxurious, high-quality Extrait de Parfum fragrances that are long-lasting and affordable, allowing more people to experience premium scents without the traditional luxury price tag.
+              </p>
+            </div>
+          </div>
+
+          <div class="vision-mission-media reveal-on-scroll delay-1">
+            <img src="assets/images/brand-bag-luxury.jpg" alt="TOMÉA Luxury Packaging Presentation" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Story & Editorial Showcase -->
+    <section class="visual-story-section section-spacing" aria-label="Visual Brand Story">
+      <div class="container">
+        <div class="section-header-centered reveal-on-scroll">
+          <span class="brand-eyebrow">UNBOXING ELEGANCE</span>
+          <h2 class="editorial-heading">AN ELEVATED RITUAL</h2>
+          <p class="editorial-subtext">
+            From our signature deep burgundy presentation boxes to each meticulously sealed flacon, every touchpoint honors the art of fine perfumery.
+          </p>
+        </div>
+
+        <div class="story-grid">
+          <div class="story-card reveal-on-scroll">
+            <img src="assets/images/packaging-unboxing.jpg" alt="TOMÉA Unboxing Experience" class="story-card-image" loading="lazy">
+            <div class="story-card-overlay">
+              <h3 class="story-card-title">Maison Packaging</h3>
+              <p class="story-card-desc">Every order is hand-assembled in our signature deep burgundy keepsake gift box with satin protective bedding.</p>
+            </div>
+          </div>
+
+          <div class="story-card reveal-on-scroll delay-1">
+            <img src="assets/images/campaign-charme.jpg" alt="TOMÉA Charme Silk Campaign" class="story-card-image" loading="lazy">
+            <div class="story-card-overlay">
+              <h3 class="story-card-title">Sensory Seduction</h3>
+              <p class="story-card-desc">Designed to weave seamlessly into your identity, leaving a captivating whisper in every room you enter.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final Call to Action -->
+    <section class="final-cta-section" aria-label="Call to Action">
+      <div class="final-cta-container reveal-on-scroll">
+        <span class="brand-eyebrow" style="color: var(--color-gold);">YOUR ODYSSEY BEGINS</span>
+        <h2 class="final-cta-heading" id="final-cta-heading">FIND YOUR SIGNATURE SCENT.</h2>
+        <p class="final-cta-subtitle" id="final-cta-subtitle">
+          Experience the distinction of TOMÉA. Connect directly with our concierge on WhatsApp to place your order or receive bespoke fragrance counsel.
+        </p>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="collection.html" class="btn btn-white" id="final-cta-btn">EXPLORE THE COLLECTION</a>
+          <button class="btn btn-gold" data-action="whatsapp-concierge">ORDER NOW</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <img src="assets/images/logo-white.png" alt="TOMÉA" class="footer-logo-img">
+          <p class="footer-brand-desc">
+            Premium fragrance, thoughtfully crafted. Dedicated to empowering personal presence through high-concentration Extrait de Parfum creations.
+          </p>
+          <div class="footer-social-row">
+            <a href="https://instagram.com/tomeaperfumes" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://facebook.com/tomeaperfumes" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+            <a href="https://tiktok.com/@tomeaperfumes" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-1.01-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-heading">NAVIGATION</h4>
+          <ul class="footer-links-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collection.html">The Collection</a></li>
+            <li><a href="about.html">About TOMÉA</a></li>
+            <li><a href="contact.html">Concierge Service</a></li>
+            <li><a href="privacy.html">Privacy & Policies</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-heading">CREATIONS</h4>
+          <ul class="footer-links-list">
+            <li><a href="product.html?id=lorigine">TOMÉA L'Origine</a></li>
+            <li><a href="product.html?id=charme">TOMÉA Charme</a></li>
+            <li><a href="product.html?id=desir">TOMÉA Désir</a></li>
+            <li><a href="collection.html">All Fragrances</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-heading">DIRECT CONCIERGE</h4>
+          <div class="footer-contact-info">
+            <p><strong>WhatsApp Orders:</strong> Direct ordering with immediate concierge response.</p>
+            <p><strong>Maison Hours:</strong> Mon &ndash; Sat: 9:00 AM &ndash; 7:00 PM</p>
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-sm btn-white-outline" data-action="whatsapp-concierge">
+                Chat with Concierge
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 TOMÉA PERFUMES. All rights reserved.</p>
+        <p>
+          <a href="privacy.html">Privacy Policy</a> &bull; 
+          <a href="admin/login.html" style="opacity: 0.5;">Admin Access</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Firebase Web SDK (v9/v10 Compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Application Scripts -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/firestore.js"></script>
+  <script src="js/cloudinary.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/homepage.js"></script>
+</body>
+</html>
