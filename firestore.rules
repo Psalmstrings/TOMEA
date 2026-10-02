@@ -31,6 +31,23 @@ service cloud.firestore {
       allow read: if true;
       allow write: if isAdmin();
     }
+
+    // Affiliates Collection
+    // Public can read active affiliates for coupon validation and referral links.
+    // Only authenticated administrators can create, modify, or delete affiliate records.
+    match /affiliates/{affiliateId} {
+      allow read: if resource.data.isActive == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Orders Collection
+    // Public can submit an initial pending order via WhatsApp ordering flow.
+    // Only authenticated admins can read, update status, confirm, or delete orders.
+    match /orders/{orderId} {
+      allow create: if request.resource.data.status == 'pending' &&
+                       request.resource.data.commissionStatus == 'pending';
+      allow read, update, delete: if isAdmin();
+    }
     
     // Admins Collection
     // Only existing admins can read the admin list or add new admins.

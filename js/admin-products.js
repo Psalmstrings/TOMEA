@@ -190,6 +190,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   closeModalBtns.forEach(btn => btn.addEventListener('click', closeModal));
 
+  if (productModal) {
+    productModal.addEventListener('click', (e) => {
+      if (e.target === productModal) closeModal();
+    });
+  }
+
   // Edit Product Modal
   function openEditModal(prod) {
     editingProductId = prod.id;
@@ -405,13 +411,27 @@ document.addEventListener('DOMContentLoaded', async () => {
             Utils.showToast('Asset added to fragrance gallery.', 'success');
           }
           libraryModal.classList.remove('is-open');
+          if (!productModal.classList.contains('is-open')) {
+            document.body.style.overflow = '';
+          }
         });
       });
 
       libraryModal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
     });
 
-    closeLibraryBtns.forEach(b => b.addEventListener('click', () => libraryModal.classList.remove('is-open')));
+    const closeLib = () => {
+      libraryModal.classList.remove('is-open');
+      if (!productModal.classList.contains('is-open')) {
+        document.body.style.overflow = '';
+      }
+    };
+
+    closeLibraryBtns.forEach(b => b.addEventListener('click', closeLib));
+    libraryModal.addEventListener('click', (e) => {
+      if (e.target === libraryModal) closeLib();
+    });
   }
 
   // Form Submit (Save Product to Firestore)

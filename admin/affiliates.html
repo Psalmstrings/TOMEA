@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affiliates | TOMÉA Admin</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar" role="navigation" aria-label="Administrator Navigation">
+    <div class="admin-sidebar-brand">
+      <img src="../assets/images/logo-white.png" alt="TOMÉA" class="admin-sidebar-logo" />
+      <span class="admin-badge-label">CMS</span>
+    </div>
+
+    <nav class="admin-sidebar-nav">
+      <a href="dashboard.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="products.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span>Fragrances</span>
+      </a>
+
+      <a href="orders.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+          <rect x="9" y="3" width="6" height="4" rx="2"/>
+          <line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>
+        </svg>
+        <span>Orders</span>
+      </a>
+
+      <a href="affiliates.html" class="admin-nav-item is-active">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span>Affiliates</span>
+      </a>
+
+      <a href="homepage.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span>Homepage CMS</span>
+      </a>
+
+      <a href="settings.html" class="admin-nav-item">
+        <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span>Brand Settings</span>
+      </a>
+
+      <div class="sidebar-nav-divider">
+        <a href="../index.html" target="_blank" class="admin-nav-item">
+          <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          <span>View Public Store</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <div class="admin-user-info">
+        <span class="admin-user-label">Active Session</span>
+        <span class="admin-user-email js-admin-email">Administrator</span>
+      </div>
+      <button class="btn btn-sm btn-logout js-admin-logout" title="Log Out">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Admin Main Layout -->
+  <div class="admin-main-wrapper">
+    <!-- Admin Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="admin-sidebar-toggle" aria-label="Toggle Sidebar">
+          <span></span><span></span><span></span>
+        </button>
+        <h1 class="topbar-title">Affiliate Management</h1>
+      </div>
+      <div class="topbar-right">
+        <button id="btn-open-add-affiliate" class="btn btn-sm btn-primary">
+          + Add Affiliate
+        </button>
+        <span class="topbar-admin-badge js-admin-email">admin@tomeaperfumes.com</span>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <main class="admin-content-container">
+
+      <!-- Affiliate Stats Row -->
+      <div class="admin-metrics-grid" id="affiliate-metrics-grid">
+        <div class="metric-card metric-card--total">
+          <div class="metric-header">
+            <span class="metric-title">Total Affiliates</span>
+            <div class="metric-icon-box metric-icon-box--dark">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value" id="aff-metric-total">—</div>
+          <div class="metric-subtext">Influencer partners</div>
+        </div>
+
+        <div class="metric-card metric-card--active">
+          <div class="metric-header">
+            <span class="metric-title">Active Campaigns</span>
+            <div class="metric-icon-box metric-icon-box--green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value text-success" id="aff-metric-active">—</div>
+          <div class="metric-subtext">Currently running</div>
+        </div>
+
+        <div class="metric-card metric-card--featured">
+          <div class="metric-header">
+            <span class="metric-title">Total Sales</span>
+            <div class="metric-icon-box metric-icon-box--gold">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value text-gold" id="aff-metric-sales">—</div>
+          <div class="metric-subtext">Via affiliate channels</div>
+        </div>
+
+        <div class="metric-card metric-card--waitlist">
+          <div class="metric-header">
+            <span class="metric-title">Pending Commission</span>
+            <div class="metric-icon-box metric-icon-box--amber">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value text-amber" id="aff-metric-pending">—</div>
+          <div class="metric-subtext">Awaiting payout</div>
+        </div>
+      </div>
+
+      <!-- Affiliates Table -->
+      <div class="admin-card">
+        <div class="admin-card-header d-flex justify-between align-center">
+          <div>
+            <h3 class="card-heading">Influencer Partners</h3>
+            <p class="card-subtext">Manage affiliate codes, discounts, commissions, and payout records.</p>
+          </div>
+          <div class="d-flex gap-2">
+            <select id="aff-filter-status" class="tomea-select" style="width:auto;">
+              <option value="all">All Affiliates</option>
+              <option value="active">Active Only</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+        <div class="admin-card-body p-0">
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Influencer</th>
+                  <th>Code</th>
+                  <th>Discount</th>
+                  <th>Commission</th>
+                  <th>Orders</th>
+                  <th>Total Sales</th>
+                  <th>Commission</th>
+                  <th>Status</th>
+                  <th style="text-align:right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="affiliates-table-body">
+                <tr><td colspan="9" class="text-center py-4">Loading affiliates...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Affiliate Create/Edit Modal -->
+  <div id="affiliate-modal" class="admin-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="affiliate-modal-title">
+    <div class="admin-modal-container modal-lg">
+      <div class="admin-modal-header">
+        <h2 id="affiliate-modal-title" class="modal-title">Add Affiliate</h2>
+        <button type="button" class="modal-close-btn js-close-affiliate-modal" aria-label="Close">&times;</button>
+      </div>
+      <form id="affiliate-form" class="admin-modal-form">
+        <div class="admin-modal-body">
+          <input type="hidden" id="aff-id" />
+
+          <!-- Row 1: Name + Email -->
+          <div class="form-grid-two">
+            <div class="tomea-form-group">
+              <label for="aff-name" class="tomea-label">Influencer Name *</label>
+              <input type="text" id="aff-name" class="tomea-input" placeholder="e.g. Amara Johnson" required />
+            </div>
+            <div class="tomea-form-group">
+              <label for="aff-email" class="tomea-label">Email Address</label>
+              <input type="email" id="aff-email" class="tomea-input" placeholder="amara@example.com" />
+            </div>
+          </div>
+
+          <!-- Row 2: Phone + Instagram -->
+          <div class="form-grid-two">
+            <div class="tomea-form-group">
+              <label for="aff-phone" class="tomea-label">Phone / WhatsApp</label>
+              <input type="text" id="aff-phone" class="tomea-input" placeholder="+234 800 000 0000" />
+            </div>
+            <div class="tomea-form-group">
+              <label for="aff-instagram" class="tomea-label">Instagram Handle</label>
+              <input type="text" id="aff-instagram" class="tomea-input" placeholder="@amarajohnson" />
+            </div>
+          </div>
+
+          <!-- Row 3: Code + Slug -->
+          <div class="form-grid-two">
+            <div class="tomea-form-group">
+              <label for="aff-code" class="tomea-label">Discount Code *</label>
+              <div class="input-with-button">
+                <input type="text" id="aff-code" class="tomea-input" placeholder="AMARA20" style="text-transform:uppercase;" required />
+                <button type="button" id="btn-generate-code" class="btn btn-sm btn-secondary">Generate</button>
+              </div>
+              <span class="tomea-field-hint">Customers enter this code at checkout.</span>
+            </div>
+            <div class="tomea-form-group">
+              <label for="aff-slug" class="tomea-label">Referral Slug *</label>
+              <div class="input-with-button">
+                <input type="text" id="aff-slug" class="tomea-input" placeholder="amara" required />
+                <button type="button" id="btn-copy-link" class="btn btn-sm btn-outline">Copy Link</button>
+              </div>
+              <span class="tomea-field-hint">Used in URL: yourdomain.com/?ref=amara</span>
+            </div>
+          </div>
+
+          <!-- Row 4: Discount % + Commission % -->
+          <div class="form-grid-two">
+            <div class="tomea-form-group">
+              <label for="aff-discount" class="tomea-label">Customer Discount % *</label>
+              <input type="number" id="aff-discount" class="tomea-input" placeholder="20" min="0" max="100" step="1" required />
+              <span class="tomea-field-hint">Applied to customer's order price.</span>
+            </div>
+            <div class="tomea-form-group">
+              <label for="aff-commission" class="tomea-label">Affiliate Commission % *</label>
+              <input type="number" id="aff-commission" class="tomea-input" placeholder="10" min="0" max="100" step="1" required />
+              <span class="tomea-field-hint">Calculated on final (post-discount) price.</span>
+            </div>
+          </div>
+
+          <!-- Row 5: Start + End Date -->
+          <div class="form-grid-two">
+            <div class="tomea-form-group">
+              <label for="aff-start-date" class="tomea-label">Campaign Start Date</label>
+              <input type="date" id="aff-start-date" class="tomea-input" />
+            </div>
+            <div class="tomea-form-group">
+              <label for="aff-end-date" class="tomea-label">Campaign End Date</label>
+              <input type="date" id="aff-end-date" class="tomea-input" />
+            </div>
+          </div>
+
+          <!-- Row 6: Usage Limit + Status -->
+          <div class="form-grid-two">
+            <div class="tomea-form-group">
+              <label for="aff-usage-limit" class="tomea-label">Usage Limit</label>
+              <input type="number" id="aff-usage-limit" class="tomea-input" placeholder="Leave blank for unlimited" min="0" />
+            </div>
+            <div class="tomea-form-group">
+              <label class="tomea-label">Status</label>
+              <label class="custom-checkbox" style="margin-top:0.6rem;">
+                <input type="checkbox" id="aff-active" checked />
+                <span class="checkbox-box"></span>
+                <span class="checkbox-label"><strong>Active</strong> (Code is valid and campaign is live)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Affiliate Link Preview -->
+          <div class="admin-section-divider">
+            <h4 class="divider-title">AFFILIATE REFERRAL LINK</h4>
+          </div>
+          <div class="affiliate-link-preview" id="aff-link-preview" style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--admin-bg-light,#f9f7f4);border:1px solid var(--admin-border-subtle,#e8e3dc);border-radius:6px;">
+            <span class="aff-link-url" id="aff-link-url" style="flex:1;font-family:monospace;font-size:0.85rem;color:var(--admin-primary,#2c1810);word-break:break-all;">https://yourdomain.com/?ref=</span>
+            <button type="button" class="btn btn-sm btn-outline" id="btn-copy-link-2">Copy</button>
+          </div>
+
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn btn-secondary js-close-affiliate-modal">Cancel</button>
+          <button type="submit" id="btn-save-affiliate" class="btn btn-primary">Save Affiliate</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Affiliate Detail/Stats Modal -->
+  <div id="affiliate-detail-modal" class="admin-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="detail-modal-title">
+    <div class="admin-modal-container modal-lg">
+      <div class="admin-modal-header">
+        <h2 id="detail-modal-title" class="modal-title">Affiliate Details</h2>
+        <button type="button" class="modal-close-btn js-close-detail-modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="admin-modal-body" id="affiliate-detail-body">
+        <!-- Populated by JS -->
+      </div>
+      <div class="admin-modal-footer">
+        <button type="button" class="btn btn-secondary js-close-detail-modal">Close</button>
+        <button type="button" id="btn-detail-edit" class="btn btn-primary">Edit Affiliate</button>
+        <button type="button" id="btn-record-payout" class="btn btn-outline">Record Payout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payout Modal -->
+  <div id="payout-modal" class="admin-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="payout-modal-title">
+    <div class="admin-modal-container modal-sm">
+      <div class="admin-modal-header">
+        <h2 id="payout-modal-title" class="modal-title">Record Payout</h2>
+        <button type="button" class="modal-close-btn js-close-payout-modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <input type="hidden" id="payout-affiliate-id" />
+        <div class="tomea-form-group">
+          <label for="payout-amount" class="tomea-label">Payout Amount (₦) *</label>
+          <input type="number" id="payout-amount" class="tomea-input" placeholder="0" min="0" step="100" required />
+        </div>
+        <div class="tomea-form-group">
+          <label for="payout-method" class="tomea-label">Payment Method</label>
+          <select id="payout-method" class="tomea-select">
+            <option value="bank_transfer">Bank Transfer</option>
+            <option value="cash">Cash</option>
+            <option value="mobile_money">Mobile Money</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="tomea-form-group">
+          <label for="payout-reference" class="tomea-label">Reference / Notes</label>
+          <input type="text" id="payout-reference" class="tomea-input" placeholder="Transaction ID or notes" />
+        </div>
+      </div>
+      <div class="admin-modal-footer">
+        <button type="button" class="btn btn-secondary js-close-payout-modal">Cancel</button>
+        <button type="button" id="btn-confirm-payout" class="btn btn-primary">Confirm Payout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase & Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/firestore.js"></script>
+  <script src="../js/firebase-auth.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="../js/admin-affiliates.js"></script>
+</body>
+</html>

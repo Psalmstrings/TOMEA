@@ -26,40 +26,113 @@ const WhatsAppService = {
   },
 
   /**
-   * Generate and open a personalized WhatsApp order message for a specific perfume
+   * Generate and open a personalized WhatsApp order message for a specific perfume.
+   * Upgraded to include affiliate attribution and automatically records the order as pending.
+   * 
    * @param {object} product { name, price, size, concentration, slug, id }
    * @param {number} quantity 
+   * @param {object|null} discountInfo Optional applied discount information
    */
-  async orderProduct(product, quantity = 1) {
+  async orderProduct(product, quantity = 1, discountInfo = null) {
     if (!product) return;
 
     const phoneNumber = await this.getActiveNumber();
     const currency = (window.TOMEA_CONFIG && window.TOMEA_CONFIG.defaultCurrency) || '₦';
-    const formattedPrice = Utils.formatCurrency(product.price * quantity, currency);
-    
-    // Construct current page or product link
-    const origin = window.location.origin || '';
-    const productPath = window.location.pathname.includes('/product.html')
-      ? window.location.href
-      : `${origin}/product.html?id=${product.id || product.slug}`;
+    const originalTotal = (product.price || 0) * quantity;
+    const formattedOriginalPrice = Utils.formatCurrency(originalTotal, currency);
 
-    const lines = [
-      "Hello TOMÉA Perfumes,",
-      "",
-      "I would like to place an order.",
-      "",
-      `Product: ${product.name}`,
-      `Concentration: ${product.concentration || 'Extrait de Parfum'}`,
-      `Size: ${product.size || '50ml'}`,
-      `Quantity: ${quantity}`,
-      `Total: ${formattedPrice}`,
-      "",
-      `Product Link: ${productPath}`,
-      "",
-      "Please provide me with the payment details and delivery steps.",
-      "",
-      "Thank you."
-    ];
+    let finalPrice = originalTotal;
+    let discountAmount = 0;
+    let discountPercent = 0;
+    let affiliateCode = '';
+    let affiliateName = '';
+    let affiliateId = '';
+    let commissionPercent = 0;
+    let commissionAmount = 0;
+
+    if (discountInfo && discountInfo.code && discountInfo.percent > 0) {
+      discountPercent = Number(discountInfo.percent) || 0;
+      discountAmount = Math.round((originalTotal * discountPercent) / 100);
+      finalPrice = Math.max(0, originalTotal - discountAmount);
+      affiliateCode = discountInfo.code;
+      affiliateName = discountInfo.affiliateName || '';
+      affiliateId = discountInfo.affiliateId || '';
+      commissionPercent = Number(discountInfo.commissionPercent) || 0;
+      commissionAmount = Math.round((finalPrice * commissionPercent) / 100);
+    }
+
+    const formattedFinalPrice = Utils.formatCurrency(finalPrice, currency);
+
+    // Track order in Firestore / localStorage DB (Status defaults to "pending")
+    try {
+      if (window.DB) {
+        await window.DB.createOrder({
+          productId: product.id || product.slug || '',
+          productName: product.name || '',
+          quantity,
+          originalPrice: originalTotal,
+          discountPercent,
+          discountAmount,
+          finalPrice,
+          affiliateId,
+          affiliateCode,
+          affiliateName,
+          commissionPercent,
+          commissionAmount,
+          status: 'pending'
+        });
+      }
+    } catch (orderErr) {
+      console.warn('[TOMÉA WhatsApp] Error tracking order record:', orderErr);
+    }
+
+    // Construct WhatsApp message conforming to Part 8
+    let lines = [];
+    if (discountPercent > 0 && affiliateCode) {
+      lines = [
+        "Hello TOMÉA Perfumes,",
+        "",
+        "I would like to place an order.",
+        "",
+        `Product: ${product.name}`,
+        `Quantity: ${quantity}`,
+        "",
+        `Original Price: ${formattedOriginalPrice}`,
+        `Discount Code: ${affiliateCode}`,
+        `Discount: ${discountPercent}%`,
+        `Final Price: ${formattedFinalPrice}`,
+        "",
+        affiliateName ? `Affiliate: ${affiliateName}` : "",
+        "",
+        "Please provide me with the next steps.",
+        "",
+        "Thank you."
+      ].filter(l => l !== undefined);
+    } else {
+      // Standard order message
+      const origin = window.location.origin || '';
+      const productPath = window.location.pathname.includes('/product.html')
+        ? window.location.href
+        : `${origin}/product.html?id=${product.id || product.slug}`;
+
+      lines = [
+        "Hello TOMÉA Perfumes,",
+        "",
+        "I would like to place an order.",
+        "",
+        `Product: ${product.name}`,
+        `Concentration: ${product.concentration || 'Extrait de Parfum'}`,
+        `Size: ${product.size || '50ml'}`,
+        `Quantity: ${quantity}`,
+        `Total: ${formattedOriginalPrice}`,
+        "",
+        `Product Link: ${productPath}`,
+        "",
+        "Please provide me with the payment details and delivery steps.",
+        "",
+        "Thank you."
+      ];
+    }
 
     const message = lines.join("\n");
     const encodedMessage = encodeURIComponent(message);

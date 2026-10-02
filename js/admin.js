@@ -113,6 +113,36 @@ async function loadDashboardMetrics() {
     if (outOfStockEl) outOfStockEl.textContent = outOfStock;
     if (waNumberEl) waNumberEl.textContent = settings.whatsappNumber ? `+${settings.whatsappNumber}` : 'Not Configured';
 
+    // Affiliate & Orders Dashboard Metrics
+    const affCountEl = document.getElementById('dash-metric-affiliates');
+    const orderCountEl = document.getElementById('dash-metric-orders');
+    const pendingOrdersEl = document.getElementById('dash-metric-pending-orders');
+    const pendingCommEl = document.getElementById('dash-metric-pending-comm');
+
+    if (affCountEl || orderCountEl) {
+      try {
+        const [affiliates, orders] = await Promise.all([
+          window.DB.getAffiliates ? window.DB.getAffiliates() : [],
+          window.DB.getOrders ? window.DB.getOrders() : []
+        ]);
+
+        if (affCountEl) affCountEl.textContent = affiliates.length;
+        if (orderCountEl) orderCountEl.textContent = orders.length;
+
+        const pendingOrders = orders.filter(o => o.status === 'pending').length;
+        if (pendingOrdersEl) pendingOrdersEl.textContent = pendingOrders;
+
+        const totalPendingComm = affiliates.reduce((sum, a) => sum + (a.pendingCommission || 0), 0);
+        if (pendingCommEl) {
+          pendingCommEl.textContent = window.Utils && window.Utils.formatCurrency
+            ? window.Utils.formatCurrency(totalPendingComm)
+            : '₦' + Number(totalPendingComm).toLocaleString('en-NG');
+        }
+      } catch (err) {
+        console.warn('[TOMÉA Admin] Error loading affiliate/order metrics:', err);
+      }
+    }
+
     // Render Recent Products in Dashboard table
     const tableBody = document.getElementById('dashboard-recent-products');
     if (tableBody) {

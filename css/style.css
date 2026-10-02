@@ -4,7 +4,7 @@
    High-Fashion Typography (Poppins + High-Contrast Serif), Restrained Luxury.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
 
 :root {
   /* Official Brand Palette from Guidelines */
@@ -27,10 +27,11 @@
   --color-gold-muted: #E2CE9C;
   --color-gold-subtle: rgba(197, 160, 89, 0.2);
 
-  /* Typography System */
-  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
-  --font-serif-display: 'Cormorant Garamond', 'Playfair Display', serif;
-  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Global Poppins Typography System */
+  --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-primary);
+  --font-serif-display: var(--font-primary);
+  --font-sans: var(--font-primary);
 
   /* Spacing System */
   --space-xs: 0.25rem;
@@ -75,12 +76,21 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-primary);
+}
+
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-primary);
   background-color: var(--color-cream);
   color: var(--color-black);
   line-height: 1.65;
-  font-weight: 300;
+  font-weight: 400;
   overflow-x: hidden;
   min-height: 100vh;
   display: flex;
@@ -108,7 +118,7 @@ a {
 }
 
 button, input, select, textarea {
-  font-family: inherit;
+  font-family: var(--font-primary);
   font-size: inherit;
   border: none;
   outline: none;
@@ -117,6 +127,8 @@ button, input, select, textarea {
 
 button {
   cursor: pointer;
+  font-family: var(--font-primary);
+  font-weight: 600;
 }
 
 ul, ol {
@@ -132,10 +144,10 @@ ul, ol {
    Typography Standards
    ========================================================================== */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
-  font-weight: 500;
+  font-family: var(--font-primary);
+  font-weight: 700;
   line-height: 1.15;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   color: var(--color-charcoal);
 }
 
@@ -151,18 +163,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .editorial-heading {
-  font-family: var(--font-serif);
+  font-family: var(--font-primary);
   font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 500;
-  line-height: 1.1;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
   color: var(--color-charcoal);
   margin-bottom: var(--space-md);
 }
 
 .editorial-subtext {
-  font-size: clamp(0.95rem, 1.2vw, 1.125rem);
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
   color: var(--color-grey-dark);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.8;
   max-width: 650px;
 }
@@ -212,12 +225,12 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 1rem 2rem;
+  padding: 0.95rem 1.85rem;
   border-radius: 0px; /* Minimal luxury rectangular edges */
   transition: all var(--transition-smooth);
   position: relative;
@@ -709,19 +722,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2.75rem, 6.5vw, 5.25rem);
-  font-weight: 500;
-  line-height: 1.05;
-  letter-spacing: -0.015em;
+  font-family: var(--font-primary);
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
   color: var(--color-white);
   margin-bottom: var(--space-lg);
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
 }
 
 .hero-subtitle {
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
-  font-weight: 300;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-weight: 400;
   line-height: 1.7;
   color: var(--color-blush);
   max-width: 680px;
@@ -992,9 +1005,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product-card-title {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-family: var(--font-primary);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--color-charcoal);
   margin-bottom: var(--space-xs);
   transition: color var(--transition-fast);
@@ -1576,15 +1590,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product-info-section .product-title {
-  font-family: var(--font-serif);
+  font-family: var(--font-primary);
   font-size: clamp(2.25rem, 4vw, 3.25rem);
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   margin-bottom: var(--space-xs);
 }
 
 .product-info-section .product-subtitle {
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-burgundy);
@@ -1601,9 +1616,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product-price-bar .price-val {
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  font-weight: 600;
+  font-family: var(--font-primary);
+  font-size: 2.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--color-burgundy);
 }
 
@@ -1756,6 +1772,204 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.75rem;
   color: var(--color-grey);
   margin-top: var(--space-sm);
+}
+
+/* ==========================================================================
+   Product Discount & Affiliate Voucher Module
+   Luxury, restrained, clean Poppins typography with burgundy accents.
+   ========================================================================== */
+.product-discount-wrapper {
+  margin: var(--space-md) 0 var(--space-lg) 0;
+  padding: var(--space-md) 0;
+  border-top: 1px solid rgba(107, 46, 53, 0.12);
+  border-bottom: 1px solid rgba(107, 46, 53, 0.12);
+}
+
+.discount-input-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xs);
+}
+
+.discount-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-grey-dark);
+}
+
+.discount-input-group {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: stretch;
+  margin-top: 0.35rem;
+}
+
+.discount-input-box {
+  flex: 1;
+  position: relative;
+}
+
+.discount-input-box input {
+  width: 100%;
+  height: 44px;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-color: var(--color-cream);
+  border: 1px solid rgba(107, 46, 53, 0.2);
+  color: var(--color-charcoal);
+  border-radius: 0;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.discount-input-box input:focus {
+  border-color: var(--color-burgundy);
+  background-color: var(--color-white);
+  outline: none;
+}
+
+.discount-input-box input::placeholder {
+  text-transform: none;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: var(--color-grey);
+}
+
+.btn-discount-apply {
+  height: 44px;
+  padding: 0 1.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background-color: var(--color-burgundy);
+  color: var(--color-white);
+  border: 1px solid var(--color-burgundy);
+  border-radius: 0;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-discount-apply:hover {
+  background-color: var(--color-burgundy-deep);
+  border-color: var(--color-burgundy-deep);
+}
+
+.discount-message {
+  margin-top: 0.65rem;
+  font-size: 0.825rem;
+  line-height: 1.4;
+  padding: 0.5rem 0.75rem;
+  animation: fadeInDiscount 0.3s ease forwards;
+}
+
+@keyframes fadeInDiscount {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.discount-message.is-success {
+  color: #155724;
+  background-color: #EDF7EE;
+  border-left: 2px solid #28A745;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  font-weight: 500;
+}
+
+.discount-message.is-error {
+  color: #721C24;
+  background-color: #F8D7DA;
+  border-left: 2px solid #DC3545;
+  font-weight: 500;
+}
+
+.btn-remove-discount {
+  background: none;
+  border: none;
+  color: #721C24;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.5rem;
+}
+
+.btn-remove-discount:hover {
+  color: #491217;
+}
+
+/* Pricing Breakdown */
+.order-pricing-breakdown {
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.pricing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.9rem;
+  color: var(--color-grey-dark);
+}
+
+.pricing-row .label {
+  font-weight: 500;
+}
+
+.pricing-row .value {
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.pricing-row.discount-row {
+  color: var(--color-burgundy);
+}
+
+.pricing-row.discount-row .value {
+  color: var(--color-burgundy);
+  font-weight: 700;
+}
+
+.pricing-row.total-row {
+  margin-top: 0.25rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(107, 46, 53, 0.2);
+  font-size: 1.05rem;
+}
+
+.pricing-row.total-row .label {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-charcoal);
+}
+
+.pricing-row.total-row .value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-burgundy-deep);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-row.total-row .value,
+  .discount-message,
+  .btn-discount-apply {
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
 .product-editorial-story {

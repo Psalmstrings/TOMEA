@@ -182,6 +182,45 @@ function renderProductDetails(product, container) {
             </div>
           </div>
 
+          <!-- Affiliate Discount Code Module -->
+          <div class="product-discount-wrapper" id="product-discount-block">
+            <div class="discount-input-header">
+              <span class="discount-title">Have a discount code?</span>
+            </div>
+            <div class="discount-input-group" id="discount-input-row">
+              <div class="discount-input-box">
+                <input 
+                  type="text" 
+                  id="affiliate-coupon-input" 
+                  placeholder="e.g. AMARA20" 
+                  autocomplete="off" 
+                  spellcheck="false"
+                  aria-label="Enter affiliate discount code"
+                />
+              </div>
+              <button type="button" class="btn btn-sm btn-discount-apply" id="btn-apply-coupon">
+                APPLY
+              </button>
+            </div>
+            <div class="discount-message" id="discount-feedback" role="status" aria-live="polite" style="display: none;"></div>
+
+            <!-- Price Breakdown Summary -->
+            <div class="order-pricing-breakdown" id="order-pricing-summary">
+              <div class="pricing-row" id="row-original-subtotal">
+                <span class="label">Original price</span>
+                <span class="value" id="summary-subtotal">${formattedPrice}</span>
+              </div>
+              <div class="pricing-row discount-row" id="row-discount" style="display: none;">
+                <span class="label" id="summary-discount-label">Discount</span>
+                <span class="value" id="summary-discount-val">-₦0</span>
+              </div>
+              <div class="pricing-row total-row">
+                <span class="label">Your price</span>
+                <span class="value" id="summary-total">${formattedPrice}</span>
+              </div>
+            </div>
+          </div>
+
           <button 
             class="btn btn-primary btn-order-large" 
             id="order-product-whatsapp-btn"
@@ -190,7 +229,7 @@ function renderProductDetails(product, container) {
             <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.042-.047-.282-.07-1.144-.383-2.18-1.309-1.312-1.173-1.846-2.348-1.925-2.522-.079-.174-.537-.714-.537-1.362 0-.649.34-0.968.461-1.099.121-.131.265-.164.354-.164.088 0 .177.001.254.005.081.004.19-.031.297.226.11.265.376.917.409.985.033.069.055.15.011.238-.044.088-.066.143-.132.22-.066.077-.139.172-.199.232-.066.066-.135.138-.058.271.077.133.344.568.739.919.508.453.937.593 1.07.659.133.066.21.055.288-.033.077-.089.332-.387.42-.519.088-.133.177-.11.299-.066.121.044.774.365.907.432.133.066.221.099.254.154.033.056.033.322-.111.727z"/>
             </svg>
-            <span>${product.isOutOfStock ? 'Join Private Waitlist' : 'Order via WhatsApp'}</span>
+            <span>${product.isOutOfStock ? 'Join Private Waitlist' : 'Order Now'}</span>
           </button>
 
           <p class="order-guarantee-note">
@@ -230,20 +269,167 @@ function renderProductDetails(product, container) {
     });
   });
 
-  // Quantity controls
+  // State for active discount attribution
+  let activeDiscount = null;
+
+  // UI Elements
   const qtyInput = document.getElementById('product-qty-input');
   const qtyMinus = document.getElementById('qty-minus');
   const qtyPlus = document.getElementById('qty-plus');
   const priceDisplay = document.getElementById('dynamic-price');
+  
+  const couponInput = document.getElementById('affiliate-coupon-input');
+  const applyCouponBtn = document.getElementById('btn-apply-coupon');
+  const feedbackEl = document.getElementById('discount-feedback');
+  const summarySubtotal = document.getElementById('summary-subtotal');
+  const rowDiscount = document.getElementById('row-discount');
+  const summaryDiscountLabel = document.getElementById('summary-discount-label');
+  const summaryDiscountVal = document.getElementById('summary-discount-val');
+  const summaryTotal = document.getElementById('summary-total');
 
+  /**
+   * Recalculate price breakdown smoothly
+   */
+  function updatePriceBreakdown() {
+    const originalSubtotal = product.price * currentQuantity;
+    if (summarySubtotal) {
+      summarySubtotal.textContent = Utils.formatCurrency(originalSubtotal);
+    }
+
+    if (activeDiscount && activeDiscount.discountPercent > 0) {
+      const discountPercent = activeDiscount.discountPercent;
+      const discountAmount = Math.round((originalSubtotal * discountPercent) / 100);
+      const finalPrice = Math.max(0, originalSubtotal - discountAmount);
+
+      if (rowDiscount) rowDiscount.style.display = 'flex';
+      if (summaryDiscountLabel) {
+        summaryDiscountLabel.textContent = `${discountPercent}% discount`;
+      }
+      if (summaryDiscountVal) {
+        summaryDiscountVal.textContent = `-${Utils.formatCurrency(discountAmount)}`;
+      }
+      if (summaryTotal) {
+        summaryTotal.textContent = Utils.formatCurrency(finalPrice);
+      }
+      if (priceDisplay) {
+        priceDisplay.textContent = Utils.formatCurrency(finalPrice);
+      }
+    } else {
+      if (rowDiscount) rowDiscount.style.display = 'none';
+      if (summaryTotal) {
+        summaryTotal.textContent = Utils.formatCurrency(originalSubtotal);
+      }
+      if (priceDisplay) {
+        priceDisplay.textContent = Utils.formatCurrency(originalSubtotal);
+      }
+    }
+  }
+
+  function showDiscountMessage(type, messageHtml) {
+    if (!feedbackEl) return;
+    feedbackEl.className = `discount-message is-${type}`;
+    feedbackEl.innerHTML = messageHtml;
+    feedbackEl.style.display = 'flex';
+  }
+
+  function clearDiscountMessage() {
+    if (!feedbackEl) return;
+    feedbackEl.style.display = 'none';
+    feedbackEl.innerHTML = '';
+  }
+
+  function setAppliedDiscountState(aff) {
+    activeDiscount = aff;
+    if (couponInput) {
+      couponInput.value = aff.code;
+    }
+    showDiscountMessage('success', `
+      <span>✓ <strong>${Utils.escapeHtml(aff.code)}</strong> applied (${aff.discountPercent}% discount)</span>
+      <button type="button" class="btn-remove-discount" id="btn-remove-coupon" aria-label="Remove discount code">Remove</button>
+    `);
+    
+    // Bind remove button
+    const removeBtn = document.getElementById('btn-remove-coupon');
+    if (removeBtn) {
+      removeBtn.addEventListener('click', () => {
+        activeDiscount = null;
+        if (couponInput) couponInput.value = '';
+        clearDiscountMessage();
+        if (window.AffiliateService) {
+          window.AffiliateService.clearAttribution();
+        }
+        updatePriceBreakdown();
+      });
+    }
+
+    updatePriceBreakdown();
+  }
+
+  // Pre-load stored referral attribution if available (Part 4 & 6)
+  if (window.AffiliateService && window.DB) {
+    const storedAttribution = window.AffiliateService.getStoredAttribution();
+    if (storedAttribution && (storedAttribution.code || storedAttribution.affiliateSlug)) {
+      window.DB.validateAffiliate(storedAttribution.code || storedAttribution.affiliateSlug, false)
+        .then(result => {
+          if (result && result.valid && result.affiliate) {
+            setAppliedDiscountState(result.affiliate);
+          }
+        })
+        .catch(err => console.warn('[TOMÉA] Error validating pre-stored referral:', err));
+    }
+  }
+
+  // Handle explicit coupon application
+  async function handleApplyCoupon() {
+    if (!couponInput) return;
+    const rawCode = couponInput.value.trim();
+    if (!rawCode) {
+      showDiscountMessage('error', 'Please enter a discount code.');
+      return;
+    }
+
+    applyCouponBtn.disabled = true;
+    const originalBtnText = applyCouponBtn.textContent;
+    applyCouponBtn.textContent = 'CHECKING...';
+
+    if (window.AffiliateService) {
+      const res = await window.AffiliateService.applyCode(rawCode);
+      applyCouponBtn.disabled = false;
+      applyCouponBtn.textContent = originalBtnText;
+
+      if (res.success && res.affiliate) {
+        setAppliedDiscountState(res.affiliate);
+      } else {
+        showDiscountMessage('error', res.error || 'This discount code is invalid or expired.');
+        activeDiscount = null;
+        updatePriceBreakdown();
+      }
+    } else {
+      applyCouponBtn.disabled = false;
+      applyCouponBtn.textContent = originalBtnText;
+    }
+  }
+
+  if (applyCouponBtn) {
+    applyCouponBtn.addEventListener('click', handleApplyCoupon);
+  }
+
+  if (couponInput) {
+    couponInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleApplyCoupon();
+      }
+    });
+  }
+
+  // Quantity controls
   if (qtyMinus && qtyPlus && qtyInput) {
     qtyMinus.addEventListener('click', () => {
       if (currentQuantity > 1) {
         currentQuantity--;
         qtyInput.value = currentQuantity;
-        if (priceDisplay) {
-          priceDisplay.textContent = Utils.formatCurrency(product.price * currentQuantity);
-        }
+        updatePriceBreakdown();
       }
     });
 
@@ -251,9 +437,7 @@ function renderProductDetails(product, container) {
       if (currentQuantity < 10) {
         currentQuantity++;
         qtyInput.value = currentQuantity;
-        if (priceDisplay) {
-          priceDisplay.textContent = Utils.formatCurrency(product.price * currentQuantity);
-        }
+        updatePriceBreakdown();
       }
     });
   }
@@ -262,7 +446,27 @@ function renderProductDetails(product, container) {
   const orderBtn = document.getElementById('order-product-whatsapp-btn');
   if (orderBtn) {
     orderBtn.addEventListener('click', async () => {
-      await WhatsAppService.orderProduct(product, currentQuantity);
+      let discountInfo = null;
+      if (activeDiscount && activeDiscount.discountPercent > 0) {
+        const subtotal = product.price * currentQuantity;
+        const discountAmount = Math.round((subtotal * activeDiscount.discountPercent) / 100);
+        const finalPrice = Math.max(0, subtotal - discountAmount);
+        const commissionPercent = Number(activeDiscount.commissionPercent) || 0;
+        const commissionAmount = Math.round((finalPrice * commissionPercent) / 100);
+
+        discountInfo = {
+          code: activeDiscount.code,
+          percent: activeDiscount.discountPercent,
+          discountAmount,
+          finalPrice,
+          affiliateId: activeDiscount.id || activeDiscount.affiliateId || '',
+          affiliateName: activeDiscount.name || '',
+          commissionPercent,
+          commissionAmount
+        };
+      }
+
+      await WhatsAppService.orderProduct(product, currentQuantity, discountInfo);
     });
   }
 }
