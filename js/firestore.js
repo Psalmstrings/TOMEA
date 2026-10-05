@@ -271,6 +271,23 @@ class FirestoreService {
   ensureLocalStorageSeed() {
     if (!localStorage.getItem('tomea_products')) {
       localStorage.setItem('tomea_products', JSON.stringify(INITIAL_PRODUCTS_SEED));
+    } else {
+      try {
+        let items = JSON.parse(localStorage.getItem('tomea_products') || '[]');
+        let modified = false;
+        items = items.map((p, idx) => {
+          if (!p.id || p.id === 'null' || p.id === 'undefined') {
+            p.id = p.slug || ('prod_' + (Date.now() + idx));
+            modified = true;
+          }
+          return p;
+        });
+        if (modified) {
+          localStorage.setItem('tomea_products', JSON.stringify(items));
+        }
+      } catch (e) {
+        localStorage.setItem('tomea_products', JSON.stringify(INITIAL_PRODUCTS_SEED));
+      }
     }
     if (!localStorage.getItem('tomea_settings')) {
       localStorage.setItem('tomea_settings', JSON.stringify(INITIAL_SETTINGS_SEED));
@@ -303,7 +320,7 @@ class FirestoreService {
         const snapshot = await query.orderBy('displayOrder', 'asc').get();
         const products = [];
         snapshot.forEach(doc => {
-          products.push({ id: doc.id, ...doc.data() });
+          products.push({ ...doc.data(), id: doc.id });
         });
         return products;
       } catch (e) {
@@ -332,7 +349,7 @@ class FirestoreService {
       try {
         const doc = await this.db.collection('products').doc(id).get();
         if (doc.exists) {
-          return { id: doc.id, ...doc.data() };
+          return { ...doc.data(), id: doc.id };
         }
       } catch (e) {
         console.warn('[TOMÉA] Firestore error fetching product by ID:', e);
@@ -351,7 +368,7 @@ class FirestoreService {
         const snapshot = await this.db.collection('products').where('slug', '==', slug).limit(1).get();
         if (!snapshot.empty) {
           const doc = snapshot.docs[0];
-          return { id: doc.id, ...doc.data() };
+          return { ...doc.data(), id: doc.id };
         }
       } catch (e) {
         console.warn('[TOMÉA] Firestore error fetching product by slug:', e);
@@ -364,7 +381,7 @@ class FirestoreService {
   }
 
   async saveProduct(product) {
-    const isNew = !product.id;
+    const isNew = !product.id || product.id === 'null' || product.id === 'undefined';
     const now = new Date().toISOString();
     
     // Auto-generate slug if missing
@@ -372,18 +389,20 @@ class FirestoreService {
       product.slug = Utils.slugify(product.name);
     }
 
+    const dataToSave = { ...product };
+    delete dataToSave.id; // Do not store id inside document fields to prevent null overwrite
+
     if (this.isFirebaseReady) {
       try {
         if (isNew) {
-          product.createdAt = now;
-          product.updatedAt = now;
-          const ref = await this.db.collection('products').add(product);
-          product.id = ref.id;
-          return product;
+          dataToSave.createdAt = now;
+          dataToSave.updatedAt = now;
+          const ref = await this.db.collection('products').add(dataToSave);
+          return { ...dataToSave, id: ref.id };
         } else {
-          product.updatedAt = now;
-          await this.db.collection('products').doc(product.id).set(product, { merge: true });
-          return product;
+          dataToSave.updatedAt = now;
+          await this.db.collection('products').doc(product.id).set(dataToSave, { merge: true });
+          return { ...dataToSave, id: product.id };
         }
       } catch (e) {
         console.error('[TOMÉA] Firestore saveProduct error:', e);
@@ -393,42 +412,56 @@ class FirestoreService {
 
     // LocalStorage Fallback
     this.ensureLocalStorageSeed();
-    const items = JSON.parse(localStorage.getItem('tomea_products') || '[]');
+    let items = JSON.parse(localStorage.getItem('tomea_products') || '[]');
+    let savedProduct;
     if (isNew) {
-      product.id = 'prod_' + Date.now();
-      product.createdAt = now;
-      product.updatedAt = now;
-      items.push(product);
+      savedProduct = {
+        ...dataToSave,
+        id: 'prod_' + Date.now(),
+        createdAt: now,
+        updatedAt: now
+      };
+      items.push(savedProduct);
     } else {
-      product.updatedAt = now;
-      const index = items.findIndex(p => p.id === product.id);
+      savedProduct = {
+        ...dataToSave,
+        id: product.id,
+        updatedAt: now
+      };
+      const index = items.findIndex(p => p.id === product.id || (p.slug && p.slug === product.slug));
       if (index !== -1) {
-        items[index] = { ...items[index], ...product };
+        items[index] = { ...items[index], ...savedProduct };
       } else {
-        items.push(product);
+        items.push(savedProduct);
       }
     }
     localStorage.setItem('tomea_products', JSON.stringify(items));
-    return product;
+    return savedProduct;
   }
 
   async deleteProduct(productId) {
     if (!productId) return false;
+    let deleted = false;
     if (this.isFirebaseReady) {
       try {
-        await this.db.collection('products').doc(productId).delete();
-        return true;
+        if (productId !== 'null' && productId !== 'undefined') {
+          await this.db.collection('products').doc(productId).delete();
+          deleted = true;
+        }
       } catch (e) {
-        console.error('[TOMÉA] Firestore deleteProduct error:', e);
-        throw e;
+        console.warn('[TOMÉA] Firestore deleteProduct error, trying fallback:', e);
       }
     }
 
     this.ensureLocalStorageSeed();
     let items = JSON.parse(localStorage.getItem('tomea_products') || '[]');
-    items = items.filter(p => p.id !== productId);
+    const prevLen = items.length;
+    items = items.filter(p => p.id !== productId && p.slug !== productId);
+    if (items.length < prevLen) {
+      deleted = true;
+    }
     localStorage.setItem('tomea_products', JSON.stringify(items));
-    return true;
+    return deleted;
   }
 
   /* ========================================================
@@ -517,7 +550,7 @@ class FirestoreService {
         const snapshot = await query.get();
         const affiliates = [];
         snapshot.forEach(doc => {
-          affiliates.push({ id: doc.id, ...doc.data() });
+          affiliates.push({ ...doc.data(), id: doc.id });
         });
         affiliates.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
         return affiliates;
@@ -541,7 +574,7 @@ class FirestoreService {
       try {
         const doc = await this.db.collection('affiliates').doc(id).get();
         if (doc.exists) {
-          return { id: doc.id, ...doc.data() };
+          return { ...doc.data(), id: doc.id };
         }
       } catch (e) {
         console.warn('[TOMÉA] Firestore getAffiliateById error:', e);
@@ -563,7 +596,7 @@ class FirestoreService {
           .get();
         if (!snapshot.empty) {
           const doc = snapshot.docs[0];
-          return { id: doc.id, ...doc.data() };
+          return { ...doc.data(), id: doc.id };
         }
       } catch (e) {
         console.warn('[TOMÉA] Firestore getAffiliateByCode error:', e);
@@ -585,7 +618,7 @@ class FirestoreService {
           .get();
         if (!snapshot.empty) {
           const doc = snapshot.docs[0];
-          return { id: doc.id, ...doc.data() };
+          return { ...doc.data(), id: doc.id };
         }
       } catch (e) {
         console.warn('[TOMÉA] Firestore getAffiliateBySlug error:', e);
@@ -1012,7 +1045,7 @@ class FirestoreService {
         const snapshot = await query.get();
         const orders = [];
         snapshot.forEach(doc => {
-          orders.push({ id: doc.id, ...doc.data() });
+          orders.push({ ...doc.data(), id: doc.id });
         });
         orders.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
         return orders;
@@ -1039,7 +1072,7 @@ class FirestoreService {
       try {
         const doc = await this.db.collection('orders').doc(id).get();
         if (doc.exists) {
-          return { id: doc.id, ...doc.data() };
+          return { ...doc.data(), id: doc.id };
         }
       } catch (e) {
         console.warn('[TOMÉA] Firestore getOrderById error:', e);

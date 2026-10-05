@@ -23,15 +23,33 @@ document.addEventListener('DOMContentLoaded', async () => {
   let currentBaseNotes = [];
   let editingProductId = null;
 
+  // Helper to resolve admin relative image paths
+  function resolveAdminImg(src) {
+    if (!src) return '../assets/images/bottle-lorigine.jpg';
+    if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:') || src.startsWith('/')) {
+      return src;
+    }
+    if (src.startsWith('../')) {
+      return src;
+    }
+    return '../' + src;
+  }
+
   // Load products list
   async function loadProducts() {
     if (!productTableBody || !window.DB) return;
     try {
-      allProducts = await window.DB.getProducts();
+      const rawProducts = await window.DB.getProducts();
+      allProducts = (rawProducts || []).map((p, idx) => {
+        if (!p.id || p.id === 'null' || p.id === 'undefined') {
+          p.id = p.slug || ('prod_' + Date.now() + '_' + idx);
+        }
+        return p;
+      });
       renderProductTable();
     } catch (err) {
       console.error('[TOMÉA Admin] Error loading products:', err);
-      productTableBody.innerHTML = `<tr><td colspan="7" class="text-center text-danger">Failed to load products.</td></tr>`;
+      productTableBody.innerHTML = `<tr><td colspan="8" class="text-center text-danger">Failed to load products.</td></tr>`;
     }
   }
 
@@ -57,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (list.length === 0) {
       productTableBody.innerHTML = `
         <tr>
-          <td colspan="7" class="text-center py-4">
+          <td colspan="8" class="text-center py-4">
             <p class="text-muted">No fragrances found matching the criteria.</p>
           </td>
         </tr>
@@ -65,13 +83,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    productTableBody.innerHTML = list.map(prod => {
-      const primaryImg = prod.primaryImage || (prod.images && prod.images[0]) || 'assets/images/bottle-lorigine.jpg';
+    productTableBody.innerHTML = list.map((prod, index) => {
+      const rawImg = prod.primaryImage || (prod.images && prod.images[0]) || 'assets/images/bottle-lorigine.jpg';
+      const primaryImg = resolveAdminImg(rawImg);
+      const prodId = prod.id || ('prod_' + index);
+
       return `
-        <tr data-id="${prod.id}">
+        <tr data-id="${prodId}" data-index="${index}">
           <td>
             <div class="table-product-cell">
-              <img src="${primaryImg}" alt="${Utils.escapeHtml(prod.name)}" class="table-thumb" />
+              <img src="${primaryImg}" alt="${Utils.escapeHtml(prod.name)}" class="table-thumb" onerror="this.onerror=null;this.src='../assets/images/bottle-lorigine.jpg';" />
               <div>
                 <a href="../product.html?id=${prod.id || prod.slug}" target="_blank" class="table-product-name">
                   ${Utils.escapeHtml(prod.name)}
@@ -82,27 +103,30 @@ document.addEventListener('DOMContentLoaded', async () => {
           </td>
           <td>${Utils.escapeHtml(prod.fragranceFamily || 'N/A')}</td>
           <td><strong>${Utils.formatCurrency(prod.price)}</strong></td>
-          <td>
-            <button class="status-toggle-btn ${prod.isActive ? 'is-active' : ''}" data-action="toggle-active" data-id="${prod.id}" title="Toggle Active">
+          <td style="text-align: center;">
+            <span class="display-order-pill" title="Display Order">#${prod.displayOrder || 1}</span>
+          </td>
+          <td style="text-align: center;">
+            <button type="button" class="status-toggle-btn ${prod.isActive ? 'is-active' : ''}" data-action="toggle-active" data-id="${prodId}" data-index="${index}" title="Click to toggle Active / Draft">
               ${prod.isActive ? 'Active' : 'Draft'}
             </button>
           </td>
-          <td>
-            <button class="featured-star-btn ${prod.isFeatured ? 'is-featured' : ''}" data-action="toggle-featured" data-id="${prod.id}" title="Toggle Featured">
+          <td style="text-align: center;">
+            <button type="button" class="featured-star-btn ${prod.isFeatured ? 'is-featured' : ''}" data-action="toggle-featured" data-id="${prodId}" data-index="${index}" title="Click to toggle Featured on Homepage">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="${prod.isFeatured ? '#C5A059' : 'none'}" stroke="${prod.isFeatured ? '#C5A059' : 'currentColor'}" stroke-width="2">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
             </button>
           </td>
-          <td>
-            <span class="badge ${prod.isOutOfStock ? 'badge-danger' : 'badge-success'}">
+          <td style="text-align: center;">
+            <button type="button" class="badge-toggle-btn ${prod.isOutOfStock ? 'badge-danger' : 'badge-success'}" data-action="toggle-stock" data-id="${prodId}" data-index="${index}" title="Click to toggle In Stock / Sold Out">
               ${prod.isOutOfStock ? 'Sold Out' : 'In Stock'}
-            </span>
+            </button>
           </td>
           <td class="text-right">
-            <div class="table-actions">
-              <button class="btn btn-sm btn-secondary" data-action="edit-product" data-id="${prod.id}">Edit</button>
-              <button class="btn btn-sm btn-danger-outline" data-action="delete-product" data-id="${prod.id}">Delete</button>
+            <div class="table-actions" style="justify-content: flex-end;">
+              <button type="button" class="btn btn-sm btn-secondary" data-action="edit-product" data-id="${prodId}" data-index="${index}">Edit</button>
+              <button type="button" class="btn btn-sm btn-danger-outline" data-action="delete-product" data-id="${prodId}" data-index="${index}">Delete</button>
             </div>
           </td>
         </tr>
@@ -118,15 +142,34 @@ document.addEventListener('DOMContentLoaded', async () => {
     filterSelect.addEventListener('change', renderProductTable);
   }
 
+  // Helper to find product from allProducts by ID, slug, or index
+  function findProduct(id, indexStr) {
+    if (id && id !== 'null' && id !== 'undefined') {
+      const match = allProducts.find(p => String(p.id) === String(id) || (p.slug && p.slug === id));
+      if (match) return match;
+    }
+    if (indexStr !== null && indexStr !== undefined) {
+      const idx = parseInt(indexStr, 10);
+      if (!isNaN(idx) && allProducts[idx]) {
+        return allProducts[idx];
+      }
+    }
+    return null;
+  }
+
   // Quick Action delegation (table clicks)
   if (productTableBody) {
     productTableBody.addEventListener('click', async (e) => {
       const btn = e.target.closest('[data-action]');
       if (!btn) return;
       const id = btn.getAttribute('data-id');
+      const indexStr = btn.getAttribute('data-index');
       const action = btn.getAttribute('data-action');
-      const prod = allProducts.find(p => p.id === id);
-      if (!prod) return;
+      const prod = findProduct(id, indexStr);
+      if (!prod) {
+        console.warn('[TOMÉA Admin] Product not found for action:', action, 'id:', id, 'index:', indexStr);
+        return;
+      }
 
       if (action === 'toggle-active') {
         prod.isActive = !prod.isActive;
@@ -138,16 +181,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         await window.DB.saveProduct(prod);
         Utils.showToast(`${prod.name} ${prod.isFeatured ? 'featured on homepage' : 'unfeatured'}.`, 'success');
         renderProductTable();
+      } else if (action === 'toggle-stock') {
+        prod.isOutOfStock = !prod.isOutOfStock;
+        await window.DB.saveProduct(prod);
+        Utils.showToast(`${prod.name} marked as ${prod.isOutOfStock ? 'Sold Out / Waitlist' : 'In Stock'}.`, 'success');
+        renderProductTable();
       } else if (action === 'edit-product') {
         openEditModal(prod);
       } else if (action === 'delete-product') {
         const confirmed = await Utils.confirm(
-          `Are you sure you want to permanently delete "${prod.name}" from the TOMÉA collection?`,
+          `Are you sure you want to permanently delete "${prod.name || 'this fragrance'}" from the TOMÉA collection?`,
           { title: "Delete Fragrance", confirmText: "Delete Fragrance" }
         );
         if (confirmed) {
-          await window.DB.deleteProduct(prod.id);
-          Utils.showToast(`"${prod.name}" has been deleted.`, 'info');
+          try {
+            await window.DB.deleteProduct(prod.id);
+          } catch (delErr) {
+            console.error('[TOMÉA Admin] Delete product error:', delErr);
+          }
+          // Remove from memory immediately
+          allProducts = allProducts.filter(p => p !== prod && p.id !== prod.id);
+          Utils.showToast(`"${prod.name || 'Fragrance'}" has been deleted.`, 'info');
           await loadProducts();
         }
       }
@@ -198,31 +252,75 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Edit Product Modal
   function openEditModal(prod) {
-    editingProductId = prod.id;
-    document.getElementById('prod-name').value = prod.name || '';
-    document.getElementById('prod-slug').value = prod.slug || '';
-    document.getElementById('prod-subtitle').value = prod.subtitle || '';
-    document.getElementById('prod-price').value = prod.price || '';
-    document.getElementById('prod-compare-price').value = prod.compareAtPrice || '';
-    document.getElementById('prod-concentration').value = prod.concentration || 'Extrait de Parfum';
-    document.getElementById('prod-size').value = prod.size || '50ml / 1.7 FL. OZ.';
-    document.getElementById('prod-family').value = prod.fragranceFamily || 'Woody Aromatic';
-    document.getElementById('prod-short-desc').value = prod.shortDescription || '';
-    document.getElementById('prod-full-desc').value = prod.fullDescription || '';
-    document.getElementById('prod-story').value = prod.story || '';
-    document.getElementById('prod-display-order').value = prod.displayOrder || 1;
-    document.getElementById('prod-active').checked = !!prod.isActive;
-    document.getElementById('prod-featured').checked = !!prod.isFeatured;
-    document.getElementById('prod-outofstock').checked = !!prod.isOutOfStock;
+    if (!prod) return;
+    editingProductId = prod.id || null;
 
-    currentImages = (prod.images && prod.images.length) ? [...prod.images] : [prod.primaryImage || 'assets/images/bottle-lorigine.jpg'];
-    currentTopNotes = prod.topNotes ? [...prod.topNotes] : [];
-    currentHeartNotes = prod.heartNotes ? [...prod.heartNotes] : [];
-    currentBaseNotes = prod.baseNotes ? [...prod.baseNotes] : [];
+    const setVal = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.value = val !== undefined && val !== null ? val : '';
+    };
+
+    setVal('prod-id', prod.id);
+    setVal('prod-name', prod.name);
+    setVal('prod-slug', prod.slug);
+    setVal('prod-subtitle', prod.subtitle);
+    setVal('prod-price', prod.price);
+    setVal('prod-compare-price', prod.compareAtPrice);
+    setVal('prod-size', prod.size || '50ml / 1.7 FL. OZ.');
+    setVal('prod-short-desc', prod.shortDescription);
+    setVal('prod-full-desc', prod.fullDescription);
+    setVal('prod-story', prod.story);
+    setVal('prod-display-order', prod.displayOrder || 1);
+
+    const concEl = document.getElementById('prod-concentration');
+    if (concEl) {
+      concEl.value = prod.concentration || 'Extrait de Parfum';
+    }
+
+    const familyEl = document.getElementById('prod-family');
+    if (familyEl) {
+      if (prod.fragranceFamily) {
+        let exists = Array.from(familyEl.options).some(o => o.value.toLowerCase() === prod.fragranceFamily.toLowerCase());
+        if (!exists) {
+          const opt = document.createElement('option');
+          opt.value = prod.fragranceFamily;
+          opt.textContent = prod.fragranceFamily;
+          familyEl.appendChild(opt);
+        }
+        familyEl.value = prod.fragranceFamily;
+      } else {
+        familyEl.value = 'Woody Aromatic';
+      }
+    }
+
+    const activeEl = document.getElementById('prod-active');
+    if (activeEl) activeEl.checked = prod.isActive !== false;
+
+    const featEl = document.getElementById('prod-featured');
+    if (featEl) featEl.checked = !!prod.isFeatured;
+
+    const outOfStockEl = document.getElementById('prod-outofstock');
+    if (outOfStockEl) outOfStockEl.checked = !!prod.isOutOfStock;
+
+    currentImages = Array.isArray(prod.images) && prod.images.length > 0 
+      ? [...prod.images] 
+      : [prod.primaryImage || 'assets/images/bottle-lorigine.jpg'];
+
+    currentTopNotes = Array.isArray(prod.topNotes) 
+      ? [...prod.topNotes] 
+      : (typeof prod.topNotes === 'string' && prod.topNotes ? prod.topNotes.split(',').map(s=>s.trim()).filter(Boolean) : []);
+
+    currentHeartNotes = Array.isArray(prod.heartNotes) 
+      ? [...prod.heartNotes] 
+      : (typeof prod.heartNotes === 'string' && prod.heartNotes ? prod.heartNotes.split(',').map(s=>s.trim()).filter(Boolean) : []);
+
+    currentBaseNotes = Array.isArray(prod.baseNotes) 
+      ? [...prod.baseNotes] 
+      : (typeof prod.baseNotes === 'string' && prod.baseNotes ? prod.baseNotes.split(',').map(s=>s.trim()).filter(Boolean) : []);
 
     renderImageGalleryPreview();
     renderNotesTags();
-    openModal(`Edit ${prod.name}`);
+    openModal(`Edit ${prod.name || 'Fragrance'}`);
   }
 
   // Dynamic Notes Tags Builders
@@ -451,7 +549,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const productData = {
-          id: editingProductId,
           name,
           slug: document.getElementById('prod-slug').value.trim() || Utils.slugify(name),
           subtitle: document.getElementById('prod-subtitle').value.trim(),
@@ -474,6 +571,10 @@ document.addEventListener('DOMContentLoaded', async () => {
           heartNotes: currentHeartNotes,
           baseNotes: currentBaseNotes
         };
+
+        if (editingProductId && editingProductId !== 'null' && editingProductId !== 'undefined') {
+          productData.id = editingProductId;
+        }
 
         await window.DB.saveProduct(productData);
         Utils.showToast(`"${productData.name}" saved successfully.`, 'success');
