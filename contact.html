@@ -912,13 +912,11 @@
             'Please advise on availability and dispatch. Thank you.'
           ].filter(l => l !== undefined);
 
-          const inquiryText = lines.join('\n');
-
-          if (window.WhatsAppService) {
-            window.WhatsAppService.openCustomMessage(inquiryText);
+          if (window.WhatsAppService && typeof window.WhatsAppService.openCustomMessage === 'function') {
+            await window.WhatsAppService.openCustomMessage(inquiryText);
           } else {
             const encoded = encodeURIComponent(inquiryText);
-            window.open('https://wa.me/2348000000000?text=' + encoded, '_blank');
+            window.location.assign('https://wa.me/2348000000000?text=' + encoded);
           }
 
           if (window.Utils) {

@@ -256,6 +256,24 @@ class FirestoreService {
         }
 
         console.info('[TOMÉA] Connected to Firebase Firestore successfully.');
+
+        // If Firestore products collection is empty, migrate initial products seed
+        try {
+          const snapshot = await this.db.collection('products').limit(1).get();
+          if (snapshot.empty) {
+            console.info('[TOMÉA] Firestore products collection is empty. Migrating initial brand catalogue...');
+            for (const prod of INITIAL_PRODUCTS_SEED) {
+              const data = { ...prod };
+              const id = data.id;
+              delete data.id;
+              await this.db.collection('products').doc(id).set(data);
+            }
+            console.info('[TOMÉA] Successfully migrated initial products into Firestore.');
+          }
+        } catch (seedErr) {
+          console.warn('[TOMÉA] Firestore seed migration notice:', seedErr.message);
+        }
+
         return;
       } catch (err) {
         console.warn('[TOMÉA] Firebase initialization error. Falling back to local storage layer:', err);
@@ -317,11 +335,28 @@ class FirestoreService {
         if (options.onlyFeatured) {
           query = query.where('isFeatured', '==', true);
         }
-        const snapshot = await query.orderBy('displayOrder', 'asc').get();
-        const products = [];
+
+        let snapshot;
+        try {
+          snapshot = await query.orderBy('displayOrder', 'asc').get();
+        } catch (indexErr) {
+          // In case a composite Firestore index (e.g. isActive + isFeatured + displayOrder) is still provisioning
+          console.warn('[TOMÉA] Firestore indexed query notice, fetching and sorting in memory:', indexErr.message);
+          snapshot = await query.get();
+        }
+
+        let products = [];
         snapshot.forEach(doc => {
           products.push({ ...doc.data(), id: doc.id });
         });
+
+        // Ensure sorted by displayOrder
+        products.sort((a, b) => (Number(a.displayOrder) || 0) - (Number(b.displayOrder) || 0));
+
+        if (options.category && options.category !== 'all') {
+          products = products.filter(p => p.fragranceFamily && p.fragranceFamily.toLowerCase().includes(options.category.toLowerCase()));
+        }
+
         return products;
       } catch (e) {
         console.warn('[TOMÉA] Firestore fetch error, falling back to local storage:', e);
@@ -340,7 +375,7 @@ class FirestoreService {
     if (options.category && options.category !== 'all') {
       items = items.filter(p => p.fragranceFamily && p.fragranceFamily.toLowerCase().includes(options.category.toLowerCase()));
     }
-    return items.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
+    return items.sort((a, b) => (Number(a.displayOrder) || 0) - (Number(b.displayOrder) || 0));
   }
 
   async getProductById(id) {
@@ -384,12 +419,23 @@ class FirestoreService {
     const isNew = !product.id || product.id === 'null' || product.id === 'undefined';
     const now = new Date().toISOString();
     
-    // Auto-generate slug if missing
-    if (!product.slug) {
-      product.slug = Utils.slugify(product.name);
+    // Auto-generate slug if missing, and ensure slug uniqueness
+    let baseSlug = product.slug ? Utils.slugify(product.slug) : Utils.slugify(product.name || 'fragrance');
+    if (!baseSlug) baseSlug = 'tomea-fragrance';
+    
+    // Check slug uniqueness
+    const existingProducts = await this.getProducts();
+    let uniqueSlug = baseSlug;
+    let counter = 1;
+    const targetId = (!isNew && product.id) ? String(product.id) : null;
+    while (existingProducts.some(p => String(p.id) !== targetId && p.slug === uniqueSlug)) {
+      uniqueSlug = `${baseSlug}-${counter}`;
+      counter++;
     }
+    product.slug = uniqueSlug;
 
     const dataToSave = { ...product };
+    dataToSave.slug = uniqueSlug;
     delete dataToSave.id; // Do not store id inside document fields to prevent null overwrite
 
     if (this.isFirebaseReady) {

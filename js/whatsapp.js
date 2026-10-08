@@ -9,25 +9,65 @@ const WhatsAppService = {
   /**
    * Retrieve active WhatsApp phone number from Firestore settings or default config
    */
+  /**
+   * Validate phone number and return clean digits or null
+   */
   async getActiveNumber() {
     try {
       if (window.DB) {
         const settings = await window.DB.getSettings();
         if (settings && settings.whatsappNumber) {
-          // Remove non-numeric characters
-          return settings.whatsappNumber.replace(/[^0-9]/g, '');
+          const cleaned = String(settings.whatsappNumber).replace(/[^0-9]/g, '');
+          if (cleaned && cleaned.length >= 7) {
+            return cleaned;
+          }
         }
       }
     } catch (e) {
       console.warn('[TOMÉA WhatsApp] Error reading WhatsApp setting:', e);
     }
     const fallback = (window.TOMEA_CONFIG && window.TOMEA_CONFIG.defaultWhatsApp) || '2348000000000';
-    return fallback.replace(/[^0-9]/g, '');
+    const cleanedFallback = String(fallback).replace(/[^0-9]/g, '');
+    return (cleanedFallback && cleanedFallback.length >= 7) ? cleanedFallback : null;
   },
 
   /**
-   * Generate and open a personalized WhatsApp order message for a specific perfume.
-   * Upgraded to include affiliate attribution and automatically records the order as pending.
+   * Universal WhatsApp URL builder
+   * @param {string} phone 
+   * @param {string} message 
+   * @returns {string} Universal wa.me URL
+   */
+  generateWhatsAppUrl(phone, message) {
+    const encoded = encodeURIComponent(message || '');
+    return `https://wa.me/${phone}?text=${encoded}`;
+  },
+
+  /**
+   * Direct same-tab navigation to WhatsApp.
+   * NEVER uses window.open, new windows, or popups.
+   * @param {string} message 
+   */
+  async navigateToWhatsApp(message) {
+    const phoneNumber = await this.getActiveNumber();
+    if (!phoneNumber) {
+      console.error('[TOMÉA WhatsApp] Technical error: WhatsApp number not configured or invalid in settings.');
+      if (window.Utils && typeof window.Utils.showToast === 'function') {
+        window.Utils.showToast("WhatsApp ordering is temporarily unavailable. Please contact TOMÉA Concierge.", "error", 5000);
+      } else {
+        alert("WhatsApp ordering is temporarily unavailable. Please contact TOMÉA Concierge.");
+      }
+      return false;
+    }
+
+    const waUrl = this.generateWhatsAppUrl(phoneNumber, message);
+    // Direct same-tab navigation: eliminates popup blocker issues on iOS Safari, Android Chrome, and Desktop
+    window.location.assign(waUrl);
+    return true;
+  },
+
+  /**
+   * Generate and navigate to a personalized WhatsApp order message for a specific perfume.
+   * Includes product details, live pricing, and affiliate attribution if applied.
    * 
    * @param {object} product { name, price, size, concentration, slug, id }
    * @param {number} quantity 
@@ -36,9 +76,8 @@ const WhatsAppService = {
   async orderProduct(product, quantity = 1, discountInfo = null) {
     if (!product) return;
 
-    const phoneNumber = await this.getActiveNumber();
     const currency = (window.TOMEA_CONFIG && window.TOMEA_CONFIG.defaultCurrency) || '₦';
-    const originalTotal = (product.price || 0) * quantity;
+    const originalTotal = (Number(product.price) || 0) * quantity;
     const formattedOriginalPrice = Utils.formatCurrency(originalTotal, currency);
 
     let finalPrice = originalTotal;
@@ -65,7 +104,7 @@ const WhatsAppService = {
 
     // Track order in Firestore / localStorage DB (Status defaults to "pending")
     try {
-      if (window.DB) {
+      if (window.DB && typeof window.DB.createOrder === 'function') {
         await window.DB.createOrder({
           productId: product.id || product.slug || '',
           productName: product.name || '',
@@ -86,7 +125,13 @@ const WhatsAppService = {
       console.warn('[TOMÉA WhatsApp] Error tracking order record:', orderErr);
     }
 
-    // Construct WhatsApp message conforming to Part 8
+    // Determine canonical public product URL
+    const origin = window.location.origin || '';
+    const productLink = window.location.pathname.includes('/product.html')
+      ? window.location.href
+      : `${origin}/product.html?id=${product.id || product.slug}`;
+
+    // Construct professional, pre-filled WhatsApp message
     let lines = [];
     if (discountPercent > 0 && affiliateCode) {
       lines = [
@@ -95,71 +140,69 @@ const WhatsAppService = {
         "I would like to place an order.",
         "",
         `Product: ${product.name}`,
+        `Price: ${formattedFinalPrice}`,
         `Quantity: ${quantity}`,
+        "",
+        `Product link:`,
+        productLink,
         "",
         `Original Price: ${formattedOriginalPrice}`,
         `Discount Code: ${affiliateCode}`,
         `Discount: ${discountPercent}%`,
-        `Final Price: ${formattedFinalPrice}`,
-        "",
-        affiliateName ? `Affiliate: ${affiliateName}` : "",
+        affiliateName ? `Affiliate: ${affiliateName}` : null,
         "",
         "Please provide me with the next steps.",
         "",
         "Thank you."
-      ].filter(l => l !== undefined);
+      ].filter(l => l !== null && l !== undefined);
     } else {
-      // Standard order message
-      const origin = window.location.origin || '';
-      const productPath = window.location.pathname.includes('/product.html')
-        ? window.location.href
-        : `${origin}/product.html?id=${product.id || product.slug}`;
-
       lines = [
         "Hello TOMÉA Perfumes,",
         "",
         "I would like to place an order.",
         "",
         `Product: ${product.name}`,
-        `Concentration: ${product.concentration || 'Extrait de Parfum'}`,
-        `Size: ${product.size || '50ml'}`,
+        `Price: ${formattedOriginalPrice}`,
         `Quantity: ${quantity}`,
-        `Total: ${formattedOriginalPrice}`,
         "",
-        `Product Link: ${productPath}`,
+        `Product link:`,
+        productLink,
         "",
-        "Please provide me with the payment details and delivery steps.",
+        "Please provide me with the next steps.",
         "",
         "Thank you."
       ];
     }
 
     const message = lines.join("\n");
-    const encodedMessage = encodeURIComponent(message);
-    const waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    await this.navigateToWhatsApp(message);
   },
 
   /**
-   * Open general concierge chat on WhatsApp
+   * Open general concierge chat on WhatsApp via direct same-tab navigation
    * @param {string} customContext Optional context e.g. "Bespoke Fragrance Consultation"
    */
   async openConcierge(customContext = "") {
-    const phoneNumber = await this.getActiveNumber();
     let message = "Hello TOMÉA Perfumes,\n\nI would like to make an inquiry regarding your luxury Extrait de Parfum collection.\n\nPlease guide me with the available options.\n\nThank you.";
     
     if (customContext) {
       message = `Hello TOMÉA Perfumes,\n\nI would like to inquire about: ${customContext}.\n\nThank you.`;
     }
 
-    const encoded = encodeURIComponent(message);
-    const waUrl = `https://wa.me/${phoneNumber}?text=${encoded}`;
-    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    await this.navigateToWhatsApp(message);
   },
 
   /**
-   * Attach automatic order listeners to buttons with data-product-id
+   * Open custom formatted inquiry message via direct same-tab navigation
+   * @param {string} messageText 
+   */
+  async openCustomMessage(messageText) {
+    if (!messageText) return;
+    await this.navigateToWhatsApp(messageText);
+  },
+
+  /**
+   * Attach automatic order listeners to buttons with data-action="order-whatsapp" and data-action="whatsapp-concierge"
    */
   initDelegation() {
     document.addEventListener('click', async (e) => {
@@ -175,7 +218,11 @@ const WhatsAppService = {
             const originalText = orderBtn.innerHTML;
             orderBtn.innerHTML = 'Connecting to WhatsApp...';
             
-            const product = await window.DB.getProductById(productId);
+            let product = await window.DB.getProductById(productId);
+            if (!product) {
+              product = await window.DB.getProductBySlug(productId);
+            }
+
             if (product) {
               await this.orderProduct(product, qty);
             } else {

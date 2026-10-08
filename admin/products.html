@@ -189,26 +189,66 @@
         <div class="admin-modal-body">
           <input type="hidden" id="prod-id" />
 
-          <!-- Row 1: Basic Identifiers -->
+          <!-- Section 1: Product Information -->
+          <div class="admin-section-divider mt-0">
+            <h4 class="divider-title">1. PRODUCT INFORMATION</h4>
+          </div>
+
           <div class="form-grid-two">
             <div class="tomea-form-group">
-              <label for="prod-name" class="tomea-label">Fragrance Title *</label>
+              <label for="prod-name" class="tomea-label">Product Name *</label>
               <input type="text" id="prod-name" class="tomea-input" placeholder="e.g. TOMÉA L'Origine" required />
             </div>
 
             <div class="tomea-form-group">
-              <label for="prod-slug" class="tomea-label">URL Slug</label>
-              <input type="text" id="prod-slug" class="tomea-input" placeholder="e.g. tomea-lorigine (auto-generated if empty)" />
+              <label for="prod-slug" class="tomea-label">URL Identifier (Slug)</label>
+              <input type="text" id="prod-slug" class="tomea-input" placeholder="e.g. tomea-lorigine (auto-generated if left blank)" />
             </div>
           </div>
 
-          <!-- Row 2: Subtitle & Concentration -->
-          <div class="form-grid-two">
+          <div class="tomea-form-group">
+            <label for="prod-subtitle" class="tomea-label">Editorial Subtitle</label>
+            <input type="text" id="prod-subtitle" class="tomea-input" placeholder="e.g. Power, Depth, Quiet Confidence" />
+          </div>
+
+          <div class="tomea-form-group">
+            <label for="prod-short-desc" class="tomea-label">Short Description (Appears on Collection Cards)</label>
+            <input type="text" id="prod-short-desc" class="tomea-input" placeholder="A concise 1-2 sentence synopsis for collection cards..." />
+          </div>
+
+          <div class="tomea-form-group">
+            <label for="prod-full-desc" class="tomea-label">Full Description (Product Details Page)</label>
+            <textarea id="prod-full-desc" rows="3" class="tomea-textarea" placeholder="Comprehensive fragrance narrative highlighting craftsmanship and evolution..."></textarea>
+          </div>
+
+          <div class="tomea-form-group">
+            <label for="prod-story" class="tomea-label">Product Story (Creative Inspiration)</label>
+            <textarea id="prod-story" rows="2" class="tomea-textarea" placeholder="The creative ethos and emotional inspiration behind this creation..."></textarea>
+          </div>
+
+          <!-- Section 2: Pricing -->
+          <div class="admin-section-divider">
+            <h4 class="divider-title">2. PRICING & SPECIFICATIONS</h4>
+          </div>
+
+          <div class="form-grid-three">
             <div class="tomea-form-group">
-              <label for="prod-subtitle" class="tomea-label">Editorial Subtitle / Character</label>
-              <input type="text" id="prod-subtitle" class="tomea-input" placeholder="e.g. Power, Depth, Quiet Confidence" />
+              <label for="prod-price" class="tomea-label">Price (₦ NGN) *</label>
+              <input type="number" id="prod-price" class="tomea-input" placeholder="45000" min="0" step="100" required />
             </div>
 
+            <div class="tomea-form-group">
+              <label for="prod-compare-price" class="tomea-label">Compare-at Price (₦) <span class="text-xs text-muted">(Optional)</span></label>
+              <input type="number" id="prod-compare-price" class="tomea-input" placeholder="50000" min="0" step="100" />
+            </div>
+
+            <div class="tomea-form-group">
+              <label for="prod-size" class="tomea-label">Volume / Size</label>
+              <input type="text" id="prod-size" class="tomea-input" value="50ml / 1.7 FL. OZ." />
+            </div>
+          </div>
+
+          <div class="form-grid-two">
             <div class="tomea-form-group">
               <label for="prod-concentration" class="tomea-label">Concentration</label>
               <select id="prod-concentration" class="tomea-select">
@@ -218,64 +258,23 @@
                 <option value="Limited Reserve Extrait">Limited Reserve Extrait</option>
               </select>
             </div>
-          </div>
 
-          <!-- Row 3: Pricing & Volume -->
-          <div class="form-grid-three">
-            <div class="tomea-form-group">
-              <label for="prod-price" class="tomea-label">Price (₦ NGN) *</label>
-              <input type="number" id="prod-price" class="tomea-input" placeholder="45000" min="0" step="100" required />
-            </div>
-
-            <div class="tomea-form-group">
-              <label for="prod-compare-price" class="tomea-label">Compare-at / Retail Price (₦)</label>
-              <input type="number" id="prod-compare-price" class="tomea-input" placeholder="50000" min="0" step="100" />
-            </div>
-
-            <div class="tomea-form-group">
-              <label for="prod-size" class="tomea-label">Bottle Volume</label>
-              <input type="text" id="prod-size" class="tomea-input" value="50ml / 1.7 FL. OZ." />
-            </div>
-          </div>
-
-          <!-- Row 4: Olfactory Family & Order -->
-          <div class="form-grid-two">
             <div class="tomea-form-group">
               <label for="prod-family" class="tomea-label">Fragrance Family</label>
               <select id="prod-family" class="tomea-select">
                 <option value="Woody Aromatic">Woody Aromatic</option>
-                <option value="Floral Ambery">Floral Ambery</option>
+                <option value="Floral Amber">Floral Amber</option>
+                <option value="Fresh Amber">Fresh Amber</option>
                 <option value="Sensual Oriental Amber">Sensual Oriental Amber</option>
                 <option value="Gourmand Woody">Gourmand Woody</option>
                 <option value="Fresh Citrus Aquatic">Fresh Citrus Aquatic</option>
               </select>
             </div>
-
-            <div class="tomea-form-group">
-              <label for="prod-display-order" class="tomea-label">Display Priority Order</label>
-              <input type="number" id="prod-display-order" class="tomea-input" value="1" min="1" max="100" />
-            </div>
           </div>
 
-          <!-- Descriptions -->
-          <div class="tomea-form-group">
-            <label for="prod-short-desc" class="tomea-label">Short Boutique Summary</label>
-            <input type="text" id="prod-short-desc" class="tomea-input" placeholder="A concise 1-sentence synopsis for collection cards..." />
-          </div>
-
-          <div class="tomea-form-group">
-            <label for="prod-full-desc" class="tomea-label">Detailed Olfactory Narrative</label>
-            <textarea id="prod-full-desc" rows="3" class="tomea-textarea" placeholder="Comprehensive product description highlighting craftsmanship and notes evolution..."></textarea>
-          </div>
-
-          <div class="tomea-form-group">
-            <label for="prod-story" class="tomea-label">The Story / Creative Inspiration</label>
-            <textarea id="prod-story" rows="2" class="tomea-textarea" placeholder="The creative ethos and emotional statement of this fragrance..."></textarea>
-          </div>
-
-          <!-- Olfactory Pyramid Builder -->
+          <!-- Section 3: Fragrance Notes -->
           <div class="admin-section-divider">
-            <h4 class="divider-title">OLFACTORY ARCHITECTURE (NOTES BUILDER)</h4>
+            <h4 class="divider-title">3. OLFACTORY ARCHITECTURE (NOTES)</h4>
           </div>
 
           <div class="notes-builder-grid">
@@ -303,24 +302,29 @@
             <div class="note-builder-col">
               <label class="tomea-label">Base Notes</label>
               <div class="input-with-button">
-                <input type="text" id="prod-add-base-input" class="tomea-input" placeholder="e.g. Warm Amber, Oud" />
+                <input type="text" id="prod-add-base-input" class="tomea-input" placeholder="e.g. Golden Amber, Musks" />
                 <button type="button" id="btn-add-base-note" class="btn btn-sm btn-secondary">+ Add</button>
               </div>
               <div id="base-notes-tags" class="notes-tag-container"></div>
             </div>
           </div>
 
-          <!-- Media & Cloudinary Integration -->
+          <!-- Section 4: Product Media -->
           <div class="admin-section-divider">
-            <h4 class="divider-title">FLACON IMAGERY & MEDIA (CLOUDINARY READY)</h4>
+            <h4 class="divider-title">4. PRODUCT MEDIA (CLOUDINARY)</h4>
           </div>
 
           <div class="images-manager-wrapper">
             <div class="d-flex justify-between align-center mb-2">
-              <span class="text-sm font-semibold">Attached Images (First image is Primary flacon)</span>
+              <span class="text-sm font-semibold">Product Images (First image is Primary)</span>
               <button type="button" id="btn-open-brand-library" class="btn btn-sm btn-outline">
-                Choose from TOMÉA Asset Library
+                Choose from TOMÉA Asset Vault
               </button>
+            </div>
+
+            <div class="tomea-form-group mb-2">
+              <label for="prod-image-alt" class="tomea-label">Image Alt Description</label>
+              <input type="text" id="prod-image-alt" class="tomea-input" placeholder="e.g. TOMÉA L'Origine luxury bottle with burgundy cap" />
             </div>
 
             <!-- Cloudinary Dropzone -->
@@ -332,7 +336,7 @@
                   <polyline points="17 8 12 3 7 8"/>
                   <line x1="12" y1="3" x2="12" y2="15"/>
                 </svg>
-                <p>Click or drag new flacon photography to upload via Cloudinary</p>
+                <p>Click or drag new bottle photography to upload via Cloudinary</p>
                 <span class="text-xs text-muted">Supports JPG, PNG, WEBP</span>
               </div>
             </div>
@@ -349,35 +353,48 @@
             <div id="product-images-preview-grid" class="image-previews-grid"></div>
           </div>
 
-          <!-- Toggles & Status -->
+          <!-- Section 5: Visibility & Availability -->
           <div class="admin-section-divider">
-            <h4 class="divider-title">AVAILABILITY & STATUS</h4>
+            <h4 class="divider-title">5. VISIBILITY & AVAILABILITY</h4>
           </div>
 
-          <div class="form-checkboxes-row">
+          <div class="form-grid-two mb-3">
+            <div class="tomea-form-group">
+              <label for="prod-display-order" class="tomea-label">Display Priority Order</label>
+              <input type="number" id="prod-display-order" class="tomea-input" value="1" min="1" max="100" />
+              <span class="text-xs text-muted">Lower numbers appear first on Homepage & Collection.</span>
+            </div>
+          </div>
+
+          <div class="form-checkboxes-row" style="flex-direction: column; gap: 1rem; align-items: flex-start;">
             <label class="custom-checkbox">
               <input type="checkbox" id="prod-active" checked />
               <span class="checkbox-box"></span>
-              <span class="checkbox-label"><strong>Active</strong> (Visible in public boutique & collection)</span>
+              <span class="checkbox-label"><strong>Product Visibility: Active</strong> — Show publicly in the Collection catalogue</span>
             </label>
 
             <label class="custom-checkbox">
               <input type="checkbox" id="prod-featured" />
               <span class="checkbox-box"></span>
-              <span class="checkbox-label"><strong>Featured</strong> (Highlighted on Homepage curated selection)</span>
+              <span class="checkbox-label"><strong>Feature on Homepage</strong> — Featured fragrances appear on the homepage and remain available in the Collection</span>
             </label>
 
             <label class="custom-checkbox">
               <input type="checkbox" id="prod-outofstock" />
               <span class="checkbox-box"></span>
-              <span class="checkbox-label"><strong>Waitlist Only</strong> (Temporarily out of stock)</span>
+              <span class="checkbox-label"><strong>Availability: Waitlist Only</strong> — Flag as temporarily out of stock (clients can join waitlist)</span>
             </label>
           </div>
         </div>
 
-        <div class="admin-modal-footer">
-          <button type="button" class="btn btn-secondary js-close-product-modal">Cancel</button>
-          <button type="submit" id="btn-save-product" class="btn btn-primary">Save Fragrance</button>
+        <div class="admin-modal-footer d-flex justify-between align-center">
+          <div>
+            <button type="button" id="btn-preview-product" class="btn btn-outline" style="display:none;">Preview Fragrance &rarr;</button>
+          </div>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-secondary js-close-product-modal">Cancel</button>
+            <button type="submit" id="btn-save-product" class="btn btn-primary">Save Fragrance</button>
+          </div>
         </div>
       </form>
     </div>

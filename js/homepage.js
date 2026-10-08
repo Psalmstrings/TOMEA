@@ -7,8 +7,34 @@
 document.addEventListener('DOMContentLoaded', async () => {
   await loadHomepageContent();
   await loadFeaturedProducts();
-  initFragranceNotesExplorer();
+  await initFragranceNotesExplorer();
+  updateFooterCreations();
 });
+
+async function updateFooterCreations() {
+  const footerList = document.querySelector('.footer-links-col .footer-links-list');
+  if (!footerList || !window.DB) return;
+  try {
+    const products = await window.DB.getProducts({ onlyActive: true });
+    if (!products || products.length === 0) return;
+    const topCreations = products.slice(0, 4);
+    
+    // Find creations footer column
+    const headings = document.querySelectorAll('.footer-links-col .footer-heading');
+    headings.forEach(heading => {
+      if (heading.textContent.trim().toUpperCase() === 'CREATIONS') {
+        const list = heading.nextElementSibling;
+        if (list && list.tagName === 'UL') {
+          list.innerHTML = topCreations.map(p => `
+            <li><a href="product.html?id=${p.id || p.slug}">${Utils.escapeHtml(p.name)}</a></li>
+          `).join('') + `<li><a href="collection.html">All Fragrances</a></li>`;
+        }
+      }
+    });
+  } catch (e) {
+    // Graceful fallback
+  }
+}
 
 async function loadHomepageContent() {
   if (!window.DB) return;
@@ -167,28 +193,120 @@ async function loadFeaturedProducts() {
 
 /**
  * Visual Fragrance Notes Explorer (Top, Heart, Base tabs for each signature scent)
+ * Dynamically rendered from active products in Firestore.
  */
-function initFragranceNotesExplorer() {
-  const tabs = document.querySelectorAll('.fragrance-tab-btn');
-  const panels = document.querySelectorAll('.fragrance-notes-panel');
+async function initFragranceNotesExplorer() {
+  const navContainer = document.querySelector('.fragrance-tabs-nav');
+  const sectionContainer = document.querySelector('.experience-section .container');
+  if (!navContainer || !sectionContainer || !window.DB) return;
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const targetId = tab.getAttribute('data-target');
-      
-      tabs.forEach(t => {
-        t.classList.remove('is-active');
-        t.setAttribute('aria-selected', 'false');
+  try {
+    let products = await window.DB.getProducts({ onlyActive: true, onlyFeatured: true });
+    if (!products || products.length === 0) {
+      products = await window.DB.getProducts({ onlyActive: true });
+    }
+    if (!products || products.length === 0) return;
+
+    // Take top 3-4 products for the olfactory architecture tabs
+    const tabProducts = products.slice(0, 4);
+
+    // Render tab buttons
+    navContainer.innerHTML = tabProducts.map((p, idx) => `
+      <button 
+        class="fragrance-tab-btn ${idx === 0 ? 'is-active' : ''}" 
+        data-target="panel-${Utils.slugify(p.id || p.slug)}" 
+        role="tab" 
+        aria-selected="${idx === 0 ? 'true' : 'false'}"
+      >
+        ${Utils.escapeHtml(p.name)}
+      </button>
+    `).join('');
+
+    // Remove existing hardcoded panels
+    const existingPanels = sectionContainer.querySelectorAll('.fragrance-notes-panel');
+    existingPanels.forEach(el => el.remove());
+
+    // Generate dynamic panels
+    const panelsHtml = tabProducts.map((p, idx) => {
+      const panelId = `panel-${Utils.slugify(p.id || p.slug)}`;
+      const bottleImg = p.primaryImage || (p.images && p.images[0]) || 'assets/images/bottle-lorigine.jpg';
+      const topNotes = (p.topNotes || []).length > 0 ? p.topNotes : ['Citrus accords', 'Bright botanicals'];
+      const heartNotes = (p.heartNotes || []).length > 0 ? p.heartNotes : ['Aromatic florals', 'Spicy accords'];
+      const baseNotes = (p.baseNotes || []).length > 0 ? p.baseNotes : ['Ambered woods', 'Sensual musks'];
+
+      return `
+        <div class="fragrance-notes-panel ${idx === 0 ? 'is-active' : ''}" id="${panelId}" role="tabpanel">
+          <div class="experience-grid">
+            <div class="experience-bottle-col reveal-on-scroll">
+              <img src="${bottleImg}" alt="${Utils.escapeHtml(p.name)} Bottle" class="experience-bottle-img" loading="lazy">
+            </div>
+
+            <div class="olfactory-pyramid reveal-on-scroll delay-1">
+              <div class="pyramid-level">
+                <span class="level-badge">TOP NOTES</span>
+                <p style="font-size: 0.85rem; color: var(--color-grey-dark); margin-bottom: 0.5rem;">The immediate luminous impression upon contact.</p>
+                <div class="notes-content">
+                  ${topNotes.map(n => `<span class="note-tag">${Utils.escapeHtml(n)}</span>`).join('')}
+                </div>
+              </div>
+
+              <div class="pyramid-level">
+                <span class="level-badge">HEART NOTES</span>
+                <p style="font-size: 0.85rem; color: var(--color-grey-dark); margin-bottom: 0.5rem;">The deep signature character unfolding after 15 minutes.</p>
+                <div class="notes-content">
+                  ${heartNotes.map(n => `<span class="note-tag">${Utils.escapeHtml(n)}</span>`).join('')}
+                </div>
+              </div>
+
+              <div class="pyramid-level">
+                <span class="level-badge">BASE NOTES</span>
+                <p style="font-size: 0.85rem; color: var(--color-grey-dark); margin-bottom: 0.5rem;">The magnetic foundation lingering intimately for 12+ hours.</p>
+                <div class="notes-content">
+                  ${baseNotes.map(n => `<span class="note-tag">${Utils.escapeHtml(n)}</span>`).join('')}
+                </div>
+              </div>
+
+              <div style="margin-top: 1.5rem;">
+                <button class="btn btn-primary" data-action="order-whatsapp" data-product-id="${p.id || p.slug}">
+                  Order ${Utils.escapeHtml(p.name)} Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    sectionContainer.insertAdjacentHTML('beforeend', panelsHtml);
+
+    // Attach tab switching events
+    const tabs = navContainer.querySelectorAll('.fragrance-tab-btn');
+    const panels = sectionContainer.querySelectorAll('.fragrance-notes-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.getAttribute('data-target');
+        
+        tabs.forEach(t => {
+          t.classList.remove('is-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach(pan => pan.classList.remove('is-active'));
+
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+        
+        const targetPanel = document.getElementById(targetId);
+        if (targetPanel) {
+          targetPanel.classList.add('is-active');
+        }
       });
-      panels.forEach(p => p.classList.remove('is-active'));
-
-      tab.classList.add('is-active');
-      tab.setAttribute('aria-selected', 'true');
-      
-      const targetPanel = document.getElementById(targetId);
-      if (targetPanel) {
-        targetPanel.classList.add('is-active');
-      }
     });
-  });
+
+    if (window.reobserveScrollReveals) {
+      window.reobserveScrollReveals();
+    }
+  } catch (err) {
+    console.warn('[TOMÉA] Error initializing dynamic fragrance notes explorer:', err);
+  }
 }

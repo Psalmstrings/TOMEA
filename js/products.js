@@ -16,12 +16,47 @@ document.addEventListener('DOMContentLoaded', async () => {
   let currentSearch = '';
   let currentSort = 'default';
 
+  // Populate dynamic category buttons from products
+  function setupDynamicFilterButtons() {
+    const filterContainer = document.querySelector('.col-filters');
+    if (!filterContainer) return;
+
+    // Extract unique fragrance families from all active products
+    const families = new Set();
+    allProducts.forEach(p => {
+      if (p.fragranceFamily) {
+        families.add(p.fragranceFamily.trim());
+      }
+    });
+
+    let buttonsHtml = `<button class="col-filter-btn collection-filter-btn ${currentCategory === 'all' ? 'is-active' : ''}" data-category="all">All Fragrances</button>`;
+    
+    families.forEach(fam => {
+      const isActive = currentCategory.toLowerCase() === fam.toLowerCase();
+      buttonsHtml += `<button class="col-filter-btn collection-filter-btn ${isActive ? 'is-active' : ''}" data-category="${Utils.escapeHtml(fam)}">${Utils.escapeHtml(fam)}</button>`;
+    });
+
+    filterContainer.innerHTML = buttonsHtml;
+
+    // Re-bind click handlers
+    filterContainer.querySelectorAll('.collection-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterContainer.querySelectorAll('.collection-filter-btn').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        currentCategory = btn.getAttribute('data-category') || 'all';
+        applyFiltersAndRender();
+      });
+    });
+  }
+
   // Load products from Firestore
   async function fetchCollection() {
     if (!gridContainer || !window.DB) return;
     try {
       allProducts = await window.DB.getProducts({ onlyActive: true });
+      setupDynamicFilterButtons();
       applyFiltersAndRender();
+      updateCollectionFooter();
     } catch (err) {
       console.error('[TOMÉA] Error fetching collection:', err);
       gridContainer.innerHTML = `
@@ -32,6 +67,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  function updateCollectionFooter() {
+    const headings = document.querySelectorAll('.footer-links-col .footer-heading');
+    headings.forEach(heading => {
+      if (heading.textContent.trim().toUpperCase() === 'CREATIONS') {
+        const list = heading.nextElementSibling;
+        if (list && list.tagName === 'UL') {
+          list.innerHTML = allProducts.slice(0, 4).map(p => `
+            <li><a href="product.html?id=${p.id || p.slug}">${Utils.escapeHtml(p.name)}</a></li>
+          `).join('') + `<li><a href="collection.html">All Fragrances</a></li>`;
+        }
+      }
+    });
+  }
+
   function applyFiltersAndRender() {
     let filtered = [...allProducts];
 
@@ -40,28 +89,30 @@ document.addEventListener('DOMContentLoaded', async () => {
       const q = currentSearch.toLowerCase().trim();
       filtered = filtered.filter(p => {
         const nameMatch = p.name && p.name.toLowerCase().includes(q);
+        const subtitleMatch = p.subtitle && p.subtitle.toLowerCase().includes(q);
         const familyMatch = p.fragranceFamily && p.fragranceFamily.toLowerCase().includes(q);
         const notesMatch = (p.topNotes || []).concat(p.heartNotes || []).concat(p.baseNotes || []).some(n => n.toLowerCase().includes(q));
-        const descMatch = p.shortDescription && p.shortDescription.toLowerCase().includes(q);
-        return nameMatch || familyMatch || notesMatch || descMatch;
+        const descMatch = (p.shortDescription && p.shortDescription.toLowerCase().includes(q)) || (p.fullDescription && p.fullDescription.toLowerCase().includes(q));
+        return nameMatch || subtitleMatch || familyMatch || notesMatch || descMatch;
       });
     }
 
     // 2. Category Filter
     if (currentCategory !== 'all') {
+      const catLower = currentCategory.toLowerCase();
       filtered = filtered.filter(p => {
-        return p.fragranceFamily && p.fragranceFamily.toLowerCase().includes(currentCategory.toLowerCase());
+        return p.fragranceFamily && p.fragranceFamily.toLowerCase().includes(catLower);
       });
     }
 
     // 3. Sorting
     if (currentSort === 'price-asc') {
-      filtered.sort((a, b) => (a.price || 0) - (b.price || 0));
+      filtered.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
     } else if (currentSort === 'price-desc') {
-      filtered.sort((a, b) => (b.price || 0) - (a.price || 0));
+      filtered.sort((a, b) => (Number(b.price) || 0) - (Number(a.price) || 0));
     } else {
       // Default: display order
-      filtered.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
+      filtered.sort((a, b) => (Number(a.displayOrder) || 0) - (Number(b.displayOrder) || 0));
     }
 
     // Update count display

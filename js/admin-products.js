@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       } else if (action === 'toggle-featured') {
         prod.isFeatured = !prod.isFeatured;
         await window.DB.saveProduct(prod);
-        Utils.showToast(`${prod.name} ${prod.isFeatured ? 'featured on homepage' : 'unfeatured'}.`, 'success');
+        Utils.showToast(prod.isFeatured ? 'Fragrance is now featured on the homepage.' : 'Fragrance removed from the homepage.', 'success');
         renderProductTable();
       } else if (action === 'toggle-stock') {
         prod.isOutOfStock = !prod.isOutOfStock;
@@ -190,8 +190,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         openEditModal(prod);
       } else if (action === 'delete-product') {
         const confirmed = await Utils.confirm(
-          `Are you sure you want to permanently delete "${prod.name || 'this fragrance'}" from the TOMÉA collection?`,
-          { title: "Delete Fragrance", confirmText: "Delete Fragrance" }
+          `Deleting "${prod.name || 'this fragrance'}" will remove it from the public collection and homepage. This action cannot be undone.`,
+          { title: `Delete ${prod.name || 'Fragrance'}?`, confirmText: "Delete Product", cancelText: "Cancel" }
         );
         if (confirmed) {
           try {
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           }
           // Remove from memory immediately
           allProducts = allProducts.filter(p => p !== prod && p.id !== prod.id);
-          Utils.showToast(`"${prod.name || 'Fragrance'}" has been deleted.`, 'info');
+          Utils.showToast('Fragrance deleted successfully.', 'info');
           await loadProducts();
         }
       }
@@ -220,6 +220,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.style.overflow = '';
     editingProductId = null;
     productForm.reset();
+    const previewBtn = document.getElementById('btn-preview-product');
+    if (previewBtn) previewBtn.style.display = 'none';
     currentImages = [];
     currentTopNotes = [];
     currentHeartNotes = [];
@@ -232,6 +234,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     openAddModalBtn.addEventListener('click', () => {
       editingProductId = null;
       productForm.reset();
+      const previewBtn = document.getElementById('btn-preview-product');
+      if (previewBtn) previewBtn.style.display = 'none';
       currentImages = ['assets/images/bottle-lorigine.jpg'];
       currentTopNotes = [];
       currentHeartNotes = [];
@@ -301,6 +305,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const outOfStockEl = document.getElementById('prod-outofstock');
     if (outOfStockEl) outOfStockEl.checked = !!prod.isOutOfStock;
+
+    const altEl = document.getElementById('prod-image-alt');
+    if (altEl) altEl.value = prod.imageAlt || '';
+
+    // Configure Preview Fragrance button
+    const previewBtn = document.getElementById('btn-preview-product');
+    if (previewBtn) {
+      previewBtn.style.display = 'inline-flex';
+      previewBtn.onclick = () => {
+        window.open(`../product.html?id=${prod.id || prod.slug}`, '_blank');
+      };
+    }
 
     currentImages = Array.isArray(prod.images) && prod.images.length > 0 
       ? [...prod.images] 
@@ -567,17 +583,19 @@ document.addEventListener('DOMContentLoaded', async () => {
           images: currentImages.length > 0 ? currentImages : ['assets/images/bottle-lorigine.jpg'],
           primaryImage: currentImages[0] || 'assets/images/bottle-lorigine.jpg',
           campaignImage: currentImages[1] || currentImages[0] || 'assets/images/bottle-lorigine.jpg',
+          imageAlt: (document.getElementById('prod-image-alt')?.value || '').trim() || `${name} Extrait de Parfum Bottle`,
           topNotes: currentTopNotes,
           heartNotes: currentHeartNotes,
           baseNotes: currentBaseNotes
         };
 
-        if (editingProductId && editingProductId !== 'null' && editingProductId !== 'undefined') {
+        const isUpdating = !!(editingProductId && editingProductId !== 'null' && editingProductId !== 'undefined');
+        if (isUpdating) {
           productData.id = editingProductId;
         }
 
         await window.DB.saveProduct(productData);
-        Utils.showToast(`"${productData.name}" saved successfully.`, 'success');
+        Utils.showToast(isUpdating ? 'Fragrance updated successfully.' : 'Fragrance published successfully.', 'success');
         closeModal();
         await loadProducts();
       } catch (err) {
