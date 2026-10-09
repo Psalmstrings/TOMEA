@@ -57,7 +57,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (backdrop) {
     backdrop.addEventListener('click', closeSidebar);
+    backdrop.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      closeSidebar();
+    }, { passive: false });
   }
+
+  // Close sidebar when clicking outside on mobile
+  document.addEventListener('click', (e) => {
+    if (sidebar && sidebar.classList.contains('is-open')) {
+      if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+        closeSidebar();
+      }
+    }
+  });
 
   // Close sidebar when clicking any navigation link on mobile
   document.querySelectorAll('.admin-nav-item').forEach(item => {

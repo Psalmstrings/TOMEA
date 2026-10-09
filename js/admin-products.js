@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let currentHeartNotes = [];
   let currentBaseNotes = [];
   let editingProductId = null;
+  let isUploading = false;
 
   // Helper to resolve admin relative image paths
   function resolveAdminImg(src) {
@@ -216,6 +217,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function closeModal() {
+    if (isUploading) {
+      Utils.showToast('Please wait for the current image upload to finish.', 'warning');
+      return;
+    }
     productModal.classList.remove('is-open');
     document.body.style.overflow = '';
     editingProductId = null;
@@ -418,25 +423,35 @@ document.addEventListener('DOMContentLoaded', async () => {
           ${idx === 0 ? '<span class="primary-tag">Primary</span>' : `
             <button type="button" class="btn-make-primary" data-index="${idx}" title="Set as primary image">Make Primary</button>
           `}
-          <button type="button" class="btn-remove-image" data-index="${idx}" title="Remove image">&times;</button>
+          <button type="button" class="btn-remove-image" data-index="${idx}" aria-label="Remove image" title="Remove image">&times;</button>
         </div>
       </div>
     `).join('');
 
     previewContainer.querySelectorAll('.btn-make-primary').forEach(b => {
-      b.addEventListener('click', () => {
+      b.addEventListener('click', (e) => {
+        e.stopPropagation();
         const idx = parseInt(b.getAttribute('data-index'), 10);
-        const item = currentImages.splice(idx, 1)[0];
-        currentImages.unshift(item);
-        renderImageGalleryPreview();
+        if (!isNaN(idx) && currentImages[idx]) {
+          const item = currentImages.splice(idx, 1)[0];
+          currentImages.unshift(item);
+          renderImageGalleryPreview();
+        }
       });
     });
 
     previewContainer.querySelectorAll('.btn-remove-image').forEach(b => {
-      b.addEventListener('click', () => {
+      b.addEventListener('click', (e) => {
+        e.stopPropagation();
         const idx = parseInt(b.getAttribute('data-index'), 10);
-        currentImages.splice(idx, 1);
-        renderImageGalleryPreview();
+        if (!isNaN(idx) && currentImages[idx]) {
+          const removedUrl = currentImages.splice(idx, 1)[0];
+          if (removedUrl && removedUrl.startsWith('blob:')) {
+            try { URL.revokeObjectURL(removedUrl); } catch (e) {}
+          }
+          renderImageGalleryPreview();
+          Utils.showToast('Image removed from fragrance.', 'info');
+        }
       });
     });
   }
@@ -449,7 +464,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const uploadStatusText = document.getElementById('cloudinary-status-text');
 
   if (fileDropzone && fileInput) {
-    fileDropzone.addEventListener('click', () => fileInput.click());
+    // Only call fileInput.click() if the click was not directly on the fileInput itself
+    // (since fileDropzone is a <label for="cloudinary-file-input">, the browser natively triggers the input)
+    fileDropzone.addEventListener('click', (e) => {
+      if (e.target !== fileInput && !fileDropzone.contains(e.target)) {
+        fileInput.click();
+      }
+    });
 
     fileDropzone.addEventListener('dragover', (e) => {
       e.preventDefault();
@@ -471,32 +492,97 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     fileInput.addEventListener('change', async () => {
       if (fileInput.files && fileInput.files.length > 0) {
-        await handleImageUpload(fileInput.files[0]);
+        const file = fileInput.files[0];
+        await handleImageUpload(file);
         fileInput.value = '';
       }
     });
   }
 
   async function handleImageUpload(file) {
-    if (!window.Cloudinary) return;
+    if (!file) return;
+    if (isUploading) {
+      Utils.showToast('An upload is already in progress. Please wait a moment.', 'info');
+      return;
+    }
+
+    // Client-side file validation
+    if (file.size > 10 * 1024 * 1024) {
+      Utils.showToast('This image is too large (' + (file.size / (1024 * 1024)).toFixed(1) + 'MB). Maximum size is 10MB.', 'error');
+      return;
+    }
+
+    const isImageMime = file.type && file.type.startsWith('image/');
+    const hasImageExt = /\.(jpe?g|png|webp|gif|avif|heic|heif)$/i.test(file.name || '');
+    if (!isImageMime && !hasImageExt) {
+      Utils.showToast('This file type is not supported. Please select a JPG, PNG, or WebP photo.', 'error');
+      return;
+    }
+
+    // Create immediate local object preview
+    let localPreviewUrl = null;
     try {
-      if (uploadProgress) uploadProgress.classList.remove('d-none');
-      if (uploadStatusText) uploadStatusText.textContent = `Uploading ${file.name}...`;
+      localPreviewUrl = URL.createObjectURL(file);
+      currentImages.push(localPreviewUrl);
+      renderImageGalleryPreview();
+      Utils.showToast('Preparing image preview...', 'info', 2000);
+    } catch (previewErr) {
+      console.warn('[TOMÉA] Could not create local preview:', previewErr);
+    }
+
+    isUploading = true;
+    const saveBtn = document.getElementById('btn-save-product');
+    if (saveBtn) {
+      saveBtn.disabled = true;
+      saveBtn.setAttribute('data-original-text', saveBtn.innerHTML);
+      saveBtn.innerHTML = 'Uploading Image to Cloudinary...';
+    }
+
+    try {
+      if (uploadProgress) uploadProgress.style.display = 'block';
+      if (uploadStatusText) uploadStatusText.textContent = `Uploading ${file.name || 'fragrance photo'} to Cloudinary...`;
+      if (uploadProgressBar) uploadProgressBar.style.width = '5%';
 
       const secureUrl = await window.Cloudinary.uploadImage(file, (percent) => {
         if (uploadProgressBar) uploadProgressBar.style.width = `${percent}%`;
-        if (uploadStatusText) uploadStatusText.textContent = `Uploading to Cloudinary: ${percent}%`;
+        if (uploadStatusText) uploadStatusText.textContent = `Uploading to Cloudinary CDN: ${percent}%`;
       });
 
-      currentImages.push(secureUrl);
+      // Replace local preview blob URL with the permanent Cloudinary secure URL
+      if (localPreviewUrl) {
+        const idx = currentImages.indexOf(localPreviewUrl);
+        if (idx !== -1) {
+          currentImages[idx] = secureUrl;
+        } else {
+          currentImages.push(secureUrl);
+        }
+        try { URL.revokeObjectURL(localPreviewUrl); } catch (e) {}
+      } else {
+        currentImages.push(secureUrl);
+      }
+
       renderImageGalleryPreview();
-      Utils.showToast('Image uploaded and linked successfully.', 'success');
+      Utils.showToast('Image uploaded successfully and linked.', 'success');
     } catch (err) {
       console.error('[TOMÉA Cloudinary] Upload error:', err);
-      Utils.showToast(err.message || 'Image upload failed.', 'error');
+      // Remove temporary preview if upload failed
+      if (localPreviewUrl) {
+        const idx = currentImages.indexOf(localPreviewUrl);
+        if (idx !== -1) {
+          currentImages.splice(idx, 1);
+          renderImageGalleryPreview();
+        }
+        try { URL.revokeObjectURL(localPreviewUrl); } catch (e) {}
+      }
+      Utils.showToast(err.message || 'Upload failed. Check your connection and try again.', 'error');
     } finally {
-      if (uploadProgress) uploadProgress.classList.add('d-none');
+      isUploading = false;
+      if (uploadProgress) uploadProgress.style.display = 'none';
       if (uploadProgressBar) uploadProgressBar.style.width = '0%';
+      if (saveBtn) {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = saveBtn.getAttribute('data-original-text') || 'Save Fragrance';
+      }
     }
   }
 
@@ -552,6 +638,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (productForm) {
     productForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      if (isUploading) {
+        Utils.showToast('Please wait for the fragrance image to finish uploading to Cloudinary before saving.', 'warning');
+        return;
+      }
+
       const saveBtn = document.getElementById('btn-save-product');
       saveBtn.disabled = true;
       saveBtn.innerHTML = 'Saving to Maison Catalog...';

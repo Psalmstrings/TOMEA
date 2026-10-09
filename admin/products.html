@@ -327,19 +327,20 @@
               <input type="text" id="prod-image-alt" class="tomea-input" placeholder="e.g. TOMÉA L'Origine luxury bottle with burgundy cap" />
             </div>
 
-            <!-- Cloudinary Dropzone -->
-            <div id="cloudinary-dropzone" class="cloudinary-dropzone">
-              <input type="file" id="cloudinary-file-input" class="dropzone-file-input" accept="image/*" />
+            <!-- Cloudinary Dropzone / File Picker (Supports Mobile & Desktop) -->
+            <label id="cloudinary-dropzone" for="cloudinary-file-input" class="cloudinary-dropzone" aria-label="Upload fragrance bottle image">
+              <input type="file" id="cloudinary-file-input" class="dropzone-file-input" accept="image/*" aria-label="Choose image file" />
               <div class="dropzone-content">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                   <polyline points="17 8 12 3 7 8"/>
                   <line x1="12" y1="3" x2="12" y2="15"/>
                 </svg>
-                <p>Click or drag new bottle photography to upload via Cloudinary</p>
-                <span class="text-xs text-muted">Supports JPG, PNG, WEBP</span>
+                <p>Tap or drag fragrance bottle photo to upload</p>
+                <span class="dropzone-action-pill">Choose from Gallery / Files</span>
+                <span class="text-xs text-muted d-block mt-1">Supports JPG, PNG, WEBP (Max 10MB)</span>
               </div>
-            </div>
+            </label>
 
             <!-- Upload Progress -->
             <div id="cloudinary-upload-progress" class="upload-progress-wrapper" style="display:none;">

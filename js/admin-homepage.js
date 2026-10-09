@@ -66,18 +66,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     heroFileInput.addEventListener('change', async () => {
       if (heroFileInput.files && heroFileInput.files.length > 0) {
         const file = heroFileInput.files[0];
+        if (file.size > 10 * 1024 * 1024) {
+          Utils.showToast('Image exceeds 10MB limit. Please select a smaller photo.', 'error');
+          return;
+        }
+        let localPreview = null;
+        try {
+          localPreview = URL.createObjectURL(file);
+          if (heroImagePreview) heroImagePreview.src = localPreview;
+        } catch (e) {}
+
         try {
           heroUploadBtn.disabled = true;
-          heroUploadBtn.textContent = 'Uploading...';
+          heroUploadBtn.textContent = 'Uploading to Cloudinary...';
           const url = await window.Cloudinary.uploadImage(file);
           heroImageInput.value = url;
           if (heroImagePreview) heroImagePreview.src = url;
           Utils.showToast('Hero image uploaded to Cloudinary successfully.', 'success');
         } catch (e) {
-          Utils.showToast(e.message || 'Upload failed.', 'error');
+          Utils.showToast(e.message || 'Upload failed. Check your connection.', 'error');
         } finally {
+          if (localPreview) {
+            try { URL.revokeObjectURL(localPreview); } catch (e) {}
+          }
           heroUploadBtn.disabled = false;
-          heroUploadBtn.textContent = 'Upload New Image';
+          heroUploadBtn.textContent = 'Upload to Cloudinary';
           heroFileInput.value = '';
         }
       }

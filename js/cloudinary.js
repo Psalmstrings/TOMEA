@@ -34,9 +34,11 @@ class CloudinaryService {
       throw new Error('Image size exceeds 10MB limit. Please select a smaller file.');
     }
 
-    // Validate type
-    if (!file.type.startsWith('image/')) {
-      throw new Error('Selected file is not an image.');
+    // Validate type: support image MIME types or mobile files with image extensions
+    const isImageMime = file.type && file.type.startsWith('image/');
+    const hasImageExt = /\.(jpe?g|png|webp|gif|avif|heic|heif)$/i.test(file.name || '');
+    if (!isImageMime && !hasImageExt) {
+      throw new Error('Selected file is not an image. Please choose a JPG, PNG, or WebP photo.');
     }
 
     // If Cloudinary credentials are provided, perform real unsigned upload
@@ -50,6 +52,7 @@ class CloudinaryService {
 
         const xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);
+        xhr.timeout = 60000; // 60s timeout for mobile connections
 
         if (onProgress && xhr.upload) {
           xhr.upload.onprogress = (e) => {
@@ -64,23 +67,35 @@ class CloudinaryService {
           if (xhr.status >= 200 && xhr.status < 300) {
             try {
               const response = JSON.parse(xhr.responseText);
-              resolve(response.secure_url);
+              if (response && response.secure_url) {
+                resolve(response.secure_url);
+              } else {
+                reject(new Error('Cloudinary response did not include a secure image URL.'));
+              }
             } catch (err) {
               reject(new Error('Invalid Cloudinary response.'));
             }
           } else {
-            let errorMsg = 'Cloudinary upload failed.';
+            let errorMsg = 'Cloudinary upload failed. Check your connection and try again.';
             try {
               const res = JSON.parse(xhr.responseText);
               if (res.error && res.error.message) {
                 errorMsg = res.error.message;
               }
             } catch (e) {}
+            console.error('[TOMÉA Cloudinary] HTTP Error:', xhr.status, errorMsg);
             reject(new Error(errorMsg));
           }
         };
 
-        xhr.onerror = () => reject(new Error('Network error during Cloudinary upload.'));
+        xhr.ontimeout = () => {
+          reject(new Error('Upload timed out. Please check your mobile internet connection and retry.'));
+        };
+
+        xhr.onerror = () => {
+          reject(new Error('Network error during Cloudinary upload. Please check your internet connection.'));
+        };
+
         xhr.send(formData);
       });
     }

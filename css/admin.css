@@ -1332,13 +1332,15 @@ body.admin-sidebar-locked {
 .cloudinary-upload-box {
   border: 2px dashed #CFC5C2;
   border-radius: 6px;
-  padding: 2.25rem 1.5rem;
+  padding: 2rem 1.25rem;
   text-align: center;
   background: #FAF8F7;
   cursor: pointer;
   position: relative;
   transition: all 0.2s ease;
   margin-bottom: 1.25rem;
+  display: block;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .cloudinary-dropzone:hover,
@@ -1354,13 +1356,27 @@ body.admin-sidebar-locked {
   cursor: pointer;
   width: 100%;
   height: 100%;
+  z-index: 1;
 }
 
 .dropzone-content p {
-  font-size: 1rem;
+  font-size: 0.975rem;
   font-weight: 600;
   color: var(--admin-text);
-  margin: 0.5rem 0 0.25rem 0;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.dropzone-action-pill {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  background-color: var(--admin-primary);
+  padding: 0.4rem 0.95rem;
+  border-radius: 20px;
+  margin: 0.25rem 0;
+  box-shadow: 0 2px 6px rgba(107, 46, 53, 0.25);
+  pointer-events: none;
 }
 
 .upload-progress-wrapper {
@@ -1412,7 +1428,7 @@ body.admin-sidebar-locked {
 .image-preview-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(22, 15, 17, 0.7);
+  background: rgba(22, 15, 17, 0.72);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1421,8 +1437,17 @@ body.admin-sidebar-locked {
   transition: opacity 0.2s ease;
 }
 
-.image-preview-item:hover .image-preview-overlay {
+.image-preview-item:hover .image-preview-overlay,
+.image-preview-item:focus-within .image-preview-overlay {
   opacity: 1;
+}
+
+/* Touch devices: Keep control buttons visible so mobile users can manage gallery */
+@media (hover: none) and (pointer: coarse) {
+  .image-preview-overlay {
+    opacity: 1;
+    background: linear-gradient(180deg, rgba(22, 15, 17, 0.6) 0%, transparent 40%, rgba(22, 15, 17, 0.8) 100%);
+  }
 }
 
 .primary-tag {
@@ -1437,22 +1462,32 @@ body.admin-sidebar-locked {
 
 .btn-make-primary {
   background: #FFFFFF;
+  color: var(--admin-text);
   border: none;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  padding: 3px 6px;
-  border-radius: 2px;
+  padding: 4px 8px;
+  border-radius: 3px;
   cursor: pointer;
+  align-self: flex-start;
+  min-height: 28px;
 }
 
 .btn-remove-image {
-  background: none;
+  background: rgba(197, 48, 48, 0.9);
   border: none;
   color: #FFFFFF;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   cursor: pointer;
   align-self: flex-end;
   line-height: 1;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
 /* ==========================================================================
@@ -1726,22 +1761,40 @@ body.admin-sidebar-locked {
 
 /* Mobile Devices (under 768px) */
 @media (max-width: 767px) {
+  .admin-sidebar {
+    width: min(300px, 86vw);
+  }
+
+  .admin-sidebar-nav {
+    padding: 1rem 0.65rem;
+    gap: 0.35rem;
+  }
+
+  .admin-nav-item {
+    padding: 0.8rem 1rem;
+    font-size: 0.925rem;
+    min-height: 44px;
+  }
+
   .admin-topbar {
     height: auto;
-    padding: 0.85rem 1rem;
+    padding: 0.75rem 1rem;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.65rem;
   }
 
   .topbar-left {
     width: 100%;
     justify-content: flex-start;
+    gap: 0.75rem;
   }
 
   .topbar-right,
   .admin-topbar-actions {
     width: 100%;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
   .admin-pill-status {
@@ -1756,6 +1809,7 @@ body.admin-sidebar-locked {
   .admin-toolbar-row {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.75rem;
   }
 
   .toolbar-search,
@@ -1769,6 +1823,7 @@ body.admin-sidebar-locked {
   .form-grid-2,
   .form-grid-3 {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .admin-metrics-grid,
@@ -1778,64 +1833,115 @@ body.admin-sidebar-locked {
   }
 
   .metric-card {
-    padding: 1.25rem;
+    padding: 1.25rem 1rem;
+    min-width: 0;
   }
 
   .metric-value {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    word-break: break-word;
   }
 
   .admin-card {
-    padding: 1.25rem;
+    padding: 1.25rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Responsive Table styling on Mobile */
+  .table-responsive,
+  .admin-table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .admin-table {
+    min-width: 640px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 0.75rem 0.65rem;
+    font-size: 0.875rem;
+  }
+
+  .table-thumb {
+    width: 44px;
+    height: 44px;
+  }
+
+  .table-product-name {
+    font-size: 0.95rem;
+    word-break: break-word;
   }
 
   /* Responsive Modals in Tablet / Mobile (under 768px) */
   .admin-modal-backdrop {
-    padding: 0.75rem 0.5rem;
+    padding: 0.5rem;
     align-items: flex-start;
   }
 
   .admin-modal-container,
   .admin-modal-card {
-    max-height: calc(100dvh - 1.5rem);
-    height: auto;
+    max-height: calc(100dvh - 1rem);
+    height: calc(100dvh - 1rem);
     border-radius: 8px;
-    margin: 0.75rem auto;
+    margin: 0.5rem auto;
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .admin-modal-header {
-    padding: 1rem 1.25rem;
+    padding: 0.85rem 1rem;
+    flex-shrink: 0;
   }
 
   .modal-title {
     font-size: 1.15rem;
+    white-space: normal;
+    word-break: break-word;
+    padding-right: 0.5rem;
   }
 
   .modal-close-btn {
     font-size: 1.6rem;
-    padding: 0.2rem 0.4rem;
+    padding: 0.2rem 0.5rem;
+    min-width: 36px;
+    min-height: 36px;
   }
 
   .admin-modal-body {
-    padding: 1.25rem 1rem;
+    padding: 1.15rem 1rem;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
 
   .admin-modal-footer {
-    padding: 1rem;
+    padding: 0.85rem 1rem;
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .admin-modal-footer .d-flex {
+    width: 100%;
     flex-direction: column-reverse;
     gap: 0.5rem;
   }
 
   .admin-modal-footer .btn {
     width: 100%;
-    min-height: 44px;
+    min-height: 46px;
     justify-content: center;
   }
 
   .admin-submit-bar .btn {
     width: 100%;
+    min-height: 46px;
   }
 
   .quick-actions-grid {
@@ -1866,29 +1972,51 @@ body.admin-sidebar-locked {
   }
 }
 
-/* Extra Small Phones (under 480px) */
+/* Extra Small Phones (under 480px down to 320px) */
 @media (max-width: 479px) {
+  .admin-topbar {
+    padding: 0.65rem 0.75rem;
+  }
+
   .topbar-title,
   .admin-topbar-title {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
+  }
+
+  .admin-content-container,
+  .admin-content-body {
+    padding: 1rem 0.75rem;
   }
 
   .form-checkboxes-row {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.85rem;
+    padding: 1rem 0.75rem;
   }
 
   .admin-metrics-grid,
   .metrics-row {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
   .quick-actions-grid {
     grid-template-columns: 1fr;
   }
 
+  .admin-banner-card {
+    padding: 1.25rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .admin-banner-card .banner-text h2 {
+    font-size: 1.35rem;
+  }
+
   .admin-banner-card .banner-actions {
     flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
   }
 
   .admin-banner-card .banner-actions .btn,
@@ -1905,25 +2033,31 @@ body.admin-sidebar-locked {
   .admin-modal-container,
   .admin-modal-card {
     max-height: calc(100dvh - 0.5rem);
+    height: calc(100dvh - 0.5rem);
     border-radius: 6px;
     margin: 0.25rem auto;
   }
 
   .admin-modal-header {
-    padding: 0.85rem 1rem;
+    padding: 0.75rem 0.85rem;
   }
 
   .modal-title {
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 
   .admin-modal-body {
-    padding: 1rem 0.75rem;
+    padding: 0.85rem 0.75rem;
   }
 
   .admin-modal-footer {
-    padding: 0.75rem;
-    gap: 0.5rem;
+    padding: 0.65rem 0.75rem;
+    gap: 0.4rem;
+  }
+
+  .admin-modal-footer .btn {
+    min-height: 44px;
+    font-size: 0.9rem;
   }
 
   .input-with-button {
@@ -1933,5 +2067,12 @@ body.admin-sidebar-locked {
 
   .input-with-button .btn {
     width: 100%;
+    min-height: 42px;
+  }
+
+  .brand-library-grid,
+  .library-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
   }
 }
